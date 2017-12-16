@@ -1,0 +1,19 @@
+Install instructions for Simple Accounts (SACC)
+-----------------------------------------------
+1/ Read sacchelp.html for more information
+2/ Install Code Data management (CDM) first.  Obtainable from http://xoops.dev.org
+   Please note that V1.0 of SACC requires CDM V1.5 or better
+3/ Create a new directory/folder called 'xbs_sacc' in your Xoops modules directory
+4/ unpack/unzip distribution files into xbs_sacc directory
+5/ Signon to your Xoops installation as administrator
+6/ In admin menu, install new SACC module as per normal module install
+7/ Go to SACC Module Administration.  Click on Module Documentation to access the module help and systems documentation.
+
+Upgrade instructions for SACC V1.0 from any previous version
+------------------------------------------------------------
+1/ You must upgrade your CDM installation to V1.5 or better FIRST!
+2/ Rename your 'sacc' module directory to 'xbs_sacc'
+3/ unpack/unzip distribution files into xbs_sacc directory, overwriting any existing ones
+4/ Signon to your Xoops installation as administrator
+5/ In admin menu, install new SACC module as per normal module install
+6/ Go to SACC Module Administration.  Click on Module Documentation to access the module help and systems documentation.
