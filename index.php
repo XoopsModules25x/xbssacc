@@ -2,7 +2,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -24,59 +24,57 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
 //  ------------------------------------------------------------------------ //
 // Author:    Ashley Kitson                                                  //
-// Copyright: (c) 2004, Ashley Kitson										 //
+// Copyright: (c) 2004, Ashley Kitson                                        //
 // URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (http://www.xoops.org/)                      //
+// Project:   The XOOPS Project (https://xoops.org/)                      //
 // Module:    Simple Accounts System (SACC)                                  //
 // ------------------------------------------------------------------------- //
 
 /**
-* Display a list of organisations to choose from 
-*
-* All further operations will act on this organisation.
-* As this is the first page that is shown when user selects main menu item
-* it should never be missed out!
-*
-* @author Ashley Kitson http://xoobs.net
-* @copyright 2005 Ashley Kitson, UK
-* @package SACC
-* @subpackage User_interface
-* @access private
-* @version 1
-*/
+ * Display a list of organisations to choose from
+ *
+ * All further operations will act on this organisation.
+ * As this is the first page that is shown when user selects main menu item
+ * it should never be missed out!
+ *
+ * @author     Ashley Kitson http://xoobs.net
+ * @copyright  2005 Ashley Kitson, UK
+ * @package    SACC
+ * @subpackage User_interface
+ * @access     private
+ * @version    1
+ */
 
 /**
-* Module header file
-*/
-require("header.php");
+ * Module header file
+ */
+require __DIR__ . '/header.php';
 /**
-* SACC form class declarations
-*/
-require_once SACC_PATH."/class/class.sacc.form.php";
+ * SACC form class declarations
+ */
+require_once SACC_PATH . '/class/class.sacc.form.php';
 /**
-* CDM functions
-*/
-require_once CDM_PATH."/include/functions.php";
-$xoopsOption['template_main'] = 'sacc_sel_org.tpl';
+ * CDM functions
+ */
+require_once CDM_PATH . '/include/functions.php';
+$GLOBALS['xoopsOption']['template_main'] = 'sacc_sel_org.tpl';
 /**
-* Xoops header file
-*/
-include XOOPS_ROOT_PATH."/header.php";
-
+ * Xoops header file
+ */
+include XOOPS_ROOT_PATH . '/header.php';
 
 // Assign page titles
 $xoopsTpl->assign('lang_pagetitle', _MD_SACC_PAGETITLE1);
 
 // Get data and assign to template
-$org_id = new SACCFormSelectOrg(_MD_SACC_SELORG,'org_id',intval(SACC_CFG_DEFORG),4);
-$submit = new XoopsFormButton("","submit",_MD_SACC_GO,"submit");
-$orgForm = new XoopsThemeForm(_MD_SACC_PAGETITLE1,"orgform","sacc_accounts_list.php");
-$orgForm->addElement($org_id,true);
+$org_id  = new SACCFormSelectOrg(_MD_SACC_SELORG, 'org_id', (int)SACC_CFG_DEFORG, 4);
+$submit  = new XoopsFormButton('', 'submit', _MD_SACC_GO, 'submit');
+$orgForm = new XoopsThemeForm(_MD_SACC_PAGETITLE1, 'orgform', 'sacc_accounts_list.php');
+$orgForm->addElement($org_id, true);
 $orgForm->addElement($submit);
 $orgForm->assign($xoopsTpl);
 
 /**
-* Display the page
-*/
-include XOOPS_ROOT_PATH.'/footer.php';		
-?>
+ * Display the page
+ */
+include XOOPS_ROOT_PATH . '/footer.php';

@@ -1,21 +1,21 @@
--- phpMyAdmin SQL Dump
--- version 2.6.0
--- http://www.phpmyadmin.net
--- 
--- Host: localhost
--- Generation Time: Nov 17, 2004 at 04:10 AM
--- Server version: 4.0.21
--- PHP Version: 4.3.9
--- 
--- Table creation for Simple Accounts System 
--- (c) 2004 A Kitson
--- 
--- 
--- Database: `sacc`
--- 
--- 
--- Table structure for table `sacc_ac`
--- 
+## phpMyAdmin SQL Dump
+## version 2.6.0
+## http://www.phpmyadmin.net
+##
+## Host: localhost
+## Generation Time: Nov 17, 2004 at 04:10 AM
+## Server version: 4.0.21
+## PHP Version: 4.3.9
+##
+## Table creation for Simple Accounts System
+## (c) 2004 A Kitson
+##
+##
+## Database: `sacc`
+##
+##
+## Table structure for table `sacc_ac`
+##
 
 CREATE TABLE sacc_ac (
   id bigint(20) NOT NULL auto_increment,
@@ -33,7 +33,7 @@ CREATE TABLE sacc_ac (
   disp_order tinyint(4) NOT NULL default '0',
   row_flag enum('Active','Defunct','Suspended') NOT NULL default 'Active',
   row_uid int(10) unsigned NOT NULL default '0',
-  row_dt timestamp(14) NOT NULL,
+  row_dt timestamp,
   PRIMARY KEY  (id),
   KEY Account_FKIndex1 (ac_tp),
   KEY Account_FKIndex2 (ac_curr),
@@ -41,9 +41,9 @@ CREATE TABLE sacc_ac (
   KEY Account_FKIndex4 (ac_prnt_id)
 ) ENGINE=MyISAM COMMENT='An Account';
 
--- 
--- Table structure for table `sacc_ctrl`
--- 
+##
+## Table structure for table `sacc_ctrl`
+##
 
 CREATE TABLE sacc_ctrl (
  org_id int(11) NOT NULL default '0',
@@ -51,13 +51,13 @@ CREATE TABLE sacc_ctrl (
  ac_id int(11) NOT NULL default '0',
  row_flag enum('Active','Defunct','Suspended') NOT NULL default 'Active',
  row_uid int(10) NOT NULL default '0',
- row_dt timestamp(14) NOT NULL,
+ row_dt timestamp,
  PRIMARY KEY  (org_id,ctrl_cd)
 ) ENGINE=MyISAM COMMENT='Control Accounts';
 
--- 
--- Table structure for table `sacc_entry`
--- 
+##
+## Table structure for table `sacc_entry`
+##
 
 CREATE TABLE sacc_entry (
   id bigint(20) NOT NULL auto_increment,
@@ -68,16 +68,16 @@ CREATE TABLE sacc_entry (
   txn_cr bigint(20) unsigned default NULL,
   row_flag enum('Active','Defunct','Suspended') NOT NULL default 'Active',
   row_uid int(10) NOT NULL default '0',
-  row_dt timestamp(14) NOT NULL,
+  row_dt timestamp,
   PRIMARY KEY  (id),
   KEY AccountEntry_FKIndex1 (jrn_id),
   KEY AccountEntry_FKIndex2 (ac_id)
 ) ENGINE=MyISAM COMMENT='Entry into an Account/Journal';
 
 
--- 
--- Table structure for table `sacc_journ`
--- 
+##
+## Table structure for table `sacc_journ`
+##
 
 CREATE TABLE sacc_journ (
   id bigint(20) NOT NULL auto_increment,
@@ -86,14 +86,14 @@ CREATE TABLE sacc_journ (
   jrn_prps varchar(30) default NULL,
   row_flag enum('Active','Defunct','Suspended') NOT NULL default 'Active',
   row_uid int(10) unsigned NOT NULL default '0',
-  row_dt timestamp(14) NOT NULL,
+  row_dt timestamp,
   PRIMARY KEY  (id),
   KEY org_id (org_id)
 ) ENGINE=MyISAM COMMENT='A journal header';
 
--- 
--- Table structure for table `sacc_org`
--- 
+##
+## Table structure for table `sacc_org`
+##
 
 CREATE TABLE sacc_org (
   id bigint(20) NOT NULL auto_increment,
@@ -101,17 +101,17 @@ CREATE TABLE sacc_org (
   org_name varchar(30) default NULL,
   row_flag enum('Active','Defunct','Suspended') NOT NULL default 'Active',
   row_uid int(10) unsigned NOT NULL default '0',
-  row_dt timestamp(14) NOT NULL,
+  row_dt timestamp,
   PRIMARY KEY  (id),
   KEY Org_FKIndex1 (base_crcy)
 ) ENGINE=MyISAM COMMENT='An organisation for whom accounts are kept';
 
 
 
--- Put code data into CDM system for SACC
+## Put code data into CDM system for SACC
 INSERT INTO cdm_meta (cd_set, cd_type, cd_len, val_type, val_len, cd_desc) VALUES ('SACCACTP', 'VARCHAR', 6, 'VARCHAR', 20, 'SAC Account Types. Codes must be as defined in include/defines.php.  Do not extend the code set unless you know what you are doing!');
 INSERT INTO cdm_meta (cd_set, cd_type, cd_len, val_type, val_len, cd_desc) VALUES ('SACCCNTL', 'CHAR', 4, 'VARCHAR', 20, 'Actual name for a control account.  Code must be same as defined in include/define.php as must be known to application.  DO NOT extend this codeset unless you are sure you know what you are doing.');
--- Account types
+## Account types
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCACTP', 'EN', 'INCOME', '', 'Income Account', 'An account showing sources of income.  Income is shown as CR, Refund as DR',null);
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCACTP', 'EN', 'EXPENS', '', 'Expense Account', 'An account showing destination of expenses.  Expense is shown as DR, refund of expense as CR.',null);
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCACTP', 'EN', 'ASSET', '', 'Asset Account', 'An account showing assets. Value coming in is DR, going out is CR.',null);
@@ -121,7 +121,7 @@ INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param)
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, row_flag, cd_param) VALUES ('SACCACTP', 'EN', '3RDPTY', '', '3rd Party Account', '3rd party Accounts are distinguished by being associated with a person or company not connected with the account''s organisation.','Defunct',null);
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCACTP', 'EN', 'SUPPLY', 'LIABIL', 'Supplier Account', 'An account recording details of purchases from Suppliers.  Derived from 3rd Party Account, it is a kind of Liability Account.',null);
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCACTP', 'EN', 'CUSTOM', 'ASSET', 'Customer Account', 'An account recording sales to a customer.  Derived from 3rd Party Account, it is a kind of Asset Account',null);
--- Control account types
+## Control account types
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCCNTL', 'EN', 'BANK', '', 'Current Account', 'The default current bank account',null);
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCCNTL', 'EN', 'OPEN', '', 'Opening Balances', 'Usually a sub account of the Equity ledger.  Used to  balance set-up amounts for accounts.',null);
 INSERT INTO cdm_code (cd_set, cd_lang, cd, cd_prnt, cd_value, cd_desc, cd_param) VALUES ('SACCCNTL', 'EN', 'ASST', '', 'Master Asset Account', 'Used for Balance sheet overview',null);

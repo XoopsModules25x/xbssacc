@@ -2,7 +2,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -26,61 +26,60 @@
 // Author:    Ashley Kitson                                                  //
 // Copyright: (c) 2005, Ashley Kitson
 // URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (http://www.xoops.org/)                      //
+// Project:   The XOOPS Project (https://xoops.org/)                      //
 // Module:    Simple Accounts System (SACC)                                  //
 // ------------------------------------------------------------------------- //
 /**
-* Accounts Admin page
-*
-* Allow administrator to create or modify Ledger Account data
-*
-* @author Ashley Kitson http://xoobs.net
-* @copyright 2005 Ashley Kitson, UK
-* @package SACC
-* @subpackage Admin
-* @access private 
-* @version 1
-*/
+ * Accounts Admin page
+ *
+ * Allow administrator to create or modify Ledger Account data
+ *
+ * @author     Ashley Kitson http://xoobs.net
+ * @copyright  2005 Ashley Kitson, UK
+ * @package    SACC
+ * @subpackage Admin
+ * @access     private
+ * @version    1
+ */
 
 /**
-* Do all the declarations etc needed by an admin page
-*/
-include_once "adminheader.php";
+ * Do all the declarations etc needed by an admin page
+ */
+include_once __DIR__ . '/admin_header.php';
+include_once __DIR__ . '/adminheader.php';
 
 //Display the admin menu
-xoops_module_admin_menu(2,_AM_SACC_ADMENU2);
+//xoops_module_admin_menu(2,_AM_SACC_ADMENU2);
 
 /**
-* To use this as a template you need to write code to display
-* whatever it is you want displaying between here...
-*/
-global $HTTP_POST_VARS;
-extract($HTTP_POST_VARS);
+ * To use this as a template you need to write code to display
+ * whatever it is you want displaying between here...
+ */
+global $_POST;
+extract($_POST);
 if (!isset($submit)) { //check to see if org_id has been set by a previous record save
-	extract($HTTP_GET_VARS);
-	if (isset($curr_org_id)) {
-		$submit = TRUE;			//set flag so that decision tree below will
-		$org_id = $curr_org_id;	// display list of accounts, not organisations
-	}
+    extract($HTTP_GET_VARS);
+    if (isset($curr_org_id)) {
+        $submit = true;         //set flag so that decision tree below will
+        $org_id = $curr_org_id; // display list of accounts, not organisations
+    }
 }
 
 if (isset($submit)) { //List the accounts for an organisation
-	adminSelectAcc($org_id);
+    adminSelectAcc($org_id);
 } elseif (isset($go)) { //edit an account
-	adminEditAcc($org_id, $ac_id);
+    adminEditAcc($org_id, $ac_id);
 } elseif (isset($insert)) { //create a new account
-	adminEditAcc($org_id);
+    adminEditAcc($org_id);
 } elseif (isset($save)) { //user has edited or created account so save it
-	adminEditAcc($org_id, $ac_id, true);
+    adminEditAcc($org_id, $ac_id, true);
 } else { //Ask user to select an organisation prior to displaying a list of accounts to edit
-	adminSelectAcc();
+    adminSelectAcc();
 } //end if
 
 /**
-* and here.
-*/
+ * and here.
+ */
 
 //And put footer in
 xoops_cp_footer();
-
-?>

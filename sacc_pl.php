@@ -2,7 +2,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -26,7 +26,7 @@
 // Author:    Ashley Kitson                                                  //
 // Copyright: (c) 2004, Ashley Kitson
 // URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (http://www.xoops.org/)                      //
+// Project:   The XOOPS Project (https://xoops.org/)                      //
 // Module:    Simple Accounts System (SACC)                                  //
 // ------------------------------------------------------------------------- //
 // Display selection of organisations to choose from.                        //
@@ -34,10 +34,9 @@
 // As this is the first pahge that is shown when user selects main menu item //
 // it should never be missed out!
 
-require("header.php");
-$xoopsOption['template_main'] = 'sacc_pl.tpl';
-include XOOPS_ROOT_PATH."/header.php";
-
+require __DIR__ . '/header.php';
+$GLOBALS['xoopsOption']['template_main'] = 'sacc_pl.tpl';
+include XOOPS_ROOT_PATH . '/header.php';
 
 // Assign page titles
 $xoopsTpl->assign('lang_pagetitle', _MD_SACC_PAGETITLE1);
@@ -45,5 +44,4 @@ $xoopsTpl->assign('lang_pagetitle', _MD_SACC_PAGETITLE1);
 // Get data and assign to template
 
 // Display the page
-include XOOPS_ROOT_PATH.'/footer.php';		//display the page!
-?>
+include XOOPS_ROOT_PATH . '/footer.php';      //display the page!

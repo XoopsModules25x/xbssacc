@@ -2,7 +2,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -26,115 +26,150 @@
 // Author:    Ashley Kitson                                                  //
 // Copyright: (c) 2004, Ashley Kitson
 // URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (http://www.xoops.org/)                      //
+// Project:   The XOOPS Project (https://xoops.org/)                      //
 // Module:    SACC Simple Accounts                                           //
 // ------------------------------------------------------------------------- //
 /**
  * Account entry object handler
  *
- * @package SACC
- * @subpackage SACCEntry
- * @author Ashley Kitson http://xoobs.net
+ * @package       SACC
+ * @subpackage    SACCEntry
+ * @author        Ashley Kitson http://xoobs.net
  * @copyright (c) 2004 Ashley Kitson, Great Britain
-*/
+ */
 
-if (!defined('XOOPS_ROOT_PATH')) { 
-  exit('Call to include SACCAccount.php failed as XOOPS_ROOT_PATH not defined');
+if (!defined('XOOPS_ROOT_PATH')) {
+    exit('Call to include SACCAccount.php failed as XOOPS_ROOT_PATH not defined');
 }
 /**
-* SACC base objects
-*/
-require_once SACC_PATH."/class/class.sacc.base.php";
-
+ * SACC base objects
+ */
+require_once SACC_PATH . '/class/class.sacc.base.php';
 
 /**
  * Object handler for SACCEntry
  *
- * @package SACC
+ * @package    SACC
  * @subpackage SACCEntry
  */
-class Xbs_SaccSACCEntryHandler extends CDMBaseHandler {
+class Xbs_SaccSACCEntryHandler extends CDMBaseHandler
+{
 
-  /**
-  * Constructor
-  *
-  * @param xoopsDatabase handle to database object
-  */
-  function Xbs_SaccSACCEntryHandler(&$db) {
-    $this->CDMBaseHandler($db); //call ancestor constructor
-    $this->classname = 'saccacentry';
-    $this->ins_tagname = 'sacc_ins_entry';
-  }
-
-  /**
-  * create new SACCEntry object
-  *
-  * @internal 
-  */
-  function &_create() {
-    $obj = new SACCAcEntry();
-    return $obj;
-  }//end function _create
-
-  /**
-  * get a journal object
-  *
-  * @param int $key journal id to get
-  * @param string row status flag
-  * @internal 
-  */
-  
-  function _get($key,$row_flag=null) {
-    $sql = "select * from ".$this->db->prefix(SACC_TBL_ENTRY)." where id = ".$key;
-    $sql .= (empty($row_flag)?"":" and row_flag = ".$this->db->quoteString($row_flag));
-    return $sql;
-  }
-
-  /**
-  * sql string to insert object data
-  *
-  * @internal 
-  */
-  function _ins_insert($cleanVars) {
-    foreach ($cleanVars as $k => $v) {
-      ${$k} = $v;
+    /**
+     * Constructor
+     *
+     * @param xoopsDatabase handle to database object
+     */
+    public function __construct($db)
+    {
+        parent::__construct($db); //call ancestor constructor
+        $this->classname   = 'saccacentry';
+        $this->ins_tagname = 'sacc_ins_entry';
     }
-    $sql = sprintf("insert into %s (id,jrn_id,ac_id,txn_ref,txn_dr,txn_cr,row_flag,row_uid,row_dt) values (%u,%u,%u,%s,%u,%u,%s,%u,%s)",$this->db->prefix(SACC_TBL_ENTRY),$id,$jrn_id,$ac_id,$this->db->quoteString($txn_ref),$txn_dr,$txn_cr,$this->db->quoteString($row_flag),$row_uid,$this->db->quoteString($row_dt));
- return $sql; 
-  }
 
-  /**
-  * sql string to update object data
-  *
-  * @internal 
-  */
-  function _ins_update($cleanVars) {
-    foreach ($cleanVars as $k => $v) {
-      ${$k} = $v;
+    /**
+     * create new SACCEntry object
+     *
+     * @internal
+     */
+    public function &_create()
+    {
+        $obj = new SACCAcEntry();
+        return $obj;
+    }//end function _create
+
+    /**
+     * get a journal object
+     *
+     * @param int $key journal id to get
+     * @param     string row status flag
+     *
+     * @return string
+     * @internal
+     */
+
+    public function _get($key, $row_flag = null)
+    {
+        $sql = 'SELECT * FROM ' . $this->db->prefix(SACC_TBL_ENTRY) . ' WHERE id = ' . $key;
+        $sql .= (empty($row_flag) ? '' : ' and row_flag = ' . $this->db->quoteString($row_flag));
+        return $sql;
     }
-    $sql = sprintf("UPDATE %s SET jrn_id=%u,ac_id=%u,txn_ref=%s,txn_dr=%u,txn_cr=%u,row_flag = %s,row_uid = %u,row_dt = %s WHERE id = %u",$this->db->prefix(SACC_TBL_ENTRY),$jrn_id,$ac_id,$this->db->quoteString($txn_ref),$txn_dr,$txn_cr,$this->db->quoteString($row_flag),$row_uid,$this->db->quoteString($row_dt),$id);
-    return $sql;
-  }
 
-  /**
-  * Insert journal object to database - extend ancestor for post process
-  *
-  * @param SACCJournal handle to object to insert
-  * @return boolean TRUE on success else FALSE
-  */
-  function insert(&$entry) {
-    if (parent::insert($entry)) {
-      //Now need to bubble up the account entry into the account totals
-      $accHandler =& xoops_getmodulehandler("SACCAccount",SACC_DIR);
-      $ac_id = $entry->getVar('ac_id');
-      $txn_dr = $entry->getVar('txn_dr');
-      $txn_cr = $entry->getVar('txn_cr');
-      return $accHandler->updateBalances($ac_id,$txn_dr,$txn_cr);
-    } else {
-      return false;
+    /**
+     * sql string to insert object data
+     *
+     * @internal
+     * @param $cleanVars
+     * @return string
+     */
+    public function _ins_insert($cleanVars)
+    {
+        foreach ($cleanVars as $k => $v) {
+            ${$k} = $v;
+        }
+        $sql = sprintf(
+            'INSERT INTO %s (id,jrn_id,ac_id,txn_ref,txn_dr,txn_cr,row_flag,row_uid,row_dt) VALUES (%u,%u,%u,%s,%u,%u,%s,%u,%s)',
+            $this->db->prefix(SACC_TBL_ENTRY),
+            $id,
+            $jrn_id,
+            $ac_id,
+            $this->db->quoteString($txn_ref),
+            $txn_dr,
+            $txn_cr,
+            $this->db->quoteString($row_flag),
+            $row_uid,
+                       $this->db->quoteString($row_dt)
+        );
+        return $sql;
     }
-  }//end function insert
 
+    /**
+     * sql string to update object data
+     *
+     * @internal
+     * @param $cleanVars
+     * @return string
+     */
+    public function _ins_update($cleanVars)
+    {
+        foreach ($cleanVars as $k => $v) {
+            ${$k} = $v;
+        }
+        $sql = sprintf(
+            'UPDATE %s SET jrn_id=%u,ac_id=%u,txn_ref=%s,txn_dr=%u,txn_cr=%u,row_flag = %s,row_uid = %u,row_dt = %s WHERE id = %u',
+            $this->db->prefix(SACC_TBL_ENTRY),
+            $jrn_id,
+            $ac_id,
+            $this->db->quoteString($txn_ref),
+            $txn_dr,
+            $txn_cr,
+            $this->db->quoteString($row_flag),
+            $row_uid,
+                       $this->db->quoteString($row_dt),
+            $id
+        );
+        return $sql;
+    }
 
+    /**
+     * Insert journal object to database - extend ancestor for post process
+     *
+     * @param \XoopsObject $entry
+     *
+     * @return boolean TRUE on success else FALSE
+     * @internal param \handle $SACCJournal to object to insert
+     */
+    public function insert(XoopsObject $entry)
+    {
+        if (parent::insert($entry)) {
+            //Now need to bubble up the account entry into the account totals
+            $accHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+            $ac_id      = $entry->getVar('ac_id');
+            $txn_dr     = $entry->getVar('txn_dr');
+            $txn_cr     = $entry->getVar('txn_cr');
+            return $accHandler->updateBalances($ac_id, $txn_dr, $txn_cr);
+        } else {
+            return false;
+        }
+    }//end function insert
 } //end class SACCEntryHandler
-?>

@@ -2,7 +2,7 @@
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
-//                       <http://www.xoops.org/>                             //
+//                       <https://xoops.org/>                             //
 //  ------------------------------------------------------------------------ //
 //  This program is free software; you can redistribute it and/or modify     //
 //  it under the terms of the GNU General Public License as published by     //
@@ -26,36 +26,35 @@
 // Author:    Ashley Kitson                                                  //
 // Copyright: (c) 2004, Ashley Kitson
 // URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (http://www.xoops.org/)                      //
+// Project:   The XOOPS Project (https://xoops.org/)                      //
 // Module:    Simple Accounts (SACC)                                         //
 // ------------------------------------------------------------------------- //
 /**
-* SACC Help file 
-*
-* Wrapper for the HTML help file for SACC
-*
-* @author Ashley Kitson http://xoobs.net
-* @copyright 2005 Ashley Kitson, UK
-* @package SACC
-* @subpackage Help
-* @access private
-* @version 1 
-*/
+ * SACC Help file
+ *
+ * Wrapper for the HTML help file for SACC
+ *
+ * @author     Ashley Kitson http://xoobs.net
+ * @copyright  2005 Ashley Kitson, UK
+ * @package    SACC
+ * @subpackage Help
+ * @access     private
+ * @version    1
+ */
 
 /**
-* MUST include module header
-*/
-require("header.php");
+ * MUST include module header
+ */
+require __DIR__ . '/header.php';
 /**
-* Xoops header file
-*/
-include XOOPS_ROOT_PATH."/header.php";
+ * Xoops header file
+ */
+include XOOPS_ROOT_PATH . '/header.php';
 /**
-* The HTML help file
-*/
-include SACC_PATH."/sacchelp.html";
+ * The HTML help file
+ */
+include SACC_PATH . '/sacchelp.html';
 /**
-* Display the page
-*/
-include XOOPS_ROOT_PATH.'/footer.php';		//display the page!
-?>
+ * Display the page
+ */
+include XOOPS_ROOT_PATH . '/footer.php';      //display the page!
