@@ -314,8 +314,8 @@ SaccSACCControlHandler</P>
 to create or get the data object e.g.; 
 </P>
 <P>NB SACC_DIR is a constant set in defines.php and must be used in
-calls to xoops_getmodulehandler<BR>$setHandler =&amp;
-xoops_getmodulehandler(ObjName,SACC_DIR) where ObjName is one of
+calls to xoops_getModuleHandler<BR>$setHandler =&amp;
+xoops_getModuleHandler(ObjName,SACC_DIR) where ObjName is one of
 &quot;SACCOrg&quot;, &quot;SACCAccount&quot;, &quot;SACCJournal&quot;,
 &quot;SACCEntry&quot; or &quot;SACCControl&quot;;<BR>$obj =&amp;
 $setHandler-&gt;get($id);<BR>$obj2 =&amp; $setHandler-&gt;create(); 
@@ -363,7 +363,7 @@ SACCFormatMoney($accs&quot;ac_net_bal&quot;] /
 $decpnt);<BR>&nbsp;&nbsp;$xoopsTpl-&gt;append(&quot;accounts&quot;,$acc);<BR>&nbsp;&nbsp;}</P>
 <P>Writing data to object, as in the following example from
 sacc_journal.php which writes journal entries to the journal object</P>
-<P>include_once CDM_DIR.&quot;/include/functions.php&quot;<BR>...<BR>$jData
+<P>require_once CDM_DIR.&quot;/include/functions.php&quot;<BR>...<BR>$jData
 = $jHandler-&gt;create($dte,$jrn_prps,$_SESSION['sacc_org_id']);<BR>$amount
 *= pow(10,SACC_CFG_DECPNT); //convert float to
 integer<BR>$jData-&gt;appendEntry($ac_dr_id,$dr_ref,$amount,0);<BR>$jData-&gt;appendEntry($ac_cr_id,$cr_ref,0,$amount);</P>
