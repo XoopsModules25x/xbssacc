@@ -51,7 +51,7 @@
  * cannot use dirname as it doesn't nest
  * define('SACC_DIR', $xoopsModule->dirname());
  */
-define('SACC_DIR', 'xbs_sacc');
+define('SACC_DIR', 'xbssacc');
 define('SACC_PATH', XOOPS_ROOT_PATH . '/modules/' . SACC_DIR);
 define('SACC_URL', XOOPS_URL . '/modules/' . SACC_DIR);
 /**#@-*/
@@ -75,11 +75,11 @@ function getSACCModConfigs()
         return $SACCModuleConfig;
     }
 
-    $Module = XoopsModule::getByDirname(SACC_DIR);
+    $module = XoopsModule::getByDirname(SACC_DIR);
 
     $configHandler = xoops_getHandler('config');
 
-    $SACCModuleConfig = $configHandler->getConfigsByCat(0, $Module->getVar('mid'));
+    $SACCModuleConfig = $configHandler->getConfigsByCat(0, $module->getVar('mid'));
 
     return $SACCModuleConfig;
 }

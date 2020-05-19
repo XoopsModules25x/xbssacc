@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use XoopsModules\Xbscdm;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -55,10 +57,6 @@ require_once XOOPS_ROOT_PATH . '/header.php'; // include the main header file
  * CDM API functions
  */
 require_once CDM_PATH . '/include/functions.php';
-/**
- * SACC form objects and elements
- */
-require_once SACC_PATH . '/class/class.sacc.form.php';
 
 //Check to see if user logged in
 global $xoopsUser;
@@ -90,7 +88,7 @@ function dispForm()
 
     $org_id = (int)$_GET['org_id'];
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     if (0 != $org_id) {
         $org = $orgHandler->get($org_id);
@@ -103,48 +101,48 @@ function dispForm()
     if (0 == $org_id) {
         //if id = 0 then user has requested a new organisation setup so hide id
 
-        $id = new XoopsFormHidden('org_id', 0);
+        $id = new \XoopsFormHidden('org_id', 0);
 
         $crcy_val = CDMGetCode('SACCCONF', 'DEFCUR'); //get system default currency
 
         $orgname = '';
 
-        $new_flag = new XoopsFormHidden('new_flag', true); //tell POST process we are new
+        $new_flag = new \XoopsFormHidden('new_flag', true); //tell POST process we are new
     } else {
         // else display the current account id as label because it is primary key
 
-        $id = new XoopsFormLabel(_MD_SACC_ORG1, $org_id);
+        $id = new \XoopsFormLabel(_MD_SACC_ORG1, $org_id);
 
-        $id_hid = new XoopsFormHidden('org_id', $org_id); //still need to know id in POST process
+        $id_hid = new \XoopsFormHidden('org_id', $org_id); //still need to know id in POST process
 
         $crcy_val = $org->getVar('base_crcy');
 
         $orgname = $org->getVar('org_name');
 
-        $new_flag = new XoopsFormHidden('new_flag', false);
+        $new_flag = new \XoopsFormHidden('new_flag', false);
     }//end if org_id==0
 
-    $org_name = new XoopsFormText(_MD_SACC_ORG2, 'org_nm', 20, 20, $orgname);
+    $org_name = new \XoopsFormText(_MD_SACC_ORG2, 'org_nm', 20, 20, $orgname);
 
     // display organisation base currency
 
-    $base_crcy = new CDMFormSelectCurrency(_MD_SACC_PAGE2COL3, 'base_crcy', $crcy_val);
+    $base_crcy = new Xbscdm\Form\FormSelectCurrency(_MD_SACC_PAGE2COL3, 'base_crcy', $crcy_val);
 
-    $row_flag = new CDMFormSelectRstat(_MD_SACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
+    $row_flag = new Xbscdm\Form\FormSelectRstat(_MD_SACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
 
     $ret = getXoopsUser($org->getVar('row_uid'));
 
-    $row_uid = new XoopsFormLabel(_MD_SACC_RUIDNM, $ret);
+    $row_uid = new \XoopsFormLabel(_MD_SACC_RUIDNM, $ret);
 
-    $row_dt = new XoopsFormLabel(_MD_SACC_RDTNM, $org->getVar('row_dt'));
+    $row_dt = new \XoopsFormLabel(_MD_SACC_RDTNM, $org->getVar('row_dt'));
 
-    $submit = new XoopsFormButton('', 'submit', _MD_SACC_SUBMIT, 'submit');
+    $submit = new \XoopsFormButton('', 'submit', _MD_SACC_SUBMIT, 'submit');
 
-    $cancel = new XoopsFormButton('', 'cancel', _MD_SACC_CANCEL, 'submit');
+    $cancel = new \XoopsFormButton('', 'cancel', _MD_SACC_CANCEL, 'submit');
 
-    $reset = new XoopsFormButton('', 'reset', _MD_SACC_RESET, 'reset');
+    $reset = new \XoopsFormButton('', 'reset', _MD_SACC_RESET, 'reset');
 
-    $editForm = new XoopsThemeForm(_MD_SACC_PAGETITLE3, 'editForm', 'sacc_org_edit.php');
+    $editForm = new \XoopsThemeForm(_MD_SACC_PAGETITLE3, 'editForm', 'sacc_org_edit.php');
 
     $editForm->addElement($id);
 
@@ -186,14 +184,14 @@ function submitForm()
 
     extract($_POST);
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     if ($new_flag) {
         $orgData = $orgHandler->create();
 
         $orgData->setVar('id', $org_id);
     } else {
-        $orgData = &$orgHandler->getall($org_id);
+        $orgData = &$orgHandler->getAll($org_id);
     }
 
     $orgData->setVar('org_name', $org_nm);

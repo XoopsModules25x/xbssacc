@@ -82,7 +82,7 @@ CREATE TABLE sacc_entry (
 CREATE TABLE sacc_journ (
   id bigint(20) NOT NULL auto_increment,
   org_id smallint(6) NOT NULL default '0',
-  jrn_dt datetime NOT NULL default '0000-00-00 00:00:00',
+  jrn_dt datetime NOT NULL default '2020-05-16 00:00:00',
   jrn_prps varchar(30) default NULL,
   row_flag enum('Active','Defunct','Suspended') NOT NULL default 'Active',
   row_uid int(10) unsigned NOT NULL default '0',

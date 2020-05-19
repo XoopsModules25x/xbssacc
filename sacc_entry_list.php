@@ -78,13 +78,13 @@ $ac_id = $_GET['ac_id'];
 if (!empty($org_id) and !empty($ac_id)) {
     //set up organisation
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     $org = $orgHandler->get($org_id);
 
     //set up account
 
-    $acHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+    $acHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
     $account = $acHandler->get($ac_id);
 
@@ -93,9 +93,9 @@ if (!empty($org_id) and !empty($ac_id)) {
     $entries = $account->getEntries(); //this is an array of entries data arrays
     $decpnt  = pow(10, SACC_CFG_DECPNT); //get divisor to display money values
     foreach ($entries as $entry) {
-        $entry['txn_dr'] = SACCFormatMoney($entry['txn_dr'] / $decpnt);
+        $entry['txn_dr'] = formatMoney($entry['txn_dr'] / $decpnt);
 
-        $entry['txn_cr'] = SACCFormatMoney($entry['txn_cr'] / $decpnt);
+        $entry['txn_cr'] = formatMoney($entry['txn_cr'] / $decpnt);
 
         $xoopsTpl->append('entries', $entry);
     }

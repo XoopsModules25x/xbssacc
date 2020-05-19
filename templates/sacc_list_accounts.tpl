@@ -27,7 +27,7 @@
             <td align="RIGHT" class="odd"><{$accounts[i].ac_cr}></td>
             <td align="RIGHT" class="even"><{$accounts[i].ac_net_bal}></td>
             <td align="LEFT" class="odd"><{$accounts[i].row_flag}></td>
-            <td align="CENTER" class="even"><a href="sacc_entry_list.php?org_id=<{$org_id}>&ac_id=<{$accounts[i].id}>"><img src="<{$xoops_url}>/modules/sacc/images/b_browse.png" title="<{$lang_select}>"></a></td>
+            <td align="CENTER" class="even"><a href="sacc_entry_list.php?org_id=<{$org_id}>&ac_id=<{$accounts[i].id}>"><img src="<{$xoops_url}>/modules/xbssacc/assets/images/b_browse.png" title="<{$lang_select}>"></a></td>
         </tr>
     <{/section}>
     <!-- end sets item loop -->

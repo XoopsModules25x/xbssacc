@@ -47,11 +47,12 @@
  * Do all the declarations etc needed by an admin page
  */
 require_once __DIR__ . '/admin_header.php';
-require_once __DIR__ . '/adminheader.php';
+//require_once __DIR__ . '/adminheader.php';
 
 //Display the admin menu
 //xoops_module_admin_menu(2,_AM_SACC_ADMENU2);
 
+xoops_cp_header();
 /**
  * To use this as a template you need to write code to display
  * whatever it is you want displaying between here...

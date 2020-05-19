@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+namespace XoopsModules\Xbssacc;
+
+use XoopsModules\Xbscdm;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -34,31 +38,25 @@
  * Account Object Handler
  *
  * @package       SACC
- * @subpackage    SACCAccount
+ * @subpackage    Account
  * @author        Ashley Kitson http://xoobs.net
  * @copyright (c) 2004 Ashley Kitson, UK
  */
-if (!defined('XOOPS_ROOT_PATH')) {
-    exit('Call to include SACCAccount.php failed as XOOPS_ROOT_PATH not defined');
-}
-/**
- * SACC base objects
- */
-require_once SACC_PATH . '/class/class.sacc.base.php';
+
 /**
  * SACC functions
  */
 require_once CDM_PATH . '/include/functions.php';
 
 /**
- * Object handler for SACCAccount
+ * Object handler for Account
  *
  * @package       SACC
- * @subpackage    SACCAccount
+ * @subpackage    Account
  * @author        Ashley Kitson http://xoobs.net
  * @copyright (c) 2004 Ashley Kitson, UK
  */
-class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
+class AccountHandler extends Xbscdm\BaseHandler
 {
     /**
      * Function: Constructor
@@ -82,45 +80,45 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
      *                                        SACC_ACTP_LIABILITY, SACC_ACTP_BANK, SACC_ACTP_SUPPLIER, SACC_ACTP_CUSTOMER,
      *                                        SACC_ACTP_EQUITY
      * @param bool   $isNew                   default TRUE. This is a new account we are creating
-     * @return SACCAccount object else FALSE on failure
+     * @return Account object else FALSE on failure
      */
     public function create($accType = null, $isNew = true)
     {
         switch ($accType) {
             case SACC_ACTP_INCOME:
-                $obj = new SACCIncomeAc();
+                $obj = new IncomeAc();
                 break;
             case SACC_ACTP_EXPENSE:
-                $obj = new SACCExpenseAc();
+                $obj = new ExpenseAc();
                 break;
             case SACC_ACTP_ASSET:
-                $obj = new SACCAssetAc();
+                $obj = new AssetAc();
                 break;
             case SACC_ACTP_LIABILITY:
-                $obj = new SACCLiabilityAc();
+                $obj = new LiabilityAc();
                 break;
             case SACC_ACTP_BANK:
-                $obj = new SACCBankAc();
+                $obj = new BankAc();
                 break;
             case SACC_ACTP_SUPPLIER:
-                $obj = new SACCSupplierAc();
+                $obj = new SupplierAc();
                 break;
             case SACC_ACTP_CUSTOMER:
-                $obj = new SACCCustomerAc();
+                $obj = new CustomerAc();
                 break;
             case SACC_ACTP_EQUITY:
-                $obj = new SACCEquityAc();
+                $obj = new EquityAc();
                 break;
             default:
                 //we will always get an object even if it the base account type
-                $obj = new SACCAccount();
+                $obj = new Account();
         }//end switch
         if ($isNew && $obj) { //if it is new and the object was created
             $obj->setNew();
 
             $obj->unsetDirty();
         } else {
-            if ($obj) {         //it is not new (forced by caller, usually &getall()) but obj was created
+            if ($obj) {         //it is not new (forced by caller, usually &getAll()) but obj was created
                 $obj->unsetNew();
 
                 $obj->unsetDirty();
@@ -144,7 +142,7 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
      * @return string
      * @internal
      */
-    public function &_get($key, $row_flag = null)
+    public function &_get($key, $row_flag = null, $lang = null)
     {
         $sql = sprintf('SELECT * FROM %s WHERE id = %u', $this->db->prefix(SACC_TBL_ACC), $key);
 
@@ -162,9 +160,9 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
      * @param string $row_flag default null.  Row status flag
      * @return bool object on success else FALSE on failure
      */
-    public function getall($id, $row_flag = null)
+    public function getAll($id, $row_flag = null, $lang = null)
     {
-        $test = (is_int($id) ? ($id > 0 ? true : false) : !empty($id) ? true : false);
+        $test = (is_int($id) ? ($id > 0 ? true : false) : (!empty($id) ? true : false));
 
         if ($test) {
             $sql = 'SELECT ac_tp FROM ' . $this->db->prefix(SACC_TBL_ACC) . ' WHERE id = ' . $id;
@@ -219,11 +217,11 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
     /**
      * function reload - extend ancestor to add account information
      *
-     * @param SACCAccount $obj handle to account object
+     * @param Account $obj handle to account object
      * @param int         $key Accoint id
      * @return bool
      */
-    public function reload(&$obj, $key = null)
+    public function reload($obj, $key = null)
     {
         $ret = parent::reload($obj, $key);
 
@@ -251,9 +249,9 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
 
         //else update the balance for this account
 
-        $accountHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+        $accountHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
-        $accountData = &$accountHandler->getall($ac_id);
+        $accountData = &$accountHandler->getAll($ac_id);
 
         $new_dr = $accountData->getVar('ac_dr') + $ac_dr;
 
@@ -373,7 +371,7 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
     /**
      * Defunct any children of an account that has been defuncted itself
      *
-     * @param int $account SACCAccount object to process
+     * @param int $account Account object to process
      */
     public function defunctChildAccounts($account)
     {
@@ -381,7 +379,7 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
             $sql = sprintf('SELECT id FROM %s WHERE ac_prnt_id = %u', $this->db->prefix(SACC_TBL_ACC), $account->getVar('id'));
 
             if ($result = $this->db->query($sql)) {
-                $accHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+                $accHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
                 while (false !== ($arr = $this->db->fetchArray($result))) {
                     $acc = $accHandler->get($arr['id']);
@@ -406,7 +404,7 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
      * @return bool
      * @internal param \Handle $SACCAccount to account object
      */
-    public function insert(XoopsObject $account)
+    public function insert(\XoopsObject $account)
     {
         if (!$account->isDirty()) {
             return true;
@@ -430,7 +428,7 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
 
         //  get organisation base currency
 
-        $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+        $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
         $org = $orgHandler->get($account->getVar('org_id'));
 
@@ -533,7 +531,7 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
         if ($result = $this->db->query($sql)) {
             $ret = [];
 
-            $entHandler = xoops_getModuleHandler('SACCEntry', SACC_DIR);
+            $entHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Entry');
 
             while (false !== ($arr = $this->db->fetchArray($result))) {
                 $entry = $entHandler->get($arr['id']);
@@ -544,4 +542,4 @@ class Xbs_SaccSACCAccountHandler extends CDMBaseHandler
             $obj->setVar('entries', $ret);
         }
     }
-} //end class SACCAccountHandler
+} //end class AccountHandler

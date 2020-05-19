@@ -111,7 +111,7 @@ function xoops_module_install_sacc(&$module)
 
     global $xoopsDB;
 
-    $sql = 'SELECT 1 FROM ' . $xoopsDB->prefix('modules') . " WHERE direname = 'xbs_cdm' AND isactive = 1";
+    $sql = 'SELECT 1 FROM ' . $xoopsDB->prefix('modules') . " WHERE direname = 'xbscdm' AND isactive = 1";
 
     return $result = $xoopsDB->queryF($sql);
 }//end function

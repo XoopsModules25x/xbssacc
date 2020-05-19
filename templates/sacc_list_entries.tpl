@@ -4,7 +4,7 @@
     <caption>
         <{$lang_table1name}><br>
         <!--
-<a href="sacc_acc_edit.php?org_id=<{$org_id}>&ac_id=0"><img src="<{$xoops_url}>/modules/sacc/images/b_insrow.png" title ="<{$lang_insert}>"> <{$lang_insert}></a>&nbsp;&nbsp;
+<a href="sacc_acc_edit.php?org_id=<{$org_id}>&ac_id=0"><img src="<{$xoops_url}>/modules/xbssacc/assets/images/b_insrow.png" title ="<{$lang_insert}>"> <{$lang_insert}></a>&nbsp;&nbsp;
 <{$lang_instruction}>
 -->
     </caption>
@@ -27,8 +27,8 @@
             <td align="RIGHT" class="odd"><{$entries[i].txn_dr}></td>
             <td align="RIGHT" class="even"><{$entries[i].txn_cr}></td>
             <!--
-	<td align="CENTER" class="even"><a href="sacc_entry_list.php?org_id=<{$org_id}>&ac_id=<{$accounts[i].id}>"><img src="<{$xoops_url}>/modules/sacc/images/b_browse.png" title ="<{$lang_select}>"></a>&nbsp;<a
-	href="sacc_acc_edit.php?org_id=<{$org_id}>&ac_id=<{$accounts[i].id}>"><img src="<{$xoops_url}>/modules/sacc/images/b_edit.png" title ="<{$lang_edit}>"></a></td>
+	<td align="CENTER" class="even"><a href="sacc_entry_list.php?org_id=<{$org_id}>&ac_id=<{$accounts[i].id}>"><img src="<{$xoops_url}>/modules/xbssacc/assets/images/b_browse.png" title ="<{$lang_select}>"></a>&nbsp;<a
+	href="sacc_acc_edit.php?org_id=<{$org_id}>&ac_id=<{$accounts[i].id}>"><img src="<{$xoops_url}>/modules/xbssacc/assets/images/b_edit.png" title ="<{$lang_edit}>"></a></td>
 -->
         </tr>
     <{/section}>

@@ -77,7 +77,7 @@ if (!empty($_POST['org_id'])) {
 if (!empty($org_id)) {
     //set up organisation
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     $org = $orgHandler->get($org_id);
 
@@ -90,11 +90,11 @@ if (!empty($org_id)) {
     foreach ($accounts as $acs) {
         $decpnt = pow(10, SACC_CFG_DECPNT); //get the divisor to display money values
 
-        $acs['ac_dr'] = SACCFormatMoney($acs['ac_dr'] / $decpnt);
+        $acs['ac_dr'] = formatMoney($acs['ac_dr'] / $decpnt);
 
-        $acs['ac_cr'] = SACCFormatMoney($acs['ac_cr'] / $decpnt);
+        $acs['ac_cr'] = formatMoney($acs['ac_cr'] / $decpnt);
 
-        $acs['ac_net_bal'] = SACCFormatMoney($acs['ac_net_bal'] / $decpnt);
+        $acs['ac_net_bal'] = formatMoney($acs['ac_net_bal'] / $decpnt);
 
         //indent the account name according to its hierarchical level
 

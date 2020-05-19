@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use XoopsModules\Xbssacc\Form;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -52,14 +54,7 @@ require __DIR__ . '/header.php';
  * Xoops header file
  */
 require XOOPS_ROOT_PATH . '/header.php';
-/**
- * SACC form objects and elements
- */
-require_once SACC_PATH . '/class/class.sacc.form.php';
-/**
- * CDM form objects and elements
- */
-require_once CDM_PATH . '/class/class.cdm.form.php';
+
 /**
  * CDM API functions
  */
@@ -103,7 +98,7 @@ function dispForm()
     if (!empty($org_id)) {
         //set up organisation
 
-        $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+        $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
         $org = $orgHandler->get($org_id);
 
@@ -111,27 +106,27 @@ function dispForm()
 
         //Date defaulted to today
 
-        $dt = new XoopsFormText('Transaction Date', 'jrn_dt', 10, 10, date('d/m/Y'));
+        $dt = new \XoopsFormText('Transaction Date', 'jrn_dt', 10, 10, date('d/m/Y'));
 
-        $prps = new XoopsFormText('Purpose', 'jrn_prps', 20, 20);
+        $prps = new \XoopsFormText('Purpose', 'jrn_prps', 20, 20);
 
-        $ac_dr_id = new SACCFormSelectAccount('Debit Account', 'ac_dr_id', $org_id, 0);
+        $ac_dr_id = new Form\FormSelectAccount('Debit Account', 'ac_dr_id', $org_id, 0);
 
-        $ac_cr_id = new SACCFormSelectAccount('Credit Account', 'ac_cr_id', $org_id, 0);
+        $ac_cr_id = new Form\FormSelectAccount('Credit Account', 'ac_cr_id', $org_id, 0);
 
-        $dr_ref = new XoopsFormText('Debit Reference', 'dr_ref', 20, 20);
+        $dr_ref = new \XoopsFormText('Debit Reference', 'dr_ref', 20, 20);
 
-        $cr_ref = new XoopsFormText('Credit Reference', 'cr_ref', 20, 20);
+        $cr_ref = new \XoopsFormText('Credit Reference', 'cr_ref', 20, 20);
 
-        $amount = new XoopsFormText('Amount', 'amount', 11, 11);
+        $amount = new \XoopsFormText('Amount', 'amount', 11, 11);
 
-        $submit = new XoopsFormButton('', 'submit', _MD_SACC_SUBMIT, 'submit');
+        $submit = new \XoopsFormButton('', 'submit', _MD_SACC_SUBMIT, 'submit');
 
-        $cancel = new XoopsFormButton('', 'cancel', _MD_SACC_CANCEL, 'submit');
+        $cancel = new \XoopsFormButton('', 'cancel', _MD_SACC_CANCEL, 'submit');
 
-        $reset = new XoopsFormButton('', 'reset', _MD_SACC_RESET, 'reset');
+        $reset = new \XoopsFormButton('', 'reset', _MD_SACC_RESET, 'reset');
 
-        $journalForm = new XoopsThemeForm(sprintf('Journal Entry for %s', $org->getVar('org_name')), 'journalform', 'sacc_journal.php');
+        $journalForm = new \XoopsThemeForm(sprintf('Journal Entry for %s', $org->getVar('org_name')), 'journalform', 'sacc_journal.php');
 
         $journalForm->addElement($dt);
 
@@ -168,7 +163,7 @@ function submitForm()
 
     extract($_POST);
 
-    $jHandler = xoops_getModuleHandler('SACCJournal', SACC_DIR);
+    $jHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Journal');
 
     //format the date for insertion into database
 

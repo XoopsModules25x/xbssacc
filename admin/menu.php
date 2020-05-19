@@ -48,21 +48,19 @@
  * and use a switch statement on a variable passed to it from here, to keep things
  * simple, use one script per menu option;
  */
-defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+include dirname(__DIR__) . '/preloads/autoloader.php';
 
-//$path = dirname(dirname(dirname(__DIR__)));
-//require_once $path . '/mainfile.php';
+$moduleDirName = basename(dirname(__DIR__));
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+/** @var \XoopsModules\Xbssacc\Helper $helper */
+$helper = \XoopsModules\Xbssacc\Helper::getInstance();
+$helper->loadLanguage('common');
+$helper->loadLanguage('feedback');
 
-$moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname(basename(dirname(__DIR__)));
-$pathIcon32    = '../../' . $module->getInfo('icons32');
-xoops_loadLanguage('modinfo', $module->dirname());
-
-$pathModuleAdmin = XOOPS_ROOT_PATH . '/' . $module->getInfo('dirmoduleadmin') . '/moduleadmin';
-if (!file_exists($fileinc = $pathModuleAdmin . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/' . 'main.php')) {
-    $fileinc = $pathModuleAdmin . '/language/english/main.php';
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+if (is_object($helper->getModule())) {
+    $pathModIcon32 = $helper->url($helper->getModule()->getInfo('modicons32'));
 }
-require_once $fileinc;
 
 $adminmenu              = [];
 $i                      = 0;

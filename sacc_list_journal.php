@@ -69,7 +69,7 @@ if (!empty($_POST['org_id'])) {
 if (!empty($org_id)) {
     //set up organisation
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     $org = $orgHandler->get($org_id);
 

@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+namespace XoopsModules\Xbssacc;
+
+use XoopsModules\Xbscdm;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -38,13 +42,6 @@
  * @author        Ashley Kitson http://xoobs.net
  * @copyright (c) 2004 Ashley Kitson, Great Britain
  */
-if (!defined('XOOPS_ROOT_PATH')) {
-    exit('Call to include SACCAccount.php failed as XOOPS_ROOT_PATH not defined');
-}
-/**
- * SACC base objects
- */
-require_once SACC_PATH . '/class/class.sacc.base.php';
 
 /**
  * Object handler for SACCEntry
@@ -52,7 +49,7 @@ require_once SACC_PATH . '/class/class.sacc.base.php';
  * @package    SACC
  * @subpackage SACCEntry
  */
-class Xbs_SaccSACCEntryHandler extends CDMBaseHandler
+class EntryHandler extends Xbscdm\BaseHandler
 {
     /**
      * Constructor
@@ -69,13 +66,13 @@ class Xbs_SaccSACCEntryHandler extends CDMBaseHandler
     }
 
     /**
-     * create new SACCEntry object
+     * create new Entry object
      *
      * @internal
      */
-    public function &_create()
+    public function _create()
     {
-        return new SACCAcEntry();
+        return new AcEntry();
     }
 
     //end function _create
@@ -166,12 +163,12 @@ class Xbs_SaccSACCEntryHandler extends CDMBaseHandler
      * @return bool TRUE on success else FALSE
      * @internal param \handle $SACCJournal to object to insert
      */
-    public function insert(XoopsObject $entry)
+    public function insert(\XoopsObject $entry)
     {
         if (parent::insert($entry)) {
             //Now need to bubble up the account entry into the account totals
 
-            $accHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+            $accHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
             $ac_id = $entry->getVar('ac_id');
 
@@ -185,4 +182,4 @@ class Xbs_SaccSACCEntryHandler extends CDMBaseHandler
         return false;
     }
     //end function insert
-} //end class SACCEntryHandler
+} //end class EntryHandler

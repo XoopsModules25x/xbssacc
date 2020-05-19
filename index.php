@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use XoopsModules\Xbssacc\Form;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -50,10 +52,7 @@
  * Module header file
  */
 require __DIR__ . '/header.php';
-/**
- * SACC form class declarations
- */
-require_once SACC_PATH . '/class/class.sacc.form.php';
+
 /**
  * CDM functions
  */
@@ -68,9 +67,9 @@ require XOOPS_ROOT_PATH . '/header.php';
 $xoopsTpl->assign('lang_pagetitle', _MD_SACC_PAGETITLE1);
 
 // Get data and assign to template
-$org_id  = new SACCFormSelectOrg(_MD_SACC_SELORG, 'org_id', (int)SACC_CFG_DEFORG, 4);
-$submit  = new XoopsFormButton('', 'submit', _MD_SACC_GO, 'submit');
-$orgForm = new XoopsThemeForm(_MD_SACC_PAGETITLE1, 'orgform', 'sacc_accounts_list.php');
+$org_id  = new Form\FormSelectOrg(_MD_SACC_SELORG, 'org_id', (int)SACC_CFG_DEFORG, 4);
+$submit  = new \XoopsFormButton('', 'submit', _MD_SACC_GO, 'submit');
+$orgForm = new \XoopsThemeForm(_MD_SACC_PAGETITLE1, 'orgform', 'sacc_accounts_list.php');
 $orgForm->addElement($org_id, true);
 $orgForm->addElement($submit);
 $orgForm->assign($xoopsTpl);

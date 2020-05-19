@@ -1,5 +1,7 @@
 <?php declare(strict_types=1);
 
+use XoopsModules\Xbssacc\Form;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -51,11 +53,8 @@ define('SACC_BBALANCES_DEFINED', true);
 /**
  * SACC constant definitions
  */
-require_once XOOPS_ROOT_PATH . '/modules/xbs_sacc/include/defines.php';
-/**
- * SACC form element class
- */
-require_once SACC_PATH . '/class/class.sacc.form.php';
+require_once XOOPS_ROOT_PATH . '/modules/xbssacc/include/defines.php';
+
 /**
  * SACC Functions
  */
@@ -83,7 +82,7 @@ function b_sacc_balances_show($options)
 
     //Organisation Name
 
-    $org = SACCGetOrg($orgId);
+    $org = getOrg($orgId);
 
     $block['org'] = $org->getVar('org_name');
 
@@ -91,11 +90,11 @@ function b_sacc_balances_show($options)
 
     //Balance Sheet
 
-    $acc1 = SACCGetControlAccount($orgId, SACC_CNTL_ASST);
+    $acc1 = getControlAccount($orgId, SACC_CNTL_ASST);
 
-    $acc2 = SACCGetControlAccount($orgId, SACC_CNTL_LIAB);
+    $acc2 = getControlAccount($orgId, SACC_CNTL_LIAB);
 
-    $block['balance'] = SACCFormatMoney(($acc1->getBalance() - $acc2->getBalance()) / $decpnt);
+    $block['balance'] = formatMoney(($acc1->getBalance() - $acc2->getBalance()) / $decpnt);
 
     $block['balancename'] = _MB_SACC_BALANCE_BALNAME;
 
@@ -105,11 +104,11 @@ function b_sacc_balances_show($options)
 
     //P&L
 
-    $acc1 = SACCGetControlAccount($orgId, SACC_CNTL_INCO);
+    $acc1 = getControlAccount($orgId, SACC_CNTL_INCO);
 
-    $acc2 = SACCGetControlAccount($orgId, SACC_CNTL_EXPE);
+    $acc2 = getControlAccount($orgId, SACC_CNTL_EXPE);
 
-    $block['pandl'] = SACCFormatMoney(($acc1->getBalance() - $acc2->getBalance()) / $decpnt);
+    $block['pandl'] = formatMoney(($acc1->getBalance() - $acc2->getBalance()) / $decpnt);
 
     $block['pandlname'] = _MB_SACC_BALANCE_PLNAME;
 
@@ -119,9 +118,9 @@ function b_sacc_balances_show($options)
 
     //Equity
 
-    $acc1 = SACCGetControlAccount($orgId, SACC_CNTL_EQUI);
+    $acc1 = getControlAccount($orgId, SACC_CNTL_EQUI);
 
-    $block['equity'] = SACCFormatMoney($acc1->getBalance() / $decpnt);
+    $block['equity'] = formatMoney($acc1->getBalance() / $decpnt);
 
     $block['equityname'] = _MB_SACC_BALANCE_EQNAME;
 
@@ -149,7 +148,7 @@ function b_sacc_balances_edit($options)
     * rather than hand coding the html.
     */
 
-    $s = new SACCFormSelectOrg('', 'options[]');
+    $s = new Form\FormSelectOrg('', 'options[]');
 
     $s->setValue($options[0]);
 

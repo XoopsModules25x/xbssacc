@@ -42,7 +42,7 @@
  * </code>
  *
  * After calling most functions, if you receive a FALSE return value you can get
- * the error number and string using SACCGetErrNo() and SACCGetErrMsg()
+ * the error number and string using getErrNo() and getErrMsg()
  *
  * @author     Ashley Kitson http://xoobs.net
  * @copyright  2005 Ashley Kitson, UK
@@ -88,12 +88,12 @@ function _SACCSaveError($errno, $errstr)
  * @return int
  * @global array User session
  */
-function SACCGetErrNo()
+function getErrNo()
 {
     global $_SESSION;
 
     return $_SESSION['SACCErrNo'];
-}//end function SACCGetErrNo
+}//end function getErrNo
 
 /**
  * Function: Get last SACC error message
@@ -101,12 +101,12 @@ function SACCGetErrNo()
  * @return   string
  * @global array User session
  */
-function SACCGetErrMsg()
+function getErrMsg()
 {
     global $_SESSION;
 
     return $_SESSION['SACCErrStr'];
-}//end function SACCGetErrMsg
+}//end function getErrMsg
 
 /**
  * Function: Return formatted string for display of money amount
@@ -116,10 +116,10 @@ function SACCGetErrMsg()
  * @param numeric $amount
  * @return string
  */
-function SACCFormatMoney($amount)
+function formatMoney($amount)
 {
     return number_format($amount, (int)SACC_CFG_DECPNT, _MD_MONEY_DECPNT, _MD_MONEY_THOUSEP);
-} //end function SACCFormatMoney
+} //end function formatMoney
 
 /**
  * Function: Create an organisation
@@ -128,9 +128,9 @@ function SACCFormatMoney($amount)
  *
  * @param string $orgname  Name of the organisation
  * @param string $currency Currency code (see CDM currency codes)
- * @return mixed SACCOrg Object else FALSE if unable to create organisation
+ * @return mixed Org Object else FALSE if unable to create organisation
  */
-function SACCCreateOrg($orgname, $currency = null)
+function createOrg($orgname, $currency = null)
 {
     //clear error messages
 
@@ -142,7 +142,7 @@ function SACCCreateOrg($orgname, $currency = null)
         $crcy_val = $currency;
     }//end if
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     if ($orgData = $orgHandler->create()) {
         $orgData->setVar('org_name', $orgname);
@@ -160,15 +160,15 @@ function SACCCreateOrg($orgname, $currency = null)
     _SACCSaveError(-2, $orgHandler->getError());
 
     return false;
-}//end function SACCCreateOrg
+}//end function createOrg
 
 /**
  * Function: Get the organisation associated with $org_id org identifier
  *
  * @param int $org_id Organisation ID
- * @return mixed SACCOrg object else FALSE on error
+ * @return mixed Org object else FALSE on error
  */
-function SACCGetOrg($org_id)
+function getOrg($org_id)
 {
     //clear error messages
 
@@ -176,7 +176,7 @@ function SACCGetOrg($org_id)
 
     $org_id = (int)$org_id;
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     if ($org = $orgHandler->get($org_id)) {
         return $org;
@@ -186,7 +186,7 @@ function SACCGetOrg($org_id)
 
     return false;
     //end if
-}//end function SACCGetOrg
+}//end function getOrg
 
 /**
  * Function: Create an account for an organisation
@@ -198,15 +198,15 @@ function SACCGetOrg($org_id)
  * @param string $ac_prps    Purpose of account
  * @param string $ac_note    Note on account
  * @param string $currency   Default Null. If null or not given then default SACC currency.  If value is given then it should be from the set of CDM CURRENCY codes.
- * @return mixed SACCAccount object else false if unable to create account
+ * @return mixed Account object else false if unable to create account
  */
-function SACCCreateAccount($org_id, $ac_nm, $ac_tp, $ac_prnt_id, $ac_prps, $ac_note, $currency = null)
+function createAccount($org_id, $ac_nm, $ac_tp, $ac_prnt_id, $ac_prps, $ac_note, $currency = null)
 {
     //clear error messages
 
     _SACCSaveError(0, '');
 
-    $accountHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+    $accountHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
     $accountData = $accountHandler->create();
 
@@ -240,21 +240,21 @@ function SACCCreateAccount($org_id, $ac_nm, $ac_tp, $ac_prnt_id, $ac_prps, $ac_n
 
     return $accountData;
     //end if
-}//end function SACCCreateAccount
+}//end function createAccount
 
 /**
  * Function: Return account object associated with the account id
  *
  * @param int $ac_id Account ID
- * @return mixed SACCAccount Object else FALSE if error
+ * @return mixed Account Object else FALSE if error
  */
-function SACCGetAccount($ac_id)
+function getAccount($ac_id)
 {
     //clear error messages
 
     _SACCSaveError(0, '');
 
-    $accountHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+    $accountHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
     if ($accountData = $accountHandler->get($ac_id)) {
         return $accountData;
@@ -264,16 +264,16 @@ function SACCGetAccount($ac_id)
 
     return false;
     //end if
-}//end function SACCGetAccount
+}//end function getAccount
 
 /**
  * Function: Returns the account associated with the specified control account
  *
  * @param int    $org_id    Organisation identifier id
  * @param string $ctrl_name Control account name.  One of SACC_CNTL_.. constants defined in defines.php
- * @return mixed SACCAccount object else False
+ * @return mixed Account object else False
  */
-function SACCGetControlAccount($org_id, $ctrl_name)
+function getControlAccount($org_id, $ctrl_name)
 {
     //clear error messages
 
@@ -281,40 +281,40 @@ function SACCGetControlAccount($org_id, $ctrl_name)
 
     $org_id = (int)$org_id;
 
-    $ctrlHandler = xoops_getModuleHandler('SACCControl', SACC_DIR);
+    $ctrlHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Control');
 
     $ctrl = $ctrlHandler->get($org_id, $ctrl_name);
 
     if ($ctrl) {
-        return SACCGetAccount($ctrl->getVar('ac_id'));
+        return getAccount($ctrl->getVar('ac_id'));
     }
 
     _SACCSaveError(-6, $ctrlHandler->getError());
 
     return false;
     //end if
-}//end function SACCGetControlAccount
+}//end function getControlAccount
 
 /**
  * Function: Initialise a Journal object
  *
  * Initialises (but does not create on the database), a journal object.
  * You will want to call $journalObject->appendEntry() to add account
- * entries to the journal before calling SACCSaveJournal to save the
+ * entries to the journal before calling saveJournal to save the
  * journal to the database.
  *
  * @param int    $org_id  Organisation identifier
  * @param string $dt      Date of journal entry in YYYY-MM-DD format
  * @param string $purpose Purpose of journal.  Can be ommitted
- * @return mixed SACCJournal object on success else False
+ * @return mixed Journal object on success else False
  */
-function SACCInitJournal($org_id, $dt, $purpose = null)
+function initializeJournal($org_id, $dt, $purpose = null)
 {
     //clear error messages
 
     _SACCSaveError(0, '');
 
-    $jHandler = xoops_getModuleHandler('SACCJournal', SACC_DIR);
+    $jHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Journal');
 
     if ($jData = $jHandler->create($dt, $purpose, $org_id)) {
         return $jData;
@@ -324,7 +324,7 @@ function SACCInitJournal($org_id, $dt, $purpose = null)
 
     return false;
     //end if
-}//end function SACCInitJournal
+}//end function initializeJournal
 
 /**
  * Function: Save a journal
@@ -332,10 +332,10 @@ function SACCInitJournal($org_id, $dt, $purpose = null)
  * Safe save of a journal.  If you use $journalObject->insert(), no balance checking is done.
  * Use this function to check that the journal balances instead
  *
- * @param object $journal SACCJournal object
+ * @param object $journal Journal object
  * @return bool TRUE if Journal balances and is saved else FALSE
  */
-function SACCSaveJournal($journal)
+function saveJournal($journal)
 {
     //clear error messages
 
@@ -358,7 +358,7 @@ function SACCSaveJournal($journal)
     //if balanced then save journal else return false
 
     if ($dr == $cr) {
-        $jHandler = xoops_getModuleHandler('SACCJournal', SACC_DIR);
+        $jHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Journal');
 
         if ($jHandler->insert($journal)) {
             return true;
@@ -371,4 +371,4 @@ function SACCSaveJournal($journal)
     }//end if
 
     return false;
-}//end function SACCSaveJournal
+}//end function saveJournal

@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+use XoopsModules\Xbscdm;
+use XoopsModules\Xbssacc\Form;
+
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -60,23 +64,23 @@ function adminSelectOrg($forAccounts = false)
 
     // else allow user to select an organisation
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     if (0 == $orgHandler->countOrgs()) {
         displayOrgForm();
     } else {
         // Get data and assign to form
 
-        $org_id = new SACCFormSelectOrgAll(_AM_SACC_SELORG, 'org_id', SACC_CFG_DEFORG, 4);
+        $org_id = new Form\FormSelectOrgAll(_AM_SACC_SELORG, 'org_id', SACC_CFG_DEFORG, 4);
 
-        $submit = new XoopsFormButton('', 'submit', _AM_SACC_GO, 'submit');
+        $submit = new \XoopsFormButton('', 'submit', _AM_SACC_GO, 'submit');
 
         if ($forAccounts) {
-            $orgForm = new XoopsThemeForm(_AM_SACC_ORGFORM, 'orgform', 'adminaccount.php');
+            $orgForm = new \XoopsThemeForm(_AM_SACC_ORGFORM, 'orgform', 'adminaccount.php');
         } else {
-            $insert = new XoopsFormButton(_AM_SACC_INSERT_DESC, 'insert', _AM_SACC_INSERT, 'submit');
+            $insert = new \XoopsFormButton(_AM_SACC_INSERT_DESC, 'insert', _AM_SACC_INSERT, 'submit');
 
-            $orgForm = new XoopsThemeForm(_AM_SACC_ORGFORM, 'orgform', 'adminorg.php');
+            $orgForm = new \XoopsThemeForm(_AM_SACC_ORGFORM, 'orgform', 'adminorg.php');
         }
 
         $orgForm->addElement($org_id, true);
@@ -115,10 +119,10 @@ function displayOrgForm($org_id = 0)
 
     //retrieve organisation details
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     if (0 != $org_id) {
-        $org = &$orgHandler->getall($org_id);
+        $org = $orgHandler->getAll($org_id);
     } else {
         $org = $orgHandler->create();
     }
@@ -134,57 +138,57 @@ function displayOrgForm($org_id = 0)
     if (0 == $org_id) {
         //if id = 0 then user has requested a new organisation setup so hide id
 
-        $id = new XoopsFormHidden('org_id', 0);
+        $id = new \XoopsFormHidden('org_id', 0);
 
         $orgname = '';
 
         $crcy_val = SACC_CFG_DEFCURR;
 
-        $new_flag  = new XoopsFormHidden('new_flag', true); //tell POST process we are new
-        $old_rstat = new XoopsFormHidden('old_rstat', CDM_RSTAT_ACT); //set default old status
+        $new_flag  = new \XoopsFormHidden('new_flag', true); //tell POST process we are new
+        $old_rstat = new \XoopsFormHidden('old_rstat', CDM_RSTAT_ACT); //set default old status
     } else {
         // else display the current organasition id as label because it is primary key
 
-        $id = new XoopsFormLabel(_AM_SACC_ORGED1, $org_id);
+        $id = new \XoopsFormLabel(_AM_SACC_ORGED1, $org_id);
 
-        $id_hid = new XoopsFormHidden('org_id', $org_id); //still need to know id in POST process
+        $id_hid = new \XoopsFormHidden('org_id', $org_id); //still need to know id in POST process
 
         $crcy_val = $org->getVar('base_crcy');
 
         $orgname = $org->getVar('org_name');
 
-        $new_flag = new XoopsFormHidden('new_flag', false);
+        $new_flag = new \XoopsFormHidden('new_flag', false);
 
-        $old_rstat = new XoopsFormHidden('old_rstat', $org->getVar('row_flag')); //need to know old status when record saved
+        $old_rstat = new \XoopsFormHidden('old_rstat', $org->getVar('row_flag')); //need to know old status when record saved
     }//end if org_id==0
 
     if ($isDefunct) {
-        $org_name = new XoopsFormLabel(_AM_SACC_ORGED2, $orgname);
+        $org_name = new \XoopsFormLabel(_AM_SACC_ORGED2, $orgname);
 
-        $base_crcy = new XoopsFormLabel(_AM_SACC_ORGED3, $crcy_val);
+        $base_crcy = new \XoopsFormLabel(_AM_SACC_ORGED3, $crcy_val);
 
-        $row_flag = new XoopsFormLabel(_AM_SACC_RSTATNM, CDM_RSTAT_DEF);
+        $row_flag = new \XoopsFormLabel(_AM_SACC_RSTATNM, CDM_RSTAT_DEF);
     } else {
-        $org_name = new XoopsFormText(_AM_SACC_ORGED2, 'org_nm', 20, 20, $orgname);
+        $org_name = new \XoopsFormText(_AM_SACC_ORGED2, 'org_nm', 20, 20, $orgname);
 
-        $base_crcy = new CDMFormSelectCurrency(_AM_SACC_ORGED3, 'base_crcy', $crcy_val);
+        $base_crcy = new Xbscdm\Form\FormSelectCurrency(_AM_SACC_ORGED3, 'base_crcy', $crcy_val);
 
-        $row_flag = new CDMFormSelectRstat(_AM_SACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
+        $row_flag = new Xbscdm\Form\FormSelectRstat(_AM_SACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
     }
 
     $ret = getXoopsUser($org->getVar('row_uid'));
 
-    $row_uid = new XoopsFormLabel(_AM_SACC_RUIDNM, $ret);
+    $row_uid = new \XoopsFormLabel(_AM_SACC_RUIDNM, $ret);
 
-    $row_dt = new XoopsFormLabel(_AM_SACC_RDTNM, $org->getVar('row_dt'));
+    $row_dt = new \XoopsFormLabel(_AM_SACC_RDTNM, $org->getVar('row_dt'));
 
-    $submit = new XoopsFormButton('', 'save', _AM_SACC_SUBMIT, 'submit');
+    $submit = new \XoopsFormButton('', 'save', _AM_SACC_SUBMIT, 'submit');
 
-    $cancel = new XoopsFormButton('', 'cancel', _AM_SACC_CANCEL, 'submit');
+    $cancel = new \XoopsFormButton('', 'cancel', _AM_SACC_CANCEL, 'submit');
 
-    $reset = new XoopsFormButton('', 'reset', _AM_SACC_RESET, 'reset');
+    $reset = new \XoopsFormButton('', 'reset', _AM_SACC_RESET, 'reset');
 
-    $editForm = new XoopsThemeForm(_AM_SACC_ORGED0, 'editForm', 'adminorg.php');
+    $editForm = new \XoopsThemeForm(_AM_SACC_ORGED0, 'editForm', 'adminorg.php');
 
     $editForm->addElement($id);
 
@@ -240,14 +244,14 @@ function submitOrgForm()
 
     extract($_POST);
 
-    $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
     if ($new_flag) {
         $orgData = $orgHandler->create();
 
         $orgData->setVar('id', $org_id);
     } else {
-        $orgData = &$orgHandler->getall($org_id);
+        $orgData = &$orgHandler->getAll($org_id);
     }
 
     $orgData->setVar('org_name', $org_nm);
@@ -307,15 +311,15 @@ function adminSelectAcc($org_id = 0)
     if (0 == $org_id) { //ask user to select an organisation
         adminSelectOrg(true);
     } else { //display list of accounts for an organisation
-        $ac_id = new SACCFormSelectAccount(_AM_SACC_SELACC, 'ac_id', $org_id, null, 10, true);
+        $ac_id = new Form\FormSelectAccount(_AM_SACC_SELACC, 'ac_id', $org_id, null, 10, true);
 
-        $org = new XoopsFormHidden('org_id', $org_id);
+        $org = new \XoopsFormHidden('org_id', $org_id);
 
-        $submit = new XoopsFormButton('', 'go', _AM_SACC_GO, 'submit');
+        $submit = new \XoopsFormButton('', 'go', _AM_SACC_GO, 'submit');
 
-        $insert = new XoopsFormButton(_AM_SACC_INSERT_DESC, 'insert', _AM_SACC_INSERT, 'submit');
+        $insert = new \XoopsFormButton(_AM_SACC_INSERT_DESC, 'insert', _AM_SACC_INSERT, 'submit');
 
-        $accForm = new XoopsThemeForm(_AM_SACC_ACCFORM, 'accountform', 'adminaccount.php');
+        $accForm = new \XoopsThemeForm(_AM_SACC_ACCFORM, 'accountform', 'adminaccount.php');
 
         $accForm->addElement($org);
 
@@ -352,10 +356,10 @@ function displayAccForm($org_id, $ac_id)
 
     //$xoopsTpl->assign('lang_copyright',_AM_SACC_COPYRIGHT);
 
-    $accountHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+    $accountHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
     if (!empty($ac_id) && '0' != $ac_id) { //retrieve the existing data object
-        $accountData = &$accountHandler->getall($ac_id);
+        $accountData = &$accountHandler->getAll($ac_id);
     } else { //create a new account object
         $accountData = $accountHandler->create();
 
@@ -370,66 +374,66 @@ function displayAccForm($org_id, $ac_id)
         if ('0' == $ac_id) {
             //if id = "0" then user has requested a new account setup so hide account id
 
-            $id = new XoopsFormHidden('ac_id', 0);
+            $id = new \XoopsFormHidden('ac_id', 0);
 
-            $new_flag = new XoopsFormHidden('new_flag', true); //tell POST process we are new
+            $new_flag = new \XoopsFormHidden('new_flag', true); //tell POST process we are new
 
             // Allow selection of organisation
 
-            $org = new SACCFormSelectOrg(_AM_SACC_ACED2, 'org_id', $org_id);
+            $org = new Form\FormSelectOrg(_AM_SACC_ACED2, 'org_id', $org_id);
 
             //define default currency
 
             $crcy = SACC_CFG_DEFCURR;
         } else { // else display the current account id as label because it is primary key
-            $id = new XoopsFormLabel(_AM_SACC_ACED1, $ac_id);
+            $id = new \XoopsFormLabel(_AM_SACC_ACED1, $ac_id);
 
-            $id_hid = new XoopsFormHidden('ac_id', $ac_id); //still need to know id in POST process
+            $id_hid = new \XoopsFormHidden('ac_id', $ac_id); //still need to know id in POST process
 
-            $new_flag = new XoopsFormHidden('new_flag', false);
+            $new_flag = new \XoopsFormHidden('new_flag', false);
 
             //display organisation as label (cannot change account organisation)
 
-            $orgHandler = xoops_getModuleHandler('SACCOrg', SACC_DIR);
+            $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
 
-            $orgData = &$orgHandler->getall($org_id);
+            $orgData = &$orgHandler->getAll($org_id);
 
-            $org = new XoopsFormHidden('org_id', $org_id);
+            $org = new \XoopsFormHidden('org_id', $org_id);
 
-            $org_label = new XoopsFormLabel(_AM_SACC_ACED2, $orgData->getVar('org_name'));
+            $org_label = new \XoopsFormLabel(_AM_SACC_ACED2, $orgData->getVar('org_name'));
 
             $crcy = $accountData->getVar('ac_curr');
         }//end if ac_id==0
 
-        $ac_tp = new SACCFormSelectAccType(_AM_SACC_ACED3, 'ac_tp', $accountData->getVar('ac_tp'));
+        $ac_tp = new Form\FormSelectAccType(_AM_SACC_ACED3, 'ac_tp', $accountData->getVar('ac_tp'));
 
-        $ac_prnt_id = new SACCFormSelectAccPrnt(_AM_SACC_ACED9, 'ac_prnt_id', $org_id, $accountData->getVar('ac_prnt_id'));
+        $ac_prnt_id = new Form\FormSelectAccPrnt(_AM_SACC_ACED9, 'ac_prnt_id', $org_id, $accountData->getVar('ac_prnt_id'));
 
-        $ac_curr = new CDMFormSelectCurrency(_AM_SACC_ACED4, 'ac_curr', $crcy);
+        $ac_curr = new Xbscdm\Form\FormSelectCurrency(_AM_SACC_ACED4, 'ac_curr', $crcy);
 
-        $ac_nm = new XoopsFormText(_AM_SACC_ACED5, 'ac_nm', 20, 20, $accountData->getVar('ac_nm'));
+        $ac_nm = new \XoopsFormText(_AM_SACC_ACED5, 'ac_nm', 20, 20, $accountData->getVar('ac_nm'));
 
-        $ac_prps = new XoopsFormTextArea(_AM_SACC_ACED6, 'ac_prps', $accountData->getVar('ac_prps'));
+        $ac_prps = new \XoopsFormTextArea(_AM_SACC_ACED6, 'ac_prps', $accountData->getVar('ac_prps'));
 
-        $ac_note = new XoopsFormTextArea(_AM_SACC_ACED7, 'ac_note', $accountData->getVar('ac_note'));
+        $ac_note = new \XoopsFormTextArea(_AM_SACC_ACED7, 'ac_note', $accountData->getVar('ac_note'));
 
         $rf = $accountData->getVar('row_flag');
 
-        $row_flag = new CDMFormSelectRstat(_MD_SACC_RSTATNM, 'row_flag', $rf, 1, $rf);
+        $row_flag = new Xbscdm\Form\FormSelectRstat(_MD_SACC_RSTATNM, 'row_flag', $rf, 1, $rf);
 
         $ret = getXoopsUser($accountData->getVar('row_uid'));
 
-        $row_uid = new XoopsFormLabel(_MD_SACC_RUIDNM, $ret);
+        $row_uid = new \XoopsFormLabel(_MD_SACC_RUIDNM, $ret);
 
-        $row_dt = new XoopsFormLabel(_MD_SACC_RDTNM, $accountData->getVar('row_dt'));
+        $row_dt = new \XoopsFormLabel(_MD_SACC_RDTNM, $accountData->getVar('row_dt'));
 
-        $submit = new XoopsFormButton('', 'save', _AM_SACC_SUBMIT, 'submit');
+        $submit = new \XoopsFormButton('', 'save', _AM_SACC_SUBMIT, 'submit');
 
-        $cancel = new XoopsFormButton('', 'cancel', _AM_SACC_CANCEL, 'submit');
+        $cancel = new \XoopsFormButton('', 'cancel', _AM_SACC_CANCEL, 'submit');
 
-        $reset = new XoopsFormButton('', 'reset', _AM_SACC_RESET, 'reset');
+        $reset = new \XoopsFormButton('', 'reset', _AM_SACC_RESET, 'reset');
 
-        $editForm = new XoopsThemeForm(_AM_SACC_ACED0, 'editForm', 'adminaccount.php');
+        $editForm = new \XoopsThemeForm(_AM_SACC_ACED0, 'editForm', 'adminaccount.php');
 
         $editForm->addElement($id);
 
@@ -486,7 +490,7 @@ function submitAccForm($org_id, $ac_id)
 
     extract($_POST);
 
-    $accountHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+    $accountHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
     if ($new_flag) {
         $accountData = $accountHandler->create();
@@ -495,7 +499,7 @@ function submitAccForm($org_id, $ac_id)
 
         $accountData->setVar('org_id', $org_id);
     } else {
-        $accountData = &$accountHandler->getall($ac_id);
+        $accountData = &$accountHandler->getAll($ac_id);
     }
 
     $accountData->setVar('ac_nm', $ac_nm);

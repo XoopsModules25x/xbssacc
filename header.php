@@ -19,8 +19,8 @@ require dirname(dirname(__DIR__)) . '/mainfile.php';
 /**
  * Include the CDM system constant defines as SACC relies on CDM
  */
-require XOOPS_ROOT_PATH . '/modules/xbs_cdm/include/defines.php';
+require XOOPS_ROOT_PATH . '/modules/xbscdm/include/defines.php';
 /**
  * Include SACC constant defines
  */
-require XOOPS_ROOT_PATH . '/modules/xbs_sacc/include/defines.php';
+require XOOPS_ROOT_PATH . '/modules/xbssacc/include/defines.php';

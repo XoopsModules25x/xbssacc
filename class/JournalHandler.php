@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+namespace XoopsModules\Xbssacc;
+
+use XoopsModules\Xbscdm;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -34,25 +38,18 @@
  * SACC Journal object handler
  *
  * @package       SACC
- * @subpackage    SACCJournal
+ * @subpackage    Journal
  * @author        Ashley Kitson http://xoobs.net
  * @copyright (c) 2004 Ashley Kitson, Great Britain
  */
-if (!defined('XOOPS_ROOT_PATH')) {
-    exit('Call to include SACCAccount.php failed as XOOPS_ROOT_PATH not defined');
-}
-/**
- * SACC base objects
- */
-require_once SACC_PATH . '/class/class.sacc.base.php';
 
 /**
- * Object handler for SACCJournal
+ * Object handler for Journal
  *
  * @package    SACC
- * @subpackage SACCJournal
+ * @subpackage Journal
  */
-class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
+class JournalHandler extends Xbscdm\BaseHandler
 {
     /**
      * Constructor
@@ -73,9 +70,9 @@ class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
      *
      * @internal
      */
-    public function &_create()
+    public function _create()
     {
-        return new SACCJournal();
+        return new Journal();
     }
 
     //end function _create
@@ -86,9 +83,9 @@ class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
      * @param date   $jrn_dt   date of journal
      * @param string $jrn_prps purpose of journal
      * @param int    $org_id   id of organisation
-     * @return SACCJournal object
+     * @return Journal object
      */
-    public function create($jrn_dt, $jrn_prps, $org_id)
+    public function create($jrn_dt, $jrn_prps = null, $org_id = null)
     {
         $obj = parent::create();
 
@@ -119,7 +116,7 @@ class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
 
         if ($result = $this->db->query($sql)) {
             while (false !== ($row = $this->db->fetchArray($result))) {
-                $entry = new SACCAcEntry();
+                $entry = new AcEntry();
 
                 $entry->assignVars($row);
 
@@ -146,11 +143,11 @@ class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
      * @param int    $id       journal id
      * @param string $row_flag default = null. row status flag
      *
-     * @return bool|object|\SACCJournal
+     * @return bool|object|\Journal
      */
-    public function getall($id, $row_flag = null)
+    public function getAll($id, $row_flag = null, $lang = null)
     {
-        $test = (is_int($id) ? ($id > 0 ? true : false) : !empty($id) ? true : false);
+        $test = (is_int($id) ? ($id > 0 ? true : false) : (!empty($id) ? true : false));
 
         if ($test) {
             $journ = $this->create(null, null, null);
@@ -245,7 +242,7 @@ class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
      * @return bool
      * @internal param \handle $SACCJournal to journal object to insert
      */
-    public function insert(XoopsObject $journal)
+    public function insert(\XoopsObject $journal)
     {
         if (parent::insert($journal)) {
             // Journal header data saved, so now save any attached entries
@@ -254,7 +251,7 @@ class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
 
             $id = $journal->getVar('id');
 
-            $eHandler = xoops_getModuleHandler('SACCEntry', SACC_DIR);
+            $eHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Entry');
 
             foreach ($entries as $entry) {
                 $entry->setVar('jrn_id', $id);
@@ -274,4 +271,4 @@ class Xbs_SaccSACCJournalHandler extends CDMBaseHandler
         return false;
     }
     //end function insert
-} //end class SACCJournalHandler
+} //end class JournalHandler

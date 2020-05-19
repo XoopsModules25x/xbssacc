@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+namespace XoopsModules\Xbssacc;
+
+use XoopsModules\Xbscdm;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -34,18 +38,14 @@
  * Organisation object handler
  *
  * @package       SACC
- * @subpackage    SACCOrg
+ * @subpackage    Org
  * @author        Ashley Kitson <akitson@bbcb.co.uk>
  * @copyright (c) 2004 Ashley Kitson, Great Britain
  */
-if (!defined('XOOPS_ROOT_PATH')) {
-    exit('Call to include SACCOrg.php failed as XOOPS_ROOT_PATH not defined');
-}
 
 /**
  * SACC base object definitions
  */
-require_once SACC_PATH . '/class/class.sacc.base.php';
 
 /**
  * SACC Organisation object handler
@@ -55,10 +55,10 @@ require_once SACC_PATH . '/class/class.sacc.base.php';
  * @author     Ashley Kitson http://xoobs.net
  * @copyright  2005 Ashley Kitson, UK
  * @package    SACC
- * @subpackage SACCOrg
+ * @subpackage Org
  * @version    1
  */
-class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
+class OrgHandler extends Xbscdm\BaseHandler
 {
     /**
      * Function: constructor
@@ -72,7 +72,7 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
     {
         parent::__construct($db); //call ancestor constructor
 
-        $this->classname = 'saccorg';
+        $this->classname = 'Org';
 
         $this->ins_tagname = 'sacc_ins_org';
     }
@@ -83,9 +83,9 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
      * @version 1
      * @access  private
      */
-    public function &_create()
+    public function _create()
     {
-        return new SACCOrg();
+        return new Org();
     }
 
     //end function _create
@@ -139,10 +139,10 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
         if ($result = $this->db->query($sql)) {
             $ret = [];
 
-            $accHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+            $accHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
             while (false !== ($arr = $this->db->fetchArray($result))) {
-                $ac = $accHandler->getall($arr['id']);
+                $ac = $accHandler->getAll($arr['id']);
 
                 $ac->setBalance();
 
@@ -168,7 +168,7 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
         if ($result = $this->db->query($sql)) {
             $ret = [];
 
-            $jHandler = xoops_getModuleHandler('SACCJournal', SACC_DIR);
+            $jHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Journal');
 
             while (false !== ($arr = $this->db->fetchArray($result))) {
                 $ret[] = $jHandler->get($arr['id']);
@@ -190,7 +190,7 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
     {
         //set the control account details
 
-        $ctrlHandler = xoops_getModuleHandler('SACCControl', SACC_DIR);
+        $ctrlHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Control');
 
         $ctrlAc = $ctrlHandler->create();
 
@@ -229,9 +229,9 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
             'open'      => ['ac_tp' => SACC_ACTP_EQUITY, 'ac_nm' => _MD_SACC_NAC_OPEN],
         ];
 
-        $accHandler = xoops_getModuleHandler('SACCAccount', SACC_DIR);
+        $accHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
-        $ctrlHandler = xoops_getModuleHandler('SACCControl', SACC_DIR);
+        $ctrlHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Control');
 
         $account = [];
 
@@ -420,7 +420,7 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
      * @return bool
      * @internal param \Handle $SACCOrg to organisation object
      */
-    public function insert(XoopsObject $code)
+    public function insert(\XoopsObject $code)
     {
         $base_crcy = $code->getVar('base_crcy');
 
@@ -452,4 +452,4 @@ class Xbs_SaccSACCOrgHandler extends CDMBaseHandler
         return $ret[0];
     }
     //end function countOrgs
-} //end class SACCOrgHandler
+} //end class OrgHandler

@@ -1,5 +1,9 @@
 <?php declare(strict_types=1);
 
+namespace XoopsModules\Xbssacc;
+
+use XoopsModules\Xbscdm;
+
 //  ------------------------------------------------------------------------ //
 //                XOOPS - PHP Content Management System                      //
 //                    Copyright (c) 2000 XOOPS.org                           //
@@ -38,13 +42,7 @@
  * @author        Ashley Kitson http://xoobs.net
  * @copyright (c) 2004 Ashley Kitson, Great Britain
  */
-if (!defined('XOOPS_ROOT_PATH')) {
-    exit('Call to include SACCControl.php failed as XOOPS_ROOT_PATH not defined');
-}
-/**
- * SACC base objects
- */
-require_once SACC_PATH . '/class/class.sacc.base.php';
+
 /**
  * SACC functions
  */
@@ -56,7 +54,7 @@ require_once CDM_PATH . '/include/functions.php';
  * @package    SACC
  * @subpackage SACCControl
  */
-class Xbs_SaccSACCControlHandler extends CDMBaseHandler
+class ControlHandler extends Xbscdm\BaseHandler
 {
     /**
      * Constructor
@@ -77,9 +75,9 @@ class Xbs_SaccSACCControlHandler extends CDMBaseHandler
      *
      * @internal
      */
-    public function &_create()
+    public function _create()
     {
-        return new SACCControl();
+        return new Control();
     }
 
     //end function _create
@@ -113,7 +111,7 @@ class Xbs_SaccSACCControlHandler extends CDMBaseHandler
      * @param string $lang     default NULL. Language set
      * @return SACCControl object if success else FALSE on failure.
      */
-    public function getall($org_id, $ctrl_cd, $row_flag = null, $lang = null)
+    public function getAll($org_id, $ctrl_cd, $row_flag = null, $lang = null)
     {
         $test = (is_int($org_id) ? ($org_id > 0 ? true : false) : !empty($org_id) ? true : false);
 
@@ -156,7 +154,7 @@ class Xbs_SaccSACCControlHandler extends CDMBaseHandler
      */
     public function get($org_id, $ctrl_cd, $lang = CDM_DEF_LANG)
     {
-        return $this->getall($org_id, $ctrl_cd, CDM_RSTAT_ACT, $lang);
+        return $this->getAll($org_id, $ctrl_cd, CDM_RSTAT_ACT, $lang);
     }
 
     /**
@@ -194,4 +192,4 @@ class Xbs_SaccSACCControlHandler extends CDMBaseHandler
 
         return $sql;
     }
-} //end class SACCControlHandler
+} //end class ControlHandler

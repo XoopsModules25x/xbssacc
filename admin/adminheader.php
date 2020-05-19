@@ -303,7 +303,7 @@ if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $modDir . '/language/' . $xoopsC
 /**
  * Include the CDM system constant defines as SACC relies on CDM
  */
-require_once XOOPS_ROOT_PATH . '/modules/xbs_cdm/include/defines.php';
+require_once XOOPS_ROOT_PATH . '/modules/xbscdm/include/defines.php';
 /**
  * Include SACC constant defines
  */
@@ -311,11 +311,11 @@ require_once dirname(__DIR__) . '/include/defines.php';
 /**
  * CDM Form elements
  */
-require_once CDM_PATH . '/class/class.cdm.form.php';
+//require_once CDM_PATH . '/class/class.cdm.form.php';
 /**
  * SACC Form elements
  */
-require_once SACC_PATH . '/class/class.sacc.form.php';
+//require_once SACC_PATH . '/class/class.sacc.form.php';
 /**
  * CDM functions
  */
