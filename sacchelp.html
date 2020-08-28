@@ -10,7 +10,7 @@
 </HEAD>
 <BODY LANG="en-US" DIR="LTR">
 <div align="center">
-<a href="http://xoobs.net" target="_blank"><img src="../images/Xoobs Banner Title.gif"></a><br>
+<a href="http://xoobs.net" target="_blank"><img src="./assets/images/Xoobs Banner Title.gif"></a><br>
 </div>
 
 <H1>Simple Accounts module help (V 1.0)</H1>
@@ -266,25 +266,25 @@ have the following line before calling them;
 <P>require_once SACC_PATH.&quot;/include/functions.php&quot;; <I>The
 functions.</I> The functions included in the functions.php file are:</P>
 <UL>
-	<LI><P STYLE="margin-bottom: 0in">SACCGetErrNo 
+	<LI><P STYLE="margin-bottom: 0in">getErrNo
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCGetErrMsg 
+	<LI><P STYLE="margin-bottom: 0in">getErrMsg
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCFormatMoney 
+	<LI><P STYLE="margin-bottom: 0in">formatMoney
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCCreateOrg 
+	<LI><P STYLE="margin-bottom: 0in">createOrg
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCGetOrg 
+	<LI><P STYLE="margin-bottom: 0in">getOrg
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCCreateAccount 
+	<LI><P STYLE="margin-bottom: 0in">createAccount
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCGetAccount 
+	<LI><P STYLE="margin-bottom: 0in">getAccount
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCGetControlAccount 
+	<LI><P STYLE="margin-bottom: 0in">getControlAccount
 	</P>
-	<LI><P STYLE="margin-bottom: 0in">SACCInitJournal 
+	<LI><P STYLE="margin-bottom: 0in">initializeJournal
 	</P>
-	<LI><P>SACCSaveJournal 
+	<LI><P>saveJournal
 	</P>
 </UL>
 <P>Read the functions.php file for more information and access the
@@ -296,7 +296,7 @@ SACC objects with their associated handlers directly. The class tree
 for these objects is: 
 </P>
 <P>XoopsObject<BR>---&gt; CDMBaseObject<BR>--------&gt;
-SACCAccount<BR>------------&gt; SACCDRAccount<BR>-----------------&gt;
+Account<BR>------------&gt; SACCDRAccount<BR>-----------------&gt;
 SACCExpenseAc<BR>-----------------&gt;
 SACCAssetAc<BR>---------------------&gt;
 SACCCustomerAc<BR>--------------------------&gt;
@@ -304,8 +304,8 @@ SACCBankAc<BR>------------&gt; SACCCRAccount<BR>-----------------&gt;
 SACCIncomeAc<BR>-----------------&gt;
 SACCLiabilityAc<BR>----------------------&gt;
 SACCSupplierAc<BR>----------------------&gt; SACCEquityAc<BR>--------&gt;
-SACCAcEntry<BR>--------&gt; SACCJournal<BR>--------&gt;
-SACCControl<BR>--------&gt; SACCOrg</P>
+AcEntry<BR>--------&gt; Journal<BR>--------&gt;
+SACCControl<BR>--------&gt; Org</P>
 <P>XoopsObjectHandler<BR>---&gt; CDMBaseHandler<BR>--------&gt;
 SaccSACCOrgHandler<BR>--------&gt; SaccSACCAccountHandler<BR>--------&gt;
 SaccSACCJournalHandler<BR>--------&gt; SaccSACCEntryHandler<BR>--------&gt;
@@ -314,9 +314,9 @@ SaccSACCControlHandler</P>
 to create or get the data object e.g.; 
 </P>
 <P>NB SACC_DIR is a constant set in defines.php and must be used in
-calls to xoops_getmodulehandler<BR>$setHandler =&amp;
-xoops_getmodulehandler(ObjName,SACC_DIR) where ObjName is one of
-&quot;SACCOrg&quot;, &quot;SACCAccount&quot;, &quot;SACCJournal&quot;,
+calls to xoops_getModuleHandler<BR>$setHandler =&amp;
+xoops_getModuleHandler(ObjName,SACC_DIR) where ObjName is one of
+&quot;Org&quot;, &quot;Account&quot;, &quot;Journal&quot;,
 &quot;SACCEntry&quot; or &quot;SACCControl&quot;;<BR>$obj =&amp;
 $setHandler-&gt;get($id);<BR>$obj2 =&amp; $setHandler-&gt;create(); 
 </P>
@@ -333,7 +333,7 @@ point to the actual accounts for Bank Account and Opening Balances
 account respectively. Thus an application can find these two accounts
 for an organisation without having to know the actual account ids
 (for instance a payments system will need to know the bank account
-details to make payments.) Use the SACCGetControlAccount function to
+details to make payments.) Use the getControlAccount function to
 retrieve a control account id. 
 </P>
 <P><I>Storage of monetary values</I>. SACC stores all monetary vales
@@ -348,7 +348,7 @@ into a SACC object (and ultimately the database.)
 <P>To do this use the following constructs that make use of the
 SACC_CFG_DECPNT constant, the value for which is set in the module
 configuration administration screen. Note also the use of the
-SACCFormatMoney function.</P>
+formatMoney function.</P>
 <P>Displaying data, as in this example which is preparing account
 data for display via a Xoops Smarty Template. Taken from
 sacc_accounts_list.php</P>
@@ -356,14 +356,14 @@ sacc_accounts_list.php</P>
 CDM_DIR.&quot;/include/functions.php&quot;<BR>...<BR>$accounts =
 $org-&gt;getAccounts();<BR>$decpnt = pow(10,SACC_CFG_DECPNT);<BR>foreach
 ($accounts as $acc) {<BR>&nbsp;&nbsp;$acc[&quot;ac_dr&quot;] =
-SACCFormatMoney($acc[&quot;ac_dr&quot;] / $decpnt);<BR>&nbsp;&nbsp;$acc[&quot;ac_cr&quot;]
-= SACCFormatMoney($acc[&quot;ac_cr&quot;] /
+formatMoney($acc[&quot;ac_dr&quot;] / $decpnt);<BR>&nbsp;&nbsp;$acc[&quot;ac_cr&quot;]
+= formatMoney($acc[&quot;ac_cr&quot;] /
 $decpnt);<BR>&nbsp;&nbsp;$acc[&quot;ac_net_bal&quot;] =
-SACCFormatMoney($accs&quot;ac_net_bal&quot;] /
+formatMoney($accs&quot;ac_net_bal&quot;] /
 $decpnt);<BR>&nbsp;&nbsp;$xoopsTpl-&gt;append(&quot;accounts&quot;,$acc);<BR>&nbsp;&nbsp;}</P>
 <P>Writing data to object, as in the following example from
 sacc_journal.php which writes journal entries to the journal object</P>
-<P>include_once CDM_DIR.&quot;/include/functions.php&quot;<BR>...<BR>$jData
+<P>require_once CDM_DIR.&quot;/include/functions.php&quot;<BR>...<BR>$jData
 = $jHandler-&gt;create($dte,$jrn_prps,$_SESSION['sacc_org_id']);<BR>$amount
 *= pow(10,SACC_CFG_DECPNT); //convert float to
 integer<BR>$jData-&gt;appendEntry($ac_dr_id,$dr_ref,$amount,0);<BR>$jData-&gt;appendEntry($ac_cr_id,$cr_ref,0,$amount);</P>
