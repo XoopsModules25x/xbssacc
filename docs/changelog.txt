@@ -4,9 +4,60 @@
 - class autoloading (mamba)
 - added Feedback (mamba)
 - added Migrate (mamba)
-- Yoda
+- Yoda (mamba)
+- Updated API (mamba)
 
----------------------------------------
-2.33 Beta 1  2013-10-23
 
-- Converted to XOOPS 2.5.6 Admin GUI (Mamba)
+<h5>1.6</h5>
+<hr>
+- Anything else that crops up!
+
+
+<h5>1.5 </h5>
+        <hr>
+- Export and import facilities to/from GNUCash
+
+
+<h5>1.4 </h5>
+        <hr>
+- Extension of Supplier, Customer and Bank account type objects to include address details and banking details (for Bank.)
+
+
+<h5>1.3 </h5>
+        <hr>
+- Reporting. P/L and Balance Sheet Reports. These reports will be from templates which can then be copied on an Organisation by Organisation basis and modified by the administrator.
+
+
+<h5>1.2 </h5>
+        <hr>
+- All about organisations. Allow selection of account template to apply to new organisation. Admin facilities to create account templates. Creation of <h5>AT accounts on organisation create.
+
+
+<h5>1.1 </h5>
+        <hr>
+- All about journals. Reversal of journals. Defuncting of journals. Allow >2 line entry of journals (NB, this is possible programmatically already, just not in the input screen of the <h5>1.0 system.)
+
+
+<h5>1.0 </h5>
+        <hr>
+– (This release.) Move SACC configuration into normal admin side config screens. This is the first full release of SACC that has core functionality complete. Everything else after this is add-on.
+
+
+<h5>1.0 </h5>
+        <hr>
+- Full release.
+
+
+<h5>0.3 </h5>
+        <hr>
+- Move account and organisation creation and editing to Xoops module administration screens. This will leave account listing, journal listing and journal creation and editing on the 'user' side.
+
+
+<h5>0.2 </h5>
+        <hr>
+- Creation of programmatic functions to access system functionality. This will be a function layer over the object layer to carry out common tasks such as creating journals, getting account balances, getting organisation ids etc.
+
+
+<h5>0.1 </h5>
+        <hr>
+- Basic functionality. Really a preview for others to see essential features via the built in user entry screens
