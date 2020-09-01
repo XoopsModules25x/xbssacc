@@ -1,0 +1,449 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.0  (Linux)">
+	<META NAME="CREATED" CONTENT="20060221;8264700">
+	<META NAME="CHANGEDBY" CONTENT="Ashley Kitson">
+	<META NAME="CHANGED" CONTENT="20060221;12461100">
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<div align="center">
+<a href="http://xoops.org" target="_blank"><img src="./assets/images/Xoobs Banner Title.gif"></a><br>
+</div>
+
+<H1>Simple Accounts module help (V 1.0)</H1>
+<P><I>(c) 2004-2005 Ashley Kitson, UK. This document and associated
+program works are licensed under the GNU General Public License
+Version 2</I> 
+</P>
+<P>This is the help file. For Class and Functions declarations see
+the <A HREF="../docs/index.html" TARGET="_blank">Systems
+Documentation</A></P>
+<P>The Simple Accounts module (or SACC) is a building block module
+that is aimed at assisting Xoops business systems developers. 
+</P>
+<H2>Background</H2>
+<P>Many business systems (and other non-business ones) are required
+to account for financial value in some manner. This module is aimed
+at providing double entry book-keeping facilities for Xoops business
+systems developers. Although it can be used by itself, that is not
+it's real aim. 
+</P>
+<P>SACC provides the following functionality; 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Multi organisation accounting
+	(accounts for &gt;1 organisation can be kept in the same system,
+	thus once the module is installed, many applications can use it.) 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Basic on screen journal entry of
+	accounts. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Hierarchical accounts 
+	</P>
+	<LI><P>A program API based on xoopsObject that can easily extended
+	for additional application functionality 
+	</P>
+</UL>
+<H2>Installing SACC</H2>
+<P>Installing SACC is as straightforward as installing any other
+Xoops module. However you <STRONG>MUST install Code Data Management
+(CDM) first</STRONG>. You can download that module in the same place
+that you found SACC. However, please note that SACC V1.0 requires CDM V1.5 or better. SACC relies on CDM to provide some of its
+functionality and ancestor object class structure. Simply unpack the
+archive file into a directory called 'xbs_sacc' in your Xoops module
+directory. Then install as for any other module using the Xoops
+administration-modules functionality. There is little or no
+configuration to be done. The installation process loads default sets
+of codes for SACC into CDM.  1 /SACCACTP - Account Types, 2 /SACCCNTL
+- Control Account names. 
+</P>
+<P>By default the module is available to the administrator and
+registered users group. You can of course give access to other groups
+if required. 
+</P>
+<H2>Concepts</H2>
+<P>It is important to understand a few concepts about SACC before
+beginning to use it. 
+</P>
+<P><I>SACC employs a hierarchy of data;</I><BR>Organisation 1-n
+Account 1-n Account Entry (Or each Organisation can have many
+Accounts and each Account can have many Entries.) 
+</P>
+<P>Account Entries are controlled by Journal Entries<BR>Organisation
+1-n Journal Entries 1-n Account Entry (Or an Organisation can have
+many Journal Entries which provides a unifying wrapper for a set of
+Account Entries.) 
+</P>
+<P>As long as you use the facilities provided by the built in user
+interface or the programming API, you will acheive balanced double
+entry accounting. 
+</P>
+<P><I>Data is never deleted.</I>Technically, you shouldn't delete an
+account entry anyway (you should make a reversing entry.) However,
+future versions of SACC will allow you to 'defunct' an entry, thereby
+removing it from calculation of balances etc. Most list screens show
+a record 'Row Flag'. This is set to 'Active' by default. In future
+this may be set to 'Suspended' or 'Defunct'. A 'Suspended' record is
+out of use temporarily and can revert to 'Active'. A 'Defunct' record
+is out of use permanently. 
+</P>
+<P>In addition to recorded the record status, the system also records
+the name of the last user to edit data and the date and time. This
+can be used for auditing purposes. You cannot see these at present
+unless you use a SQL tool such as phpMyAdmin to inspect the
+underlying tables. 
+</P>
+<H2>Using SACC - Interactive use</H2>
+<H3>Administration tasks</H3>
+<P>There are a number of tasks that you need to undertake before your
+users can start using SACC, or before you can start programming your
+application to use it. These consist of 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Basic SACC configuration 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Create an Organisation 
+	</P>
+	<LI><P>Add accounts for an organisation 
+	</P>
+</UL>
+<P>All of these tasks are accomplished from the SACC module
+administration screen. Log on as adminsitrator and access the module
+admin screen as per normal for Xoops.<BR>The module configuration
+screen has two tabs, Organisation and Account. More of these later.
+At the top of the screen are 4 links. 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">Module Configuration. This takes
+	you to the CDM screen to edit the SACCxxx code entries that are used
+	to configure SACC. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Module Home Page. This takes you
+	to the SACC first page (Select organisation) on the user side. 
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">Module Documentation. Presents
+	phpMydoc system documentation for the SACC API 
+	</P>
+	<LI><P>Module Support. Takes you to the internet home page for SACC
+	support 
+	</P>
+</UL>
+<H4>Configuration</H4>
+<P>User definable configuration for the module is done via the normal
+module configuration screen Access this by clicking Module
+Configuration from the SACC admin screen.</P>
+<P>Other configuration is via the CDM menu entry on the user menu..
+Browse the code sets for SACC and edit entries as required. The code
+sets are; 
+</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">1 SACCACTP - Account Types, 
+	</P>
+	<LI><P>2 SACCCNTL - Control Account names. 
+	</P>
+</UL>
+<P>Other constant definitions are in the normal language/../main.php
+file. 
+</P>
+<P><I>Organisations.</I> Click the Organisation tab. On first use,
+the list will be empty, so the screen will display an organisation
+details input form. Add the name of your organisation. When you click
+'Submit', you will go back to the Organisation choice screen.
+Creating an organisation also creates a simple skeleton account tree
+for it, comprising of an Asset, Liability, Income, Expense and Equity
+Master accounts along with two other accounts, the Bank account and
+the Opening Balances account. Every new Organisation gets these
+accounts. A future version of SACC will allow you to choose a more
+complex template to initially populate your accounts list with. Note
+that the Bank and Opening Balances accounts are indented beneath
+their respective parent accounts. You can edit an existing
+organisation from this screen as well. Please bear in mind that if
+you &quot;defunct&quot; an organisation, the system will also defunct
+all of its accounts as well. 
+</P>
+<P><I>Accounts. </I>When you first click on the Account tab, you are
+requested to choose an organisation to work with. When you have
+chosen one, the list of accounts for that organisation is displayed
+and you are asked to select one to edit. ALternatively you can insert
+a new account into the tree. To create a new account, click on the
+Insert button. Give the account a name and select the type of account
+you want. The 'Bank' and 'Customer' account types are special forms
+of Asset accounts, whilst the Supplier account is a special form of a
+Liability account. These three special types will, in a future
+release allow users to enter additional address and reference data
+for the accounts (e.g. Bank account number etc.) You should select
+them if required to take advantage of future functionality. (e.g. if
+you want to set up an account to record a loan, use the Supplier
+Account type so that in future you can record details of the
+loan.)<BR>Next, you need to select the parent account of this new
+account. Leaving it as 'No Parent' is not usually an option except
+under special circumstances, so choose Asset, Liability, Income,
+Expense or Equity as the parent account. You can choose an account
+that you previously set up. For instance, create an account called
+'Loans' with Liability as its parent. Then create an account called
+'Car Loan' with Loans as its parent and so on.<BR>The 'Account
+Purpose' text box allows you to put a description of the account that
+will display in the list of accounts (user side). 'Account Notes'
+allows you to enter additional information but this is not displayed
+in the list of accounts screen.<BR>The 'Row Flag' selection box
+allows you to set the row status for the account. By default this is
+'Active' and means that the account is useable. You can temporarily
+'Suspend' an account. This means that you will not be able to post
+transactions against it. Suspended accounts will also be updated as a
+result of child account entries. A Suspended account can be made
+active again. To 'Defunct' an account, it must first have a zero
+balance and usually this means that you must post a journal entry to
+zero the balance away from the account or one of its children. A
+Defunct account cannot be made Active again. Defunct accounts cannot
+be posted against and will not be updated as a result of a posting to
+a child account (by definition child accounts are also
+Defunct.)<BR>Click 'Submit' to save the account details. 
+</P>
+<H3>User Tasks</H3>
+<P>All user tasks are accessed from the user side menu.
+<I>Organisations.</I> Go to your site main page and click on the
+'Simple Accounts' menu item. You now have the opportunity to choose
+the Organisation that you wish to work with in this session. The
+screen changes to show the accounts list for your organisation. The
+accounts list shows debit and credit totals with a balance of the two
+(according to accepted accounting principles.) You can redisplay the
+account list by clicking on the 'List of Accounts' menu item. Change
+the organisation that you want to work with using the 'Simple
+Accounts' menu item again. 
+</P>
+<P><I>Accounts.</I> 'List of Accounts' menu item to view the accounts
+tree for your current organisation. From this screen you can view any
+entries on an account by clicking teh browse button next to the
+required account. Note that parent accounts do not normally have
+entries in them, there balances being derived from child accounts. 
+</P>
+<P><I>Journal Entries. </I>Click the 'Enter Journal' menu option to
+make an entry into your accounts system. Enter the purpose of the
+entry. This will display in the 'List of Journals' screen. Select the
+debit and credit accounts and optionally enter a reference for each
+that will appear in the account entry screen. Enter the amount of the
+transaction and click on the 'Submit' button to commit the
+transaction. The screen will then display the list of journal entries
+for your accounts. This screen can also be reached via the 'List of
+Journals' menu option. At present you cannot do much from the 'List
+Journals' screen. Future versions of SACC will allow you to review
+the account entries for the journal and reverse the journal etc. If
+you return to the 'List of Accounts' screen via the menu, you will
+see that your accounts have been updated and that balances have been
+'bubbled up' from child accounts to their parents. 
+</P>
+<P>Hopefully the screens are easy enough to navigate. Click the
+Browse icon next to a record to see the entries associated with it.
+Click the edit button for a record to go to its full details and to
+make changes. The record isnert button is usually above any list
+display. 
+</P>
+<H2>The API</H2>
+<P>The real utility of SACC comes when you incorporate it into your
+own module. You need to do a few simple things to access SACC. 
+</P>
+<P>In the <B>header.php</B> script of your own module add the
+following line after your include to mainfile.php; 
+</P>
+<P>require_once XOOPS_ROOT_PATH.&quot;/modules/sacc/include/defines.php&quot;;
+</P>
+<P>If you want to use the built in xoopsForm extensions for Account
+Types, Control Accounts, Organisations, Accounts and Parent Accounts
+in a form generation page include the following line somewhere at the
+head of your script; 
+</P>
+<P>require_once SACC_PATH.&quot;/class/class.sacc.form.php&quot;; 
+</P>
+<P>Read the class.sacc.form.php for calling parameters to these
+extension objects. 
+</P>
+<P>To use the function layer supplied with SACC, you will need to
+have the following line before calling them; 
+</P>
+<P>require_once SACC_PATH.&quot;/include/functions.php&quot;; <I>The
+functions.</I> The functions included in the functions.php file are:</P>
+<UL>
+	<LI><P STYLE="margin-bottom: 0in">getErrNo
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">getErrMsg
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">formatMoney
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">createOrg
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">getOrg
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">createAccount
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">getAccount
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">getControlAccount
+	</P>
+	<LI><P STYLE="margin-bottom: 0in">initializeJournal
+	</P>
+	<LI><P>saveJournal
+	</P>
+</UL>
+<P>Read the functions.php file for more information and access the
+<A HREF="../docs/index.html" TARGET="_blank">Systems
+Documentation</A>. 
+</P>
+<P>If you want to do something more complex you will need to use the
+SACC objects with their associated handlers directly. The class tree
+for these objects is: 
+</P>
+<P>XoopsObject<BR>---&gt; CDMBaseObject<BR>--------&gt;
+Account<BR>------------&gt; SACCDRAccount<BR>-----------------&gt;
+SACCExpenseAc<BR>-----------------&gt;
+SACCAssetAc<BR>---------------------&gt;
+SACCCustomerAc<BR>--------------------------&gt;
+SACCBankAc<BR>------------&gt; SACCCRAccount<BR>-----------------&gt;
+SACCIncomeAc<BR>-----------------&gt;
+SACCLiabilityAc<BR>----------------------&gt;
+SACCSupplierAc<BR>----------------------&gt; SACCEquityAc<BR>--------&gt;
+AcEntry<BR>--------&gt; Journal<BR>--------&gt;
+SACCControl<BR>--------&gt; Org</P>
+<P>XoopsObjectHandler<BR>---&gt; CDMBaseHandler<BR>--------&gt;
+SaccSACCOrgHandler<BR>--------&gt; SaccSACCAccountHandler<BR>--------&gt;
+SaccSACCJournalHandler<BR>--------&gt; SaccSACCEntryHandler<BR>--------&gt;
+SaccSACCControlHandler</P>
+<P>To use these objects you create a handler object and then ask it
+to create or get the data object e.g.; 
+</P>
+<P>NB SACC_DIR is a constant set in defines.php and must be used in
+calls to xoops_getModuleHandler<BR>$setHandler =&amp;
+xoops_getModuleHandler(ObjName,SACC_DIR) where ObjName is one of
+&quot;Org&quot;, &quot;Account&quot;, &quot;Journal&quot;,
+&quot;SACCEntry&quot; or &quot;SACCControl&quot;;<BR>$obj =&amp;
+$setHandler-&gt;get($id);<BR>$obj2 =&amp; $setHandler-&gt;create(); 
+</P>
+<P>You are advised to read the class files in the class sub directory
+for further guidance. Beware, that under normal circumstances, you
+should avoid using the &quot;getall&quot; methods of the handler
+objects as they will return all data (suspended and defunct) which is
+not usually what you require. Use the &quot;get&quot; method. 
+</P>
+<P><I>Control accounts.</I> When a new organisation is set up, along
+with the skeleton chart of accounts, two entries are made in the
+control accounts table. These are BANK and OPEN. The entries here
+point to the actual accounts for Bank Account and Opening Balances
+account respectively. Thus an application can find these two accounts
+for an organisation without having to know the actual account ids
+(for instance a payments system will need to know the bank account
+details to make payments.) Use the getControlAccount function to
+retrieve a control account id. 
+</P>
+<P><I>Storage of monetary values</I>. SACC stores all monetary vales
+(debit, credit, net balances etc) internally as an integer. Thus
+&Acirc;&pound;123.07 is stored internally as 12307. This is due to
+some problems that a/ PHP has in handling real numbers and 2/ float
+conversion issues between PHP and MySQL. Therefore you need to
+convert such values to real values to display them, and similarly
+convert any value entered by users to an integer before putting it
+into a SACC object (and ultimately the database.) 
+</P>
+<P>To do this use the following constructs that make use of the
+SACC_CFG_DECPNT constant, the value for which is set in the module
+configuration administration screen. Note also the use of the
+formatMoney function.</P>
+<P>Displaying data, as in this example which is preparing account
+data for display via a Xoops Smarty Template. Taken from
+sacc_accounts_list.php</P>
+<P><A NAME="DDE_LINK1"></A>include_once
+CDM_DIR.&quot;/include/functions.php&quot;<BR>...<BR>$accounts =
+$org-&gt;getAccounts();<BR>$decpnt = pow(10,SACC_CFG_DECPNT);<BR>foreach
+($accounts as $acc) {<BR>&nbsp;&nbsp;$acc[&quot;ac_dr&quot;] =
+formatMoney($acc[&quot;ac_dr&quot;] / $decpnt);<BR>&nbsp;&nbsp;$acc[&quot;ac_cr&quot;]
+= formatMoney($acc[&quot;ac_cr&quot;] /
+$decpnt);<BR>&nbsp;&nbsp;$acc[&quot;ac_net_bal&quot;] =
+formatMoney($accs&quot;ac_net_bal&quot;] /
+$decpnt);<BR>&nbsp;&nbsp;$xoopsTpl-&gt;append(&quot;accounts&quot;,$acc);<BR>&nbsp;&nbsp;}</P>
+<P>Writing data to object, as in the following example from
+sacc_journal.php which writes journal entries to the journal object</P>
+<P>require_once CDM_DIR.&quot;/include/functions.php&quot;<BR>...<BR>$jData
+= $jHandler-&gt;create($dte,$jrn_prps,$_SESSION['sacc_org_id']);<BR>$amount
+*= pow(10,SACC_CFG_DECPNT); //convert float to
+integer<BR>$jData-&gt;appendEntry($ac_dr_id,$dr_ref,$amount,0);<BR>$jData-&gt;appendEntry($ac_cr_id,$cr_ref,0,$amount);</P>
+<P>N.B. There is nothing to stop you appending more than 2 entries to
+a journal, so multi line journal entries are possible. It is up to
+you to make sure that the debits and credits balance though! 
+</P>
+<P>Access the SACC system documentation via the administration
+screen. 
+</P>
+<H2>Future Development</H2>
+<P>SACC is intended as a tool for developers. It is not meant to be a
+full blown accounting system, although it is possible from these
+humble beginnings to create one. SACC will never therefore be a
+replacement for GNUCash for instance. However, the following
+developments are planned for SACC and will be released given the time
+to do them. 
+</P>
+<P>V0.1 - Basic functionality. Really a preview for others to see
+essential features via the built in user entry screens<BR>V0.2 -
+Creation of programmatic functions to access system functionality.
+This will be a function layer over the object layer to carry out
+common tasks such as creating journals, getting account balances,
+getting organisation ids etc.<BR>V0.3 - Move account and organisation
+creation and editing to Xoops module administration screens. This
+will leave account listing, journal listing and journal creation and
+editing on the 'user' side.<BR>V1.0 – (<B><I>This release.</I></B>)
+Move SACC configuration into normal admin side config screens.  This
+is the first full release of SACC that has core functionality
+complete.  Everything else after this is  add-on.<BR>V1.1 - All about
+journals. Reversal of journals. Defuncting of journals. Allow &gt;2
+line entry of journals (NB, this is possible programmatically
+already, just not in the input screen of the V1.0 system.)<BR>V1.2 -
+All about organisations. Allow selection of account template to apply
+to new organisation. Admin facilities to create account templates.
+Creation of VAT accounts on organisation create.<BR>V1.3 - Reporting.
+P/L and Balance Sheet Reports. These reports will be from templates
+which can then be copied on an Organisation by Organisation basis and
+modified by the administrator.<BR>V1.4 - Extension of Supplier,
+Customer and Bank account type objects to include address details and
+banking details (for Bank.)<BR>V1.5 - Export and import facilities
+to/from GNUCash<BR>V1.6 - Anything else that crops up!<BR>V1.0 - Full
+release. 
+</P>
+<P>Obviously this takes some effort, so any interested developers out
+there who'd like to lend a hand are more than welcome to join in via
+the Xoops Dev Site. 
+</P>
+<H2>Getting help and reporting bugs</H2>
+<P>The code for this module is maintained via the <A HREF="http://dev.xoops.org/modules/xfmod/project/?sacc">Xoops
+Development</A> facility. Use the facilities there to report and
+track bugs and get latest downloads. Demo and support facilities are
+kept on my own <A HREF="http://xoobs.net/">website</A> 
+</P>
+<H2>Acknowledgements</H2>
+<P>Thanks to various people on the Xoops dev and support forums who
+by solving problems before me, made this a slightly less painful
+exercise than could have been :-)<BR>Thanks also to the phpMyAdmin
+team who made using MySql easy (and who I nicked the icons off but I
+can't find the right person to thank so I'm saying it here.) 
+</P>
+<H2>Licensing</H2>
+<P>This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the
+License, or (at your option) any later version. 
+</P>
+<P>You may not change or alter any portion of this comment or credits
+of supporting developers from this source code or any supporting
+source code which is considered copyrighted (c) material of the
+original comment or credit authors. 
+</P>
+<P>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+General Public License for more details. 
+</P>
+<P>You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+USA or see <A HREF="http://www.gnu.org/copyleft/gpl.html">http://www.gnu.org/copyleft/gpl.html</A></P>
+</BODY>
+</HTML>
