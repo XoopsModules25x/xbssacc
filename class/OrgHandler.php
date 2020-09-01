@@ -220,13 +220,13 @@ class OrgHandler extends Xbscdm\BaseHandler
         // Set up an array of new Base account information
 
         $nac = [
-            'asset'     => ['ac_tp' => SACC_ACTP_ASSET, 'ac_nm' => _MD_SACC_NAC_ASSET],
-            'liability' => ['ac_tp' => SACC_ACTP_LIABILITY, 'ac_nm' => _MD_SACC_NAC_LIABILITY],
-            'income'    => ['ac_tp' => SACC_ACTP_INCOME, 'ac_nm' => _MD_SACC_NAC_INCOME],
-            'expense'   => ['ac_tp' => SACC_ACTP_EXPENSE, 'ac_nm' => _MD_SACC_NAC_EXPENSE],
-            'equity'    => ['ac_tp' => SACC_ACTP_EQUITY, 'ac_nm' => _MD_SACC_NAC_EQUITY],
-            'bank'      => ['ac_tp' => SACC_ACTP_BANK, 'ac_nm' => _MD_SACC_NAC_BANK],
-            'open'      => ['ac_tp' => SACC_ACTP_EQUITY, 'ac_nm' => _MD_SACC_NAC_OPEN],
+            'asset'     => ['ac_tp' => SACC_ACTP_ASSET, 'ac_nm' => _MD_XBSSACC_NAC_ASSET],
+            'liability' => ['ac_tp' => SACC_ACTP_LIABILITY, 'ac_nm' => _MD_XBSSACC_NAC_LIABILITY],
+            'income'    => ['ac_tp' => SACC_ACTP_INCOME, 'ac_nm' => _MD_XBSSACC_NAC_INCOME],
+            'expense'   => ['ac_tp' => SACC_ACTP_EXPENSE, 'ac_nm' => _MD_XBSSACC_NAC_EXPENSE],
+            'equity'    => ['ac_tp' => SACC_ACTP_EQUITY, 'ac_nm' => _MD_XBSSACC_NAC_EQUITY],
+            'bank'      => ['ac_tp' => SACC_ACTP_BANK, 'ac_nm' => _MD_XBSSACC_NAC_BANK],
+            'open'      => ['ac_tp' => SACC_ACTP_EQUITY, 'ac_nm' => _MD_XBSSACC_NAC_OPEN],
         ];
 
         $accHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
@@ -240,7 +240,7 @@ class OrgHandler extends Xbscdm\BaseHandler
         foreach ($nac as $ac) {
             $accs = $accHandler->create();
 
-            $accs->setVar('ac_prnt_id', _MD_SACC_NOPARENT);
+            $accs->setVar('ac_prnt_id', _MD_XBSSACC_NOPARENT);
 
             $accs->setVar('org_id', $org_id);
 

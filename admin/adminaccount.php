@@ -50,7 +50,7 @@ require_once __DIR__ . '/admin_header.php';
 //require_once __DIR__ . '/adminheader.php';
 
 //Display the admin menu
-//xoops_module_admin_menu(2,_AM_SACC_ADMENU2);
+//xoops_module_admin_menu(2,_AM_XBSSACC_ADMENU2);
 
 xoops_cp_header();
 /**

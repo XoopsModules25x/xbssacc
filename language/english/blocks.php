@@ -18,8 +18,8 @@
 /**
  * Strings used in Balances Block
  */
-define('_MB_SACC_BALANCE_ORG', 'Organisation name');
-define('_MB_SACC_BALANCE_BALNAME', 'Balance Sheet');
-define('_MB_SACC_BALANCE_PLNAME', 'P&L');
-define('_MB_SACC_BALANCE_EQNAME', 'Equity');
-define('_MB_SACC_BALANCE_ORGNAME', 'Organisation Name');
+define('_MB_XBSSACC_BALANCE_ORG', 'Organisation name');
+define('_MB_XBSSACC_BALANCE_BALNAME', 'Balance Sheet');
+define('_MB_XBSSACC_BALANCE_PLNAME', 'P&L');
+define('_MB_XBSSACC_BALANCE_EQNAME', 'Equity');
+define('_MB_XBSSACC_BALANCE_ORGNAME', 'Organisation Name');

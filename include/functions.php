@@ -364,10 +364,10 @@ function saveJournal($journal)
             return true;
         }
 
-        _SACCSaveError(-8, _MD_SACC_ERR_10);
+        _SACCSaveError(-8, _MD_XBSSACC_ERR_10);
         //end if
     } else {
-        _SACCSaveError(-8, _MD_SACC_ERR_11);
+        _SACCSaveError(-8, _MD_XBSSACC_ERR_11);
     }//end if
 
     return false;

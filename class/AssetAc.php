@@ -66,8 +66,8 @@ class AssetAc extends DRAccount
     {
         parent::__construct();
 
-        $this->assignVar('ac_dr_altnm', _MD_SACC_INCREASE);
+        $this->assignVar('ac_dr_altnm', _MD_XBSSACC_INCREASE);
 
-        $this->assignVar('ac_cr_altnm', _MD_SACC_DECREASE);
+        $this->assignVar('ac_cr_altnm', _MD_XBSSACC_DECREASE);
     }
 }

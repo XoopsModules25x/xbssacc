@@ -86,7 +86,7 @@ function b_sacc_balances_show($options)
 
     $block['org'] = $org->getVar('org_name');
 
-    $block['orgname'] = _MB_SACC_BALANCE_ORG;
+    $block['orgname'] = _MB_XBSSACC_BALANCE_ORG;
 
     //Balance Sheet
 
@@ -96,7 +96,7 @@ function b_sacc_balances_show($options)
 
     $block['balance'] = formatMoney(($acc1->getBalance() - $acc2->getBalance()) / $decpnt);
 
-    $block['balancename'] = _MB_SACC_BALANCE_BALNAME;
+    $block['balancename'] = _MB_XBSSACC_BALANCE_BALNAME;
 
     unset($acc1);
 
@@ -110,7 +110,7 @@ function b_sacc_balances_show($options)
 
     $block['pandl'] = formatMoney(($acc1->getBalance() - $acc2->getBalance()) / $decpnt);
 
-    $block['pandlname'] = _MB_SACC_BALANCE_PLNAME;
+    $block['pandlname'] = _MB_XBSSACC_BALANCE_PLNAME;
 
     unset($acc1);
 
@@ -122,7 +122,7 @@ function b_sacc_balances_show($options)
 
     $block['equity'] = formatMoney($acc1->getBalance() / $decpnt);
 
-    $block['equityname'] = _MB_SACC_BALANCE_EQNAME;
+    $block['equityname'] = _MB_XBSSACC_BALANCE_EQNAME;
 
     unset($acc1);
 
@@ -158,7 +158,7 @@ function b_sacc_balances_edit($options)
 
     $form = '<table>';
 
-    $form .= '<tr><td>' . _MB_SACC_BALANCE_ORGNAME . '</td><td>' . $fld . '</td></tr>';
+    $form .= '<tr><td>' . _MB_XBSSACC_BALANCE_ORGNAME . '</td><td>' . $fld . '</td></tr>';
 
     $form .= '</table>';
 

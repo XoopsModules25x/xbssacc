@@ -109,31 +109,31 @@ if (!empty($org_id)) {
 
     // Assign page and column titles
 
-    $xoopsTpl->assign('lang_pagetitle', sprintf(_MD_SACC_PAGETITLE2, $org->getVar('org_name')));
+    $xoopsTpl->assign('lang_pagetitle', sprintf(_MD_XBSSACC_PAGETITLE2, $org->getVar('org_name')));
 
-    $xoopsTpl->assign('lang_instruction', _MD_SACC_PAGEINSTR2);
+    $xoopsTpl->assign('lang_instruction', _MD_XBSSACC_PAGEINSTR2);
 
-    $xoopsTpl->assign('lang_col1', _MD_SACC_PAGE2COL1);
+    $xoopsTpl->assign('lang_col1', _MD_XBSSACC_PAGE2COL1);
 
-    $xoopsTpl->assign('lang_col2', _MD_SACC_PAGE2COL2);
+    $xoopsTpl->assign('lang_col2', _MD_XBSSACC_PAGE2COL2);
 
-    $xoopsTpl->assign('lang_col3', _MD_SACC_PAGE2COL3);
+    $xoopsTpl->assign('lang_col3', _MD_XBSSACC_PAGE2COL3);
 
-    $xoopsTpl->assign('lang_col4', _MD_SACC_PAGE2COL4);
+    $xoopsTpl->assign('lang_col4', _MD_XBSSACC_PAGE2COL4);
 
-    $xoopsTpl->assign('lang_col5', _MD_SACC_DR);
+    $xoopsTpl->assign('lang_col5', _MD_XBSSACC_DR);
 
-    $xoopsTpl->assign('lang_col6', _MD_SACC_CR);
+    $xoopsTpl->assign('lang_col6', _MD_XBSSACC_CR);
 
-    $xoopsTpl->assign('lang_col6b', _MD_SACC_BALANCE);
+    $xoopsTpl->assign('lang_col6b', _MD_XBSSACC_BALANCE);
 
-    $xoopsTpl->assign('lang_col7', _MD_SACC_PAGE2COL5);
+    $xoopsTpl->assign('lang_col7', _MD_XBSSACC_PAGE2COL5);
 
-    $xoopsTpl->assign('lang_insert', _MD_SACC_INSERT);
+    $xoopsTpl->assign('lang_insert', _MD_XBSSACC_INSERT);
 
-    $xoopsTpl->assign('lang_select', _MD_SACC_BROWSE);
+    $xoopsTpl->assign('lang_select', _MD_XBSSACC_BROWSE);
 
-    $xoopsTpl->assign('lang_edit', _MD_SACC_EDIT);
+    $xoopsTpl->assign('lang_edit', _MD_XBSSACC_EDIT);
 
     $xoopsTpl->assign('org_id', $org_id);
 
@@ -143,5 +143,5 @@ if (!empty($org_id)) {
 
     require XOOPS_ROOT_PATH . '/footer.php';        //display the page!
 } else {
-    redirect_header(SACC_URL . '/index.php', 1, _MD_SACC_ERR_0);
+    redirect_header(SACC_URL . '/index.php', 1, _MD_XBSSACC_ERR_0);
 }

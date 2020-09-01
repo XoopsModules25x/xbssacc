@@ -81,7 +81,7 @@ class FormSelectAccPrnt extends \XoopsFormSelect
 
         $res = $accountHandler->getSelectList($org, true);
 
-        $res[0] = _MD_SACC_NOPARENT;
+        $res[0] = _MD_XBSSACC_NOPARENT;
 
         $this->addOptionArray($res);
     }

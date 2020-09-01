@@ -40,7 +40,7 @@ $GLOBALS['xoopsOption']['template_main'] = 'sacc_bs.tpl';
 require XOOPS_ROOT_PATH . '/header.php';
 
 // Assign page titles
-$xoopsTpl->assign('lang_pagetitle', _MD_SACC_PAGETITLE1);
+$xoopsTpl->assign('lang_pagetitle', _MD_XBSSACC_PAGETITLE1);
 
 // Get data and assign to template
 

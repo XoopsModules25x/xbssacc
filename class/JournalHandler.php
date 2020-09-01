@@ -164,14 +164,14 @@ class JournalHandler extends Xbscdm\BaseHandler
                         return $journ;
                     }
 
-                    $this->setError(-1, sprintf(_MD_CDM_ERR_1, (string)$id));
+                    $this->setError(-1, sprintf(_MD_XBSCDM_ERR_1, (string)$id));
                     //end if
                 } else {
                     $this->setError($this->db->errno(), $this->db->error());
                 }//end if
             }//end if - error value set in call to create()
         } else {
-            $this->setError(-1, sprintf(_MD_CDM_ERR_1, (string)$id));
+            $this->setError(-1, sprintf(_MD_XBSCDM_ERR_1, (string)$id));
         }//end if
         return false; //default return
     }

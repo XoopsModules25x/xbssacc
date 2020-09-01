@@ -71,16 +71,16 @@ function adminSelectOrg($forAccounts = false)
     } else {
         // Get data and assign to form
 
-        $org_id = new Form\FormSelectOrgAll(_AM_SACC_SELORG, 'org_id', SACC_CFG_DEFORG, 4);
+        $org_id = new Form\FormSelectOrgAll(_AM_XBSSACC_SELORG, 'org_id', SACC_CFG_DEFORG, 4);
 
-        $submit = new \XoopsFormButton('', 'submit', _AM_SACC_GO, 'submit');
+        $submit = new \XoopsFormButton('', 'submit', _AM_XBSSACC_GO, 'submit');
 
         if ($forAccounts) {
-            $orgForm = new \XoopsThemeForm(_AM_SACC_ORGFORM, 'orgform', 'adminaccount.php');
+            $orgForm = new \XoopsThemeForm(_AM_XBSSACC_ORGFORM, 'orgform', 'adminaccount.php');
         } else {
-            $insert = new \XoopsFormButton(_AM_SACC_INSERT_DESC, 'insert', _AM_SACC_INSERT, 'submit');
+            $insert = new \XoopsFormButton(_AM_XBSSACC_INSERT_DESC, 'insert', _AM_XBSSACC_INSERT, 'submit');
 
-            $orgForm = new \XoopsThemeForm(_AM_SACC_ORGFORM, 'orgform', 'adminorg.php');
+            $orgForm = new \XoopsThemeForm(_AM_XBSSACC_ORGFORM, 'orgform', 'adminorg.php');
         }
 
         $orgForm->addElement($org_id, true);
@@ -109,13 +109,13 @@ function displayOrgForm($org_id = 0)
 
     //global $xoopsTpl;
 
-    //$GLOBALS['xoopsOption']['template_main'] = _AM_SACC_EDITFORM;  // Set the template page to be used
+    //$GLOBALS['xoopsOption']['template_main'] = _AM_XBSSACC_EDITFORM;  // Set the template page to be used
 
     //Set up static text for form
 
-    //$xoopsTpl->assign('lang_pagetitle',_AM_SACC_PAGETITLE1);
+    //$xoopsTpl->assign('lang_pagetitle',_AM_XBSSACC_PAGETITLE1);
 
-    //$xoopsTpl->assign('lang_copyright',_AM_SACC_COPYRIGHT);
+    //$xoopsTpl->assign('lang_copyright',_AM_XBSSACC_COPYRIGHT);
 
     //retrieve organisation details
 
@@ -149,7 +149,7 @@ function displayOrgForm($org_id = 0)
     } else {
         // else display the current organasition id as label because it is primary key
 
-        $id = new \XoopsFormLabel(_AM_SACC_ORGED1, $org_id);
+        $id = new \XoopsFormLabel(_AM_XBSSACC_ORGED1, $org_id);
 
         $id_hid = new \XoopsFormHidden('org_id', $org_id); //still need to know id in POST process
 
@@ -163,32 +163,32 @@ function displayOrgForm($org_id = 0)
     }//end if org_id==0
 
     if ($isDefunct) {
-        $org_name = new \XoopsFormLabel(_AM_SACC_ORGED2, $orgname);
+        $org_name = new \XoopsFormLabel(_AM_XBSSACC_ORGED2, $orgname);
 
-        $base_crcy = new \XoopsFormLabel(_AM_SACC_ORGED3, $crcy_val);
+        $base_crcy = new \XoopsFormLabel(_AM_XBSSACC_ORGED3, $crcy_val);
 
-        $row_flag = new \XoopsFormLabel(_AM_SACC_RSTATNM, CDM_RSTAT_DEF);
+        $row_flag = new \XoopsFormLabel(_AM_XBSSACC_RSTATNM, CDM_RSTAT_DEF);
     } else {
-        $org_name = new \XoopsFormText(_AM_SACC_ORGED2, 'org_nm', 20, 20, $orgname);
+        $org_name = new \XoopsFormText(_AM_XBSSACC_ORGED2, 'org_nm', 20, 20, $orgname);
 
-        $base_crcy = new Xbscdm\Form\FormSelectCurrency(_AM_SACC_ORGED3, 'base_crcy', $crcy_val);
+        $base_crcy = new Xbscdm\Form\FormSelectCurrency(_AM_XBSSACC_ORGED3, 'base_crcy', $crcy_val);
 
-        $row_flag = new Xbscdm\Form\FormSelectRstat(_AM_SACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
+        $row_flag = new Xbscdm\Form\FormSelectRstat(_AM_XBSSACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
     }
 
     $ret = getXoopsUser($org->getVar('row_uid'));
 
-    $row_uid = new \XoopsFormLabel(_AM_SACC_RUIDNM, $ret);
+    $row_uid = new \XoopsFormLabel(_AM_XBSSACC_RUIDNM, $ret);
 
-    $row_dt = new \XoopsFormLabel(_AM_SACC_RDTNM, $org->getVar('row_dt'));
+    $row_dt = new \XoopsFormLabel(_AM_XBSSACC_RDTNM, $org->getVar('row_dt'));
 
-    $submit = new \XoopsFormButton('', 'save', _AM_SACC_SUBMIT, 'submit');
+    $submit = new \XoopsFormButton('', 'save', _AM_XBSSACC_SUBMIT, 'submit');
 
-    $cancel = new \XoopsFormButton('', 'cancel', _AM_SACC_CANCEL, 'submit');
+    $cancel = new \XoopsFormButton('', 'cancel', _AM_XBSSACC_CANCEL, 'submit');
 
-    $reset = new \XoopsFormButton('', 'reset', _AM_SACC_RESET, 'reset');
+    $reset = new \XoopsFormButton('', 'reset', _AM_XBSSACC_RESET, 'reset');
 
-    $editForm = new \XoopsThemeForm(_AM_SACC_ORGED0, 'editForm', 'adminorg.php');
+    $editForm = new \XoopsThemeForm(_AM_XBSSACC_ORGED0, 'editForm', 'adminorg.php');
 
     $editForm->addElement($id);
 
@@ -275,7 +275,7 @@ function submitOrgForm()
             $orgHandler->createAccounts($orgData);
         }
 
-        redirect_header(SACC_URL . '/admin/adminorg.php', 1, _AM_SACC_ORGED100);
+        redirect_header(SACC_URL . '/admin/adminorg.php', 1, _AM_XBSSACC_ORGED100);
     }//end if
 } //end function submitOrgForm
 
@@ -311,15 +311,15 @@ function adminSelectAcc($org_id = 0)
     if (0 == $org_id) { //ask user to select an organisation
         adminSelectOrg(true);
     } else { //display list of accounts for an organisation
-        $ac_id = new Form\FormSelectAccount(_AM_SACC_SELACC, 'ac_id', $org_id, null, 10, true);
+        $ac_id = new Form\FormSelectAccount(_AM_XBSSACC_SELACC, 'ac_id', $org_id, null, 10, true);
 
         $org = new \XoopsFormHidden('org_id', $org_id);
 
-        $submit = new \XoopsFormButton('', 'go', _AM_SACC_GO, 'submit');
+        $submit = new \XoopsFormButton('', 'go', _AM_XBSSACC_GO, 'submit');
 
-        $insert = new \XoopsFormButton(_AM_SACC_INSERT_DESC, 'insert', _AM_SACC_INSERT, 'submit');
+        $insert = new \XoopsFormButton(_AM_XBSSACC_INSERT_DESC, 'insert', _AM_XBSSACC_INSERT, 'submit');
 
-        $accForm = new \XoopsThemeForm(_AM_SACC_ACCFORM, 'accountform', 'adminaccount.php');
+        $accForm = new \XoopsThemeForm(_AM_XBSSACC_ACCFORM, 'accountform', 'adminaccount.php');
 
         $accForm->addElement($org);
 
@@ -348,13 +348,13 @@ function displayAccForm($org_id, $ac_id)
 
     //cannot use smarty templates until xoops V2.2
 
-    //$GLOBALS['xoopsOption']['template_main'] = _AM_SACC_EDITFORM;  // Set the template page to be used
+    //$GLOBALS['xoopsOption']['template_main'] = _AM_XBSSACC_EDITFORM;  // Set the template page to be used
 
     //Set up static text for form
 
-    //$xoopsTpl->assign('lang_pagetitle',_AM_SACC_PAGETITLE4);
+    //$xoopsTpl->assign('lang_pagetitle',_AM_XBSSACC_PAGETITLE4);
 
-    //$xoopsTpl->assign('lang_copyright',_AM_SACC_COPYRIGHT);
+    //$xoopsTpl->assign('lang_copyright',_AM_XBSSACC_COPYRIGHT);
 
     $accountHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Account');
 
@@ -380,13 +380,13 @@ function displayAccForm($org_id, $ac_id)
 
             // Allow selection of organisation
 
-            $org = new Form\FormSelectOrg(_AM_SACC_ACED2, 'org_id', $org_id);
+            $org = new Form\FormSelectOrg(_AM_XBSSACC_ACED2, 'org_id', $org_id);
 
             //define default currency
 
             $crcy = SACC_CFG_DEFCURR;
         } else { // else display the current account id as label because it is primary key
-            $id = new \XoopsFormLabel(_AM_SACC_ACED1, $ac_id);
+            $id = new \XoopsFormLabel(_AM_XBSSACC_ACED1, $ac_id);
 
             $id_hid = new \XoopsFormHidden('ac_id', $ac_id); //still need to know id in POST process
 
@@ -400,40 +400,40 @@ function displayAccForm($org_id, $ac_id)
 
             $org = new \XoopsFormHidden('org_id', $org_id);
 
-            $org_label = new \XoopsFormLabel(_AM_SACC_ACED2, $orgData->getVar('org_name'));
+            $org_label = new \XoopsFormLabel(_AM_XBSSACC_ACED2, $orgData->getVar('org_name'));
 
             $crcy = $accountData->getVar('ac_curr');
         }//end if ac_id==0
 
-        $ac_tp = new Form\FormSelectAccType(_AM_SACC_ACED3, 'ac_tp', $accountData->getVar('ac_tp'));
+        $ac_tp = new Form\FormSelectAccType(_AM_XBSSACC_ACED3, 'ac_tp', $accountData->getVar('ac_tp'));
 
-        $ac_prnt_id = new Form\FormSelectAccPrnt(_AM_SACC_ACED9, 'ac_prnt_id', $org_id, $accountData->getVar('ac_prnt_id'));
+        $ac_prnt_id = new Form\FormSelectAccPrnt(_AM_XBSSACC_ACED9, 'ac_prnt_id', $org_id, $accountData->getVar('ac_prnt_id'));
 
-        $ac_curr = new Xbscdm\Form\FormSelectCurrency(_AM_SACC_ACED4, 'ac_curr', $crcy);
+        $ac_curr = new Xbscdm\Form\FormSelectCurrency(_AM_XBSSACC_ACED4, 'ac_curr', $crcy);
 
-        $ac_nm = new \XoopsFormText(_AM_SACC_ACED5, 'ac_nm', 20, 20, $accountData->getVar('ac_nm'));
+        $ac_nm = new \XoopsFormText(_AM_XBSSACC_ACED5, 'ac_nm', 20, 20, $accountData->getVar('ac_nm'));
 
-        $ac_prps = new \XoopsFormTextArea(_AM_SACC_ACED6, 'ac_prps', $accountData->getVar('ac_prps'));
+        $ac_prps = new \XoopsFormTextArea(_AM_XBSSACC_ACED6, 'ac_prps', $accountData->getVar('ac_prps'));
 
-        $ac_note = new \XoopsFormTextArea(_AM_SACC_ACED7, 'ac_note', $accountData->getVar('ac_note'));
+        $ac_note = new \XoopsFormTextArea(_AM_XBSSACC_ACED7, 'ac_note', $accountData->getVar('ac_note'));
 
         $rf = $accountData->getVar('row_flag');
 
-        $row_flag = new Xbscdm\Form\FormSelectRstat(_MD_SACC_RSTATNM, 'row_flag', $rf, 1, $rf);
+        $row_flag = new Xbscdm\Form\FormSelectRstat(_MD_XBSSACC_RSTATNM, 'row_flag', $rf, 1, $rf);
 
         $ret = getXoopsUser($accountData->getVar('row_uid'));
 
-        $row_uid = new \XoopsFormLabel(_MD_SACC_RUIDNM, $ret);
+        $row_uid = new \XoopsFormLabel(_MD_XBSSACC_RUIDNM, $ret);
 
-        $row_dt = new \XoopsFormLabel(_MD_SACC_RDTNM, $accountData->getVar('row_dt'));
+        $row_dt = new \XoopsFormLabel(_MD_XBSSACC_RDTNM, $accountData->getVar('row_dt'));
 
-        $submit = new \XoopsFormButton('', 'save', _AM_SACC_SUBMIT, 'submit');
+        $submit = new \XoopsFormButton('', 'save', _AM_XBSSACC_SUBMIT, 'submit');
 
-        $cancel = new \XoopsFormButton('', 'cancel', _AM_SACC_CANCEL, 'submit');
+        $cancel = new \XoopsFormButton('', 'cancel', _AM_XBSSACC_CANCEL, 'submit');
 
-        $reset = new \XoopsFormButton('', 'reset', _AM_SACC_RESET, 'reset');
+        $reset = new \XoopsFormButton('', 'reset', _AM_XBSSACC_RESET, 'reset');
 
-        $editForm = new \XoopsThemeForm(_AM_SACC_ACED0, 'editForm', 'adminaccount.php');
+        $editForm = new \XoopsThemeForm(_AM_XBSSACC_ACED0, 'editForm', 'adminaccount.php');
 
         $editForm->addElement($id);
 
@@ -519,7 +519,7 @@ function submitAccForm($org_id, $ac_id)
     if (!$accountHandler->insert($accountData)) {
         redirect_header(SACC_URL . '/admin/adminaccount.php', 10, $accountHandler->getError());
     } else {
-        redirect_header(SACC_URL . '/admin/adminaccount.php?curr_org_id=' . $org_id, 1, _AM_SACC_ACED100);
+        redirect_header(SACC_URL . '/admin/adminaccount.php?curr_org_id=' . $org_id, 1, _AM_XBSSACC_ACED100);
     }//end if
 }
 

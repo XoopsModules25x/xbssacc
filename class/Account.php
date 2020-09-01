@@ -80,8 +80,8 @@ class Account extends Xbscdm\BaseObject
         /* following are not held on database but computed by the object */
 
         $this->initVar('ac_net_bal', XOBJ_DTYPE_INT, 0, false); //account balance
-        $this->initVar('ac_cr_altnm', XOBJ_DTYPE_OTHER, _MD_SACC_CR, false); //alt name for CR value
-        $this->initVar('ac_dr_altnm', XOBJ_DTYPE_OTHER, _MD_SACC_DR, false); //alt name for DR value
+        $this->initVar('ac_cr_altnm', XOBJ_DTYPE_OTHER, _MD_XBSSACC_CR, false); //alt name for CR value
+        $this->initVar('ac_dr_altnm', XOBJ_DTYPE_OTHER, _MD_XBSSACC_DR, false); //alt name for DR value
         $entry = [];
 
         $this->initVar('entries', XOBJ_DTYPE_OTHER, $entry, false); //account entries

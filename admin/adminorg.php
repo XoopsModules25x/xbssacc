@@ -50,7 +50,7 @@ require_once __DIR__ . '/admin_header.php';
 require_once __DIR__ . '/adminheader.php';
 
 //Display the admin menu
-//xoops_module_admin_menu(1,_AM_SACC_ADMENU1);
+//xoops_module_admin_menu(1,_AM_XBSSACC_ADMENU1);
 
 /**
  * To use this as a template you need to write code to display
@@ -65,7 +65,7 @@ if (isset($submit)) { //edit the organisation's record
 } elseif (isset($save)) { //user has edited or created organisation so save it
     adminEditOrg($org_id, true);
 } elseif (isset($cancel)) {
-    redirect_header(SACC_URL . '/admin/adminorg.php', 1, _AM_SACC_ORGED101);
+    redirect_header(SACC_URL . '/admin/adminorg.php', 1, _AM_XBSSACC_ORGED101);
 } else { //Present a list of organisations to select to work with
     adminSelectOrg();
 } //end if

@@ -65,8 +65,8 @@ class IncomeAc extends CRAccount
     {
         parent::__construct();
 
-        $this->assignVar('ac_cr_altnm', _MD_SACC_INCOME);
+        $this->assignVar('ac_cr_altnm', _MD_XBSSACC_INCOME);
 
-        $this->assignVar('ac_dr_altnm', _MD_SACC_CHARGE);
+        $this->assignVar('ac_dr_altnm', _MD_XBSSACC_CHARGE);
     }
 }

@@ -27,15 +27,15 @@
  *
  * Relative url from module directory for documentation
  */
-define('_AM_XBS_SACC_URL_DOCS', 'admin/help.php');
+define('_AM_XBS_XBSSACC_URL_DOCS', 'admin/help.php');
 /**
  * Absolute url for module support site
  */
-define('_AM_XBS_SACC_URL_SUPPORT', 'http://www.xoobs.net/modules/newbb/viewforum.php?forum=1');
+define('_AM_XBS_XBSSACC_URL_SUPPORT', 'http://www.xoobs.net/modules/newbb/viewforum.php?forum=1');
 /**
  * absolute url for module donations site
  *
- * //define("_AM_XBS_SACC_URL_DONATIONS","");
+ * //define("_AM_XBS_XBSSACC_URL_DONATIONS","");
  */
 
 /**
@@ -43,18 +43,18 @@ define('_AM_XBS_SACC_URL_SUPPORT', 'http://www.xoobs.net/modules/newbb/viewforum
  *
  * Value MUST be "xoops", "module" or "none"
  */
-define('_AM_XBS_SACC_MODCONFIG', 'xoops');
+define('_AM_XBS_XBSSACC_MODCONFIG', 'xoops');
 /**
  * If module configuration option = "module" then define the name of the script
  * to call for module configuration.  This is relative to modDir/admin/
  *
  * MUST follow the format _AM_<ModDir>_MODCONFIGURL
  */
-//define("_AM_XBS_SACC_MODCONFIGURL","saccConfig.php");
+//define("_AM_XBS_XBSSACC_MODCONFIGURL","saccConfig.php");
 /**
  * SACC config is done via CDM so the config page redirects there
  */
-//define("_AM_XBS_SACC_MODCONFIGREDIRECT","Configuration is done via the CDM system. You will shortly be redirected there.");
+//define("_AM_XBS_XBSSACC_MODCONFIGREDIRECT","Configuration is done via the CDM system. You will shortly be redirected there.");
 
 /**#@-*/
 
@@ -63,55 +63,55 @@ define('_AM_XBS_SACC_MODCONFIG', 'xoops');
  */
 
 //Admin menu breadcrumb titles
-define('_AM_SACC_ADMENU1', 'Organisations');
-define('_AM_SACC_ADMENU2', 'Account Setup');
-define('_AM_SACC_ADMENU3', 'Configuration');
+define('_AM_XBSSACC_ADMENU1', 'Organisations');
+define('_AM_XBSSACC_ADMENU2', 'Account Setup');
+define('_AM_XBSSACC_ADMENU3', 'Configuration');
 
 //Organisations - choose an organisation
-define('_AM_SACC_SELORG', 'Choose an organisation to work with');
-define('_AM_SACC_ORGFORM', 'Organisation');
+define('_AM_XBSSACC_SELORG', 'Choose an organisation to work with');
+define('_AM_XBSSACC_ORGFORM', 'Organisation');
 
 //Organisations - edit an organisation
-define('_AM_SACC_ORGED0', 'SACC - Edit an Organisation');
-define('_AM_SACC_ORGED1', 'Organisation Id');
-define('_AM_SACC_ORGED2', 'Organisation Name');
-define('_AM_SACC_ORGED3', 'Currency');
-define('_AM_SACC_ORGED100', 'Organisation details changed');
-define('_AM_SACC_ORGED101', 'Organisation edit cancelled');
+define('_AM_XBSSACC_ORGED0', 'SACC - Edit an Organisation');
+define('_AM_XBSSACC_ORGED1', 'Organisation Id');
+define('_AM_XBSSACC_ORGED2', 'Organisation Name');
+define('_AM_XBSSACC_ORGED3', 'Currency');
+define('_AM_XBSSACC_ORGED100', 'Organisation details changed');
+define('_AM_XBSSACC_ORGED101', 'Organisation edit cancelled');
 
 //Accounts - choose an account
-define('_AM_SACC_SELACC', 'Choose an account to work with');
-define('_AM_SACC_ACCFORM', 'Account');
+define('_AM_XBSSACC_SELACC', 'Choose an account to work with');
+define('_AM_XBSSACC_ACCFORM', 'Account');
 
 //Accounts - edit an account
-define('_AM_SACC_ACED0', 'SACC - Edit an Account');
-define('_AM_SACC_ACED1', 'Account Id');
-define('_AM_SACC_ACED2', 'Organisation');
-define('_AM_SACC_ACED3', 'Account Type');
-define('_AM_SACC_ACED4', 'Currency');
-define('_AM_SACC_ACED5', 'Account Name');
-define('_AM_SACC_ACED6', 'Account Purpose');
-define('_AM_SACC_ACED7', 'Account Note');
-define('_AM_SACC_ACED8', 'Account edit cancelled');
-define('_AM_SACC_ACED9', 'Parent Account');
-define('_AM_SACC_ACED100', 'Account details changed');
-define('_AM_SACC_ACED101', 'Account edit cancelled');
+define('_AM_XBSSACC_ACED0', 'SACC - Edit an Account');
+define('_AM_XBSSACC_ACED1', 'Account Id');
+define('_AM_XBSSACC_ACED2', 'Organisation');
+define('_AM_XBSSACC_ACED3', 'Account Type');
+define('_AM_XBSSACC_ACED4', 'Currency');
+define('_AM_XBSSACC_ACED5', 'Account Name');
+define('_AM_XBSSACC_ACED6', 'Account Purpose');
+define('_AM_XBSSACC_ACED7', 'Account Note');
+define('_AM_XBSSACC_ACED8', 'Account edit cancelled');
+define('_AM_XBSSACC_ACED9', 'Parent Account');
+define('_AM_XBSSACC_ACED100', 'Account details changed');
+define('_AM_XBSSACC_ACED101', 'Account edit cancelled');
 
 //buttons
-define('_AM_SACC_INSERT', 'Insert');
-define('_AM_SACC_BROWSE', 'Browse');
-define('_AM_SACC_SUBMIT', 'Submit');
-define('_AM_SACC_CANCEL', 'Cancel');
-define('_AM_SACC_RESET', 'Reset');
-define('_AM_SACC_EDIT', 'Edit');
-define('_AM_SACC_GO', 'Go');
+define('_AM_XBSSACC_INSERT', 'Insert');
+define('_AM_XBSSACC_BROWSE', 'Browse');
+define('_AM_XBSSACC_SUBMIT', 'Submit');
+define('_AM_XBSSACC_CANCEL', 'Cancel');
+define('_AM_XBSSACC_RESET', 'Reset');
+define('_AM_XBSSACC_EDIT', 'Edit');
+define('_AM_XBSSACC_GO', 'Go');
 
 //button labels
-define('_AM_SACC_INSERT_DESC', 'Create a new record');
+define('_AM_XBSSACC_INSERT_DESC', 'Create a new record');
 
 //Common row status descriptions
-define('_AM_SACC_RSTATNM', 'Row Status');
-define('_AM_SACC_RUIDNM', 'Last edited by');
-define('_AM_SACC_RDTNM', 'Last edit datetime');
+define('_AM_XBSSACC_RSTATNM', 'Row Status');
+define('_AM_XBSSACC_RUIDNM', 'Last edited by');
+define('_AM_XBSSACC_RDTNM', 'Last edit datetime');
 
 /**#@-*/

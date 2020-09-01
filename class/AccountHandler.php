@@ -123,7 +123,7 @@ class AccountHandler extends Xbscdm\BaseHandler
 
                 $obj->unsetDirty();
             } else {
-                $this->setError(-1, sprintf(_MD_CDM_ERR_2, $classname));
+                $this->setError(-1, sprintf(_MD_XBSCDM_ERR_2, $classname));
 
                 return false;      //obj was not created so return False to caller.
             }
@@ -172,7 +172,7 @@ class AccountHandler extends Xbscdm\BaseHandler
 
                 $actype = $ret[0];
             } else {//no result
-                $this->setError(-1, sprintf(_MD_SACC_ERR_6, (string)$id));
+                $this->setError(-1, sprintf(_MD_XBSSACC_ERR_6, (string)$id));
             }
 
             $account = $this->create($actype, false);
@@ -189,13 +189,13 @@ class AccountHandler extends Xbscdm\BaseHandler
                         return $account;
                     }
 
-                    $this->setError(-1, sprintf(_MD_SACC_ERR_7, (string)$id));
+                    $this->setError(-1, sprintf(_MD_XBSSACC_ERR_7, (string)$id));
                 } else {
                     $this->setError($this->db->errno(), $this->db->error());
                 }//end if
             }//end if - error value set in call to create()
         } else {
-            $this->setError(-1, sprintf(_MD_SACC_ERR_8, (string)$id));
+            $this->setError(-1, sprintf(_MD_XBSSACC_ERR_8, (string)$id));
         }//end if
         return false; //default return
     }
@@ -416,7 +416,7 @@ class AccountHandler extends Xbscdm\BaseHandler
             $account->setBalance();
 
             if (0 != $account->getVar('ac_net_bal')) {
-                $this->setError(-1, sprintf(_MD_SACC_ERR_9, $account->getVar('ac_nm')));
+                $this->setError(-1, sprintf(_MD_XBSSACC_ERR_9, $account->getVar('ac_nm')));
 
                 return false;
             }

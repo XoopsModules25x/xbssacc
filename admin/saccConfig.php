@@ -51,13 +51,13 @@ require_once __DIR__ . '/adminheader.php';
 require_once __DIR__ . '/admin_header.php';
 
 //Display the admin menu
-xoops_module_admin_menu(0, _AM_SACC_ADMENU3);
+xoops_module_admin_menu(0, _AM_XBSSACC_ADMENU3);
 
 /**
  * To use this as a template you need to write code to display
  * whatever it is you want displaying between here...
  */
-redirect_header(CDM_URL . '/index.php', 5, _AM_SACC_MODCONFIGREDIRECT);
+redirect_header(CDM_URL . '/index.php', 5, _AM_XBSSACC_MODCONFIGREDIRECT);
 
 /**
  * and here.

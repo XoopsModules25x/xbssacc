@@ -56,7 +56,7 @@ require_once __DIR__ . '/adminheader.php';
  * To use this as a template you need to write code to display
  * whatever it is you want displaying between here...
  */
-require dirname(__DIR__) . '/sacchelp.html';
+require dirname(__DIR__) . '/docu/sacchelp.html';
 /**
  * and here.
  */

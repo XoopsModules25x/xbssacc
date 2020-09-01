@@ -66,8 +66,8 @@ class ExpenseAc extends DRAccount
     {
         parent::__construct();
 
-        $this->assignVar('ac_dr_altnm', _MD_SACC_EXPENSE);
+        $this->assignVar('ac_dr_altnm', _MD_XBSSACC_EXPENSE);
 
-        $this->assignVar('ac_cr_altnm', _MD_SACC_REFUND);
+        $this->assignVar('ac_cr_altnm', _MD_XBSSACC_REFUND);
     }
 }

@@ -19,48 +19,62 @@
 /**
  * The name of this module
  */
-define('_MI_SACC_NAME', 'Simple Accounts');
+define('_MI_XBSSACC_NAME', 'Simple Accounts');
 
 /**
  * A brief description of this module
  */
-define('_MI_SACC_DESC', 'Provides simple double entry book-keeping system.  Intended as a support module for larger business applications.  System has simple input and output screens.  Requires CDM (Code Data Management) to be installed first.');
+define('_MI_XBSSACC_DESC', 'Provides simple double entry book-keeping system.  Intended as a support module for larger business applications.  System has simple input and output screens.  Requires CDM (Code Data Management) to be installed first.');
 
 /**#@+
  *  Sub menu titles
  */
-define('_MI_SACC_SMNAME1', 'List of Accounts');
-define('_MI_SACC_SMNAME2', 'Balance Sheet');
-define('_MI_SACC_SMNAME3', 'P&L Statement');
-define('_MI_SACC_SMNAME3a', 'List of Journals');
-define('_MI_SACC_SMNAME4', 'Enter Journal');
-define('_MI_SACC_SMNAME5', 'Organisations');
-define('_MI_SACC_SMNAME6', 'Help with SACC');
+define('_MI_XBSSACC_SMNAME1', 'List of Accounts');
+define('_MI_XBSSACC_SMNAME2', 'Balance Sheet');
+define('_MI_XBSSACC_SMNAME3', 'P&L Statement');
+define('_MI_XBSSACC_SMNAME3a', 'List of Journals');
+define('_MI_XBSSACC_SMNAME4', 'Enter Journal');
+define('_MI_XBSSACC_SMNAME5', 'Organisations');
+define('_MI_XBSSACC_SMNAME6', 'Help with SACC');
 /**#@-*/
 
 /**#@+
  * Admin menu titles
  */
-define('_MI_SACC_ADMENU1', 'Organisations');
-define('_MI_SACC_ADMENU2', 'Account Setup');
+define('_MI_XBSSACC_ADMENU1', 'Organisations');
+define('_MI_XBSSACC_ADMENU2', 'Account Setup');
+define('_MI_XBSSACC_ADMENU3', 'Docu');
 /**#@-*/
 
 /**#@+
  * Configuration item names and descriptions
  */
-define('_MI_SACC_DEFCURRNAME', 'Default Currency');
-define('_MI_SACC_DEFCURRNAMEDESC', 'Select the default account currency');
-define('_MI_SACC_DEFORGNAME', 'Default Organisation');
-define('_MI_SACC_DEFORGNAMEDESC', 'The identifier for the default organisation to display');
-define('_MI_SACC_USEPRNTNAME', 'Use Parent for entry');
-define('_MI_SACC_USEPRNTNAMEDESC', 'Defines if we can use Parent Accounts to enter journal entries from the input screen.  If 0 (zero) then only accounts with no child accounts can be selected.  If 1, then any account can be selected.');
-define('_MI_SACC_DECPNTNAME', 'Currency Decimal Points');
-define('_MI_SACC_DECPNTNAMEDESC', 'The number of decimal points to display currency.  All monetary values are stored as integers on the database so we need to know 10^DECPNT to display and convert display values. For the majority of currencies this will be = 2.');
+define('_MI_XBSSACC_DEFCURRNAME', 'Default Currency');
+define('_MI_XBSSACC_DEFCURRNAMEDESC', 'Select the default account currency');
+define('_MI_XBSSACC_DEFORGNAME', 'Default Organisation');
+define('_MI_XBSSACC_DEFORGNAMEDESC', 'The identifier for the default organisation to display');
+define('_MI_XBSSACC_USEPRNTNAME', 'Use Parent for entry');
+define('_MI_XBSSACC_USEPRNTNAMEDESC', 'Defines if we can use Parent Accounts to enter journal entries from the input screen.  If 0 (zero) then only accounts with no child accounts can be selected.  If 1, then any account can be selected.');
+define('_MI_XBSSACC_DECPNTNAME', 'Currency Decimal Points');
+define('_MI_XBSSACC_DECPNTNAMEDESC', 'The number of decimal points to display currency.  All monetary values are stored as integers on the database so we need to know 10^DECPNT to display and convert display values. For the majority of currencies this will be = 2.');
 /**#@-*/
 
 /**#@+
  * Block names and descriptions
  */
-define('_MI_SACC_BLOCK_BALANCENAME', 'Trial Balance');
-define('_MI_SACC_BLOCK_BALANCEDESC', 'Displays summary trial balance for an organisation');
+define('_MI_XBSSACC_BLOCK_BALANCENAME', 'Trial Balance');
+define('_MI_XBSSACC_BLOCK_BALANCEDESC', 'Displays summary trial balance for an organisation');
 /**#@-*/
+
+//Help
+define('_MI_XBSSACC_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_XBSSACC_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
+define('_MI_XBSSACC_BACK_2_ADMIN', 'Back to Administration of ');
+define('_MI_XBSSACC_OVERVIEW', 'Overview');
+
+//define('_MI_XBSSACC_HELP_DIR', __DIR__);
+
+//help multi-page
+define('_MI_XBSSACC_DISCLAIMER', 'Disclaimer');
+define('_MI_XBSSACC_LICENSE', 'License');
+define('_MI_XBSSACC_SUPPORT', 'Support');

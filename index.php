@@ -64,12 +64,12 @@ $GLOBALS['xoopsOption']['template_main'] = 'sacc_sel_org.tpl';
 require XOOPS_ROOT_PATH . '/header.php';
 
 // Assign page titles
-$xoopsTpl->assign('lang_pagetitle', _MD_SACC_PAGETITLE1);
+$xoopsTpl->assign('lang_pagetitle', _MD_XBSSACC_PAGETITLE1);
 
 // Get data and assign to template
-$org_id  = new Form\FormSelectOrg(_MD_SACC_SELORG, 'org_id', (int)SACC_CFG_DEFORG, 4);
-$submit  = new \XoopsFormButton('', 'submit', _MD_SACC_GO, 'submit');
-$orgForm = new \XoopsThemeForm(_MD_SACC_PAGETITLE1, 'orgform', 'sacc_accounts_list.php');
+$org_id  = new Form\FormSelectOrg(_MD_XBSSACC_SELORG, 'org_id', (int)SACC_CFG_DEFORG, 4);
+$submit  = new \XoopsFormButton('', 'submit', _MD_XBSSACC_GO, 'submit');
+$orgForm = new \XoopsThemeForm(_MD_XBSSACC_PAGETITLE1, 'orgform', 'sacc_accounts_list.php');
 $orgForm->addElement($org_id, true);
 $orgForm->addElement($submit);
 $orgForm->assign($xoopsTpl);

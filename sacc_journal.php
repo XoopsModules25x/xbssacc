@@ -63,7 +63,7 @@ require_once CDM_PATH . '/include/functions.php';
 //Check to see if user logged in
 global $xoopsUser;
 if (empty($xoopsUser)) {
-    redirect_header(SACC_URL . '/sacc_list_accounts.php', 1, _MD_SACC_ERR_5);
+    redirect_header(SACC_URL . '/sacc_list_accounts.php', 1, _MD_XBSSACC_ERR_5);
 }
 
 /**
@@ -120,11 +120,11 @@ function dispForm()
 
         $amount = new \XoopsFormText('Amount', 'amount', 11, 11);
 
-        $submit = new \XoopsFormButton('', 'submit', _MD_SACC_SUBMIT, 'submit');
+        $submit = new \XoopsFormButton('', 'submit', _MD_XBSSACC_SUBMIT, 'submit');
 
-        $cancel = new \XoopsFormButton('', 'cancel', _MD_SACC_CANCEL, 'submit');
+        $cancel = new \XoopsFormButton('', 'cancel', _MD_XBSSACC_CANCEL, 'submit');
 
-        $reset = new \XoopsFormButton('', 'reset', _MD_SACC_RESET, 'reset');
+        $reset = new \XoopsFormButton('', 'reset', _MD_XBSSACC_RESET, 'reset');
 
         $journalForm = new \XoopsThemeForm(sprintf('Journal Entry for %s', $org->getVar('org_name')), 'journalform', 'sacc_journal.php');
 
@@ -178,7 +178,7 @@ function submitForm()
     $jData->appendEntry($ac_cr_id, $cr_ref, 0, $amount);
 
     if ($jHandler->insert($jData)) {
-        redirect_header(SACC_URL . '/sacc_list_journal.php', 10, _MD_SACC_JRNED2);
+        redirect_header(SACC_URL . '/sacc_list_journal.php', 10, _MD_XBSSACC_JRNED2);
     } else {
         redirect_header(SACC_URL . '/sacc_list_journal.php', 10, $jHandler->getError());
     }
@@ -196,7 +196,7 @@ if (empty($_POST['submit'])) {
 
         require XOOPS_ROOT_PATH . '/footer.php';
     } else {
-        redirect_header(SACC_URL . '/sacc_list_journal.php', 1, _MD_SACC_JRNED1);
+        redirect_header(SACC_URL . '/sacc_list_journal.php', 1, _MD_XBSSACC_JRNED1);
     }//end if empty cancel
 } else { //User has submitted form
     submitForm();
