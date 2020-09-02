@@ -1,37 +1,17 @@
 <?php declare(strict_types=1);
 
 use XoopsModules\Xbscdm;
+use XoopsModules\Xbssacc\Helper;
 
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <https://xoops.org>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author:    Ashley Kitson                                                  //
-// Copyright: (c) 2004, Ashley Kitson
-// URL:       http://akitson.bbcb.co.uk                                      //
-// Project:   The XOOPS Project (https://xoops.org/)                      //
-// Module:    Simple Accounts (SACC)                                         //
-// ------------------------------------------------------------------------- //
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
 
 /**
  * Edit an organisation name record
@@ -56,12 +36,12 @@ require_once XOOPS_ROOT_PATH . '/header.php'; // include the main header file
 /**
  * CDM API functions
  */
-require_once CDM_PATH . '/include/functions.php';
+//require_once CDM_PATH . '/include/functions.php';
 
 //Check to see if user logged in
 global $xoopsUser;
 if (empty($xoopsUser)) {
-    redirect_header(SACC_URL . '/sacc_list_accounts.php', 1, _MD_SACC_ERR_5);
+    redirect_header(SACC_URL . '/sacc_list_accounts.php', 1, _MD_XBSSACC_ERR_5);
 }
 
 /**
@@ -80,15 +60,15 @@ function dispForm()
 
     //Set up static text for form
 
-    $xoopsTpl->assign('lang_pagetitle', _MD_SACC_PAGETITLE1);
+    $xoopsTpl->assign('lang_pagetitle', _MD_XBSSACC_PAGETITLE1);
 
-    $xoopsTpl->assign('lang_copyright', _MD_SACC_COPYRIGHT);
+    $xoopsTpl->assign('lang_copyright', _MD_XBSSACC_COPYRIGHT);
 
     //retrieve organisation details
 
     $org_id = (int)$_GET['org_id'];
 
-    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
+    $orgHandler = Helper::getInstance()->getHandler('Org');
 
     if (0 != $org_id) {
         $org = $orgHandler->get($org_id);
@@ -111,7 +91,7 @@ function dispForm()
     } else {
         // else display the current account id as label because it is primary key
 
-        $id = new \XoopsFormLabel(_MD_SACC_ORG1, $org_id);
+        $id = new \XoopsFormLabel(_MD_XBSSACC_ORG1, $org_id);
 
         $id_hid = new \XoopsFormHidden('org_id', $org_id); //still need to know id in POST process
 
@@ -122,27 +102,27 @@ function dispForm()
         $new_flag = new \XoopsFormHidden('new_flag', false);
     }//end if org_id==0
 
-    $org_name = new \XoopsFormText(_MD_SACC_ORG2, 'org_nm', 20, 20, $orgname);
+    $org_name = new \XoopsFormText(_MD_XBSSACC_ORG2, 'org_nm', 20, 20, $orgname);
 
     // display organisation base currency
 
-    $base_crcy = new Xbscdm\Form\FormSelectCurrency(_MD_SACC_PAGE2COL3, 'base_crcy', $crcy_val);
+    $base_crcy = new Xbscdm\Form\FormSelectCurrency(_MD_XBSSACC_PAGE2COL3, 'base_crcy', $crcy_val);
 
-    $row_flag = new Xbscdm\Form\FormSelectRstat(_MD_SACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
+    $row_flag = new Xbscdm\Form\FormSelectRstat(_MD_XBSSACC_RSTATNM, 'row_flag', $org->getVar('row_flag'), 1, $org->getVar('row_flag'));
 
     $ret = getXoopsUser($org->getVar('row_uid'));
 
-    $row_uid = new \XoopsFormLabel(_MD_SACC_RUIDNM, $ret);
+    $row_uid = new \XoopsFormLabel(_MD_XBSSACC_RUIDNM, $ret);
 
-    $row_dt = new \XoopsFormLabel(_MD_SACC_RDTNM, $org->getVar('row_dt'));
+    $row_dt = new \XoopsFormLabel(_MD_XBSSACC_RDTNM, $org->getVar('row_dt'));
 
-    $submit = new \XoopsFormButton('', 'submit', _MD_SACC_SUBMIT, 'submit');
+    $submit = new \XoopsFormButton('', 'submit', _MD_XBSSACC_SUBMIT, 'submit');
 
-    $cancel = new \XoopsFormButton('', 'cancel', _MD_SACC_CANCEL, 'submit');
+    $cancel = new \XoopsFormButton('', 'cancel', _MD_XBSSACC_CANCEL, 'submit');
 
-    $reset = new \XoopsFormButton('', 'reset', _MD_SACC_RESET, 'reset');
+    $reset = new \XoopsFormButton('', 'reset', _MD_XBSSACC_RESET, 'reset');
 
-    $editForm = new \XoopsThemeForm(_MD_SACC_PAGETITLE3, 'editForm', 'sacc_org_edit.php');
+    $editForm = new \XoopsThemeForm(_MD_XBSSACC_PAGETITLE3, 'editForm', 'sacc_org_edit.php');
 
     $editForm->addElement($id);
 
@@ -184,7 +164,7 @@ function submitForm()
 
     extract($_POST);
 
-    $orgHandler = \XoopsModules\Xbssacc\Helper::getInstance()->getHandler('Org');
+    $orgHandler = Helper::getInstance()->getHandler('Org');
 
     if ($new_flag) {
         $orgData = $orgHandler->create();
@@ -207,7 +187,7 @@ function submitForm()
 
         $orgHandler->createAccounts($orgData);
 
-        redirect_header(SACC_URL . '/index.php', 1, _MD_SACC_ORGED1);
+        redirect_header(SACC_URL . '/index.php', 1, _MD_XBSSACC_ORGED1);
     }//end if
 } //end function submitForm
 
@@ -223,7 +203,7 @@ if (empty($_POST['submit'])) {
 
         require XOOPS_ROOT_PATH . '/footer.php';
     } else { //user has cancelled form
-        redirect_header(SACC_URL . '/index.php', 1, _MD_SACC_ORGED2);
+        redirect_header(SACC_URL . '/index.php', 1, _MD_XBSSACC_ORGED2);
     }//end if empty cancel
 } else { //User has submitted form
     submitForm();

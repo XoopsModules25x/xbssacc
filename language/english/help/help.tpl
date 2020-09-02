@@ -1,9 +1,27 @@
 <div id="help-template" class="outer">
-    <{include file=$smarty.const._MI_XBSVAT_HELP_HEADER}>
+    <{include file=$smarty.const._MI_XBSSACC_HELP_HEADER}>
 
     <h4 class="odd">DESCRIPTION</h4> <br>
 
-    <p class="even">This module is ....<br> <br>
+    <p class="even">This module is aimed at providing double entry book-keeping facilities for Xoops business systems developers. Although it can be used by itself, that is not it's real aim.
+
+        SACC provides the following functionality;<br> <br>
+    <ul  class="even">
+    <li>Multi organisation accounting (accounts for &gt;1 organisation can be kept in the same system, thus once the module is installed, many applications can use it.)</li>
+    <li>Basic on screen journal entry of accounts.</li>
+    <li>Hierarchical accounts</li>
+    <li>A program API based on xoopsObject that can easily extended for additional application functionality</li>
+    </ul>
+        <br>
+
+        More Help information: <a href="<{$xoops_url}>/modules/<{$smarty.const._MI_XBSSACC_DIRNAME}>/admin/help.php" target="_blank"> XBS Docs</a>
+        <br><br>
+    </p>
+
+    <h4 class="odd"><span style="color: #FF0000; ">NEW: </span>CLASS &amp; FUNCTIONS API</h4><br>
+    <p class="even">
+        For <strong> Class and Function definitions </strong>  see: <a href="<{$xoops_url}>/modules/<{$smarty.const._MI_XBSSACC_DIRNAME}>/docu/index.html" TARGET="_blank">CDM SACC Class Documentation </a>
+        <br><br>
     </p>
 
     <h4 class="odd">INSTALL/UNINSTALL</h4>

@@ -1,73 +1,78 @@
 <?php declare(strict_types=1);
 
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <https://xoops.org>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author:    Ashley Kitson                                                  //
-// Copyright: (c) 2004, Ashley Kitson
-// URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (https://xoops.org/)                      //
-// Module:    Simple Accounts System (SACC)                                  //
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
+/**
+ * @copyright (c) 2004, Ashley Kitson
+ * @copyright     XOOPS Project https://xoops.org/
+ * @license       GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author        Ashley Kitson http://akitson.bbcb.co.uk
+ * @author        XOOPS Development Team
+ */
+
 // ------------------------------------------------------------------------- //
 /**
  * Module installation parameters
  *
  * This script conforms to the Xoops standard for xoops_version.php
  *
- * @author     Ashley Kitson http://xoobs.net
- * @copyright  2005 Ashley Kitson, UK
- * @package    SACC
- * @subpackage Installation
- * @access     private
- * @version    1
+ * @copyright (c) 2004, Ashley Kitson
+ * @copyright     XOOPS Project https://xoops.org/
+ * @license       GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author        Ashley Kitson http://akitson.bbcb.co.uk
+ * @author        XOOPS Development Team
+ * @package       SACC
+ * @subpackage    Installation
+ * @access        private
+ * @version       1
  */
 if (!defined('XOOPS_ROOT_PATH')) {
     die('XOOPS root path not defined');
 }
 
-$modversion['name']        = _MI_SACC_NAME;
-$modversion['version']     = 1.0;
-$modversion['description'] = _MI_SACC_DESC;
-$modversion['credits']     = 'Ashley Kitson<br>( http://xoobs.net/ )';
-$modversion['author']      = 'Ashley Kitson';
+$moduleDirName      = basename(__DIR__);
+$moduleDirNameUpper = mb_strtoupper($moduleDirName);
+
+$modversion['version']       = 2.01;
+$modversion['module_status'] = 'Beta 1';
+$modversion['release_date']  = '2020/08/30';
+$modversion['name']          = _MI_XBSSACC_NAME;
+$modversion['description']   = _MI_XBSSACC_DESC;
+$modversion['credits']       = 'Ashley Kitson<br>( http://xoobs.net/ )';
+$modversion['author']        = 'Ashley Kitson';
 //$modversion['help'] = "sacchelp.html";
-$modversion['help']        = 'page=help';
-$modversion['license']     = 'GNU GPL 2.0 or later';
-$modversion['license_url'] = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']    = 0;
-$modversion['image']       = 'assets/images/logoModule.png';
-$modversion['dirname']     = basename(__DIR__);
-$modversion['release_date']        = '2013/10/08';
-$modversion['module_website_url']  = 'www.xoops.org';
+$modversion['license']             = 'GNU GPL 2.0 or later';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']            = 0;
+$modversion['dirname']             = $moduleDirName;
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
+$modversion['image']               = 'assets/images/logoModule.png';
+$modversion['module_website_url']  = 'https://xoops.org';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['module_status']       = 'Beta 1';
-$modversion['min_php']             = '5.3.7';
-$modversion['min_xoops']           = '2.5.6';
-$modversion['min_admin']           = '1.1';
-$modversion['min_db']              = [
-    'mysql'  => '5.0.7',
-    'mysqli' => '5.0.7',
+$modversion['min_php']             = '7.1';
+$modversion['min_xoops']           = '2.5.10';
+$modversion['min_admin']           = '1.2';
+$modversion['min_db']              = ['mysql' => '5.5'];
+$modversion['system_menu']         = 1;
+$modversion['adminindex']          = 'admin/index.php';
+$modversion['adminmenu']           = 'admin/menu.php';
+
+// ------------------- Help files ------------------- //
+$modversion['help']        = 'page=help';
+$modversion['helpsection'] = [
+    ['name' => _MI_XBSSACC_OVERVIEW, 'link' => 'page=help'],
+    ['name' => _MI_XBSSACC_DISCLAIMER, 'link' => 'page=disclaimer'],
+    ['name' => _MI_XBSSACC_LICENSE, 'link' => 'page=license'],
+    ['name' => _MI_XBSSACC_SUPPORT, 'link' => 'page=support'],
 ];
 
 $modversion['onUninstall'] = 'install_funcs.php';
@@ -91,20 +96,20 @@ $modversion['tables'][4] = 'sacc_ctrl';
 
 // Main Menu
 $modversion['hasMain']        = 1;
-$modversion['sub'][1]['name'] = _MI_SACC_SMNAME1;
+$modversion['sub'][1]['name'] = _MI_XBSSACC_SMNAME1;
 $modversion['sub'][1]['url']  = 'sacc_accounts_list.php';
 //Balance sheet and P/L reports are for version 1.3
-//$modversion['sub'][2]['name'] = _MI_SACC_SMNAME2;
+//$modversion['sub'][2]['name'] = _MI_XBSSACC_SMNAME2;
 //$modversion['sub'][2]['url'] = "sacc_bs.php";
-//$modversion['sub'][3]['name'] = _MI_SACC_SMNAME3;
+//$modversion['sub'][3]['name'] = _MI_XBSSACC_SMNAME3;
 //$modversion['sub'][3]['url'] = "sacc_pl.php";
-$modversion['sub'][4]['name'] = _MI_SACC_SMNAME3a;
+$modversion['sub'][4]['name'] = _MI_XBSSACC_SMNAME3a;
 $modversion['sub'][4]['url']  = 'sacc_list_journal.php';
-$modversion['sub'][5]['name'] = _MI_SACC_SMNAME4;
+$modversion['sub'][5]['name'] = _MI_XBSSACC_SMNAME4;
 $modversion['sub'][5]['url']  = 'sacc_journal.php';
-//$modversion['sub'][6]['name'] = _MI_SACC_SMNAME5;
+//$modversion['sub'][6]['name'] = _MI_XBSSACC_SMNAME5;
 //$modversion['sub'][6]['url'] = "sacc_org.php";
-$modversion['sub'][6]['name'] = _MI_SACC_SMNAME6;
+$modversion['sub'][6]['name'] = _MI_XBSSACC_SMNAME6;
 $modversion['sub'][6]['url']  = 'sacchelp.php';
 
 // Templates
@@ -142,8 +147,8 @@ $modversion['adminmenu']   = 'admin/menu.php';
 
 //SACC Configuration items
 $modversion['config'][1]['name']        = 'def_currency';
-$modversion['config'][1]['title']       = '_MI_SACC_DEFCURRNAME';
-$modversion['config'][1]['description'] = '_MI_SACC_DEFCURRNAMEDESC';
+$modversion['config'][1]['title']       = '_MI_XBSSACC_DEFCURRNAME';
+$modversion['config'][1]['description'] = '_MI_XBSSACC_DEFCURRNAMEDESC';
 $modversion['config'][1]['formtype']    = 'select';
 $modversion['config'][1]['valuetype']   = 'text';
 $modversion['config'][1]['default']     = 'GBP';
@@ -386,22 +391,22 @@ $modversion['config'][1]['options']     = [
 ];
 
 $modversion['config'][2]['name']        = 'def_org';
-$modversion['config'][2]['title']       = '_MI_SACC_DEFORGNAME';
-$modversion['config'][2]['description'] = '_MI_SACC_DEFORGNAMEDESC';
+$modversion['config'][2]['title']       = '_MI_XBSSACC_DEFORGNAME';
+$modversion['config'][2]['description'] = '_MI_XBSSACC_DEFORGNAMEDESC';
 $modversion['config'][2]['formtype']    = 'textbox';
 $modversion['config'][2]['valuetype']   = 'int';
 $modversion['config'][2]['default']     = 1;
 
 $modversion['config'][3]['name']        = 'use_parent';
-$modversion['config'][3]['title']       = '_MI_SACC_USEPRNTNAME';
-$modversion['config'][3]['description'] = '_MI_SACC_USEPRNTNAMEDESC';
+$modversion['config'][3]['title']       = '_MI_XBSSACC_USEPRNTNAME';
+$modversion['config'][3]['description'] = '_MI_XBSSACC_USEPRNTNAMEDESC';
 $modversion['config'][3]['formtype']    = 'yesno';
 $modversion['config'][3]['valuetype']   = 'int';
 $modversion['config'][3]['default']     = 0;
 
 $modversion['config'][4]['name']        = 'dec_point';
-$modversion['config'][4]['title']       = '_MI_SACC_DECPNTNAME';
-$modversion['config'][4]['description'] = '_MI_SACC_DECPNTNAMEDESC';
+$modversion['config'][4]['title']       = '_MI_XBSSACC_DECPNTNAME';
+$modversion['config'][4]['description'] = '_MI_XBSSACC_DECPNTNAMEDESC';
 $modversion['config'][4]['formtype']    = 'textbox';
 $modversion['config'][4]['valuetype']   = 'int';
 $modversion['config'][4]['default']     = 2;
@@ -417,8 +422,8 @@ $modversion['hasNotification'] = 0;
 
 // Blocks
 $modversion['blocks'][1]['file']        = 'sacc_block_balances.php';
-$modversion['blocks'][1]['name']        = _MI_SACC_BLOCK_BALANCENAME;
-$modversion['blocks'][1]['description'] = _MI_SACC_BLOCK_BALANCEDESC;
+$modversion['blocks'][1]['name']        = _MI_XBSSACC_BLOCK_BALANCENAME;
+$modversion['blocks'][1]['description'] = _MI_XBSSACC_BLOCK_BALANCEDESC;
 $modversion['blocks'][1]['show_func']   = 'b_sacc_balances_show';
 $modversion['blocks'][1]['edit_func']   = 'b_sacc_balances_edit';
 $modversion['blocks'][1]['options']     = '1'; //Organisation ID

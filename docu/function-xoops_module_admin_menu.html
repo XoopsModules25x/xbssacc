@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Function xoops_module_admin_menu</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-None.html">
+						None					</a>
+
+						</li>
+				<li>
+					<a href="namespace-XoopsModules.html">
+						XoopsModules<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-XoopsModules.Xbssacc.html">
+						Xbssacc<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-XoopsModules.Xbssacc.Common.html">
+						Common					</a>
+
+						</li>
+				<li>
+					<a href="namespace-XoopsModules.Xbssacc.Form.html">
+						Form					</a>
+
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-XbssaccCorePreload.html">XbssaccCorePreload</a></li>
+			</ul>
+
+
+
+
+
+			<h3>Functions</h3>
+			<ul>
+				<li><a href="function-_SACCSaveError.html">_SACCSaveError</a></li>
+				<li><a href="function-adminEditAcc.html">adminEditAcc</a></li>
+				<li><a href="function-adminEditOrg.html">adminEditOrg</a></li>
+				<li><a href="function-adminSelectAcc.html">adminSelectAcc</a></li>
+				<li><a href="function-adminSelectOrg.html">adminSelectOrg</a></li>
+				<li><a href="function-b_sacc_balances_edit.html">b_sacc_balances_edit</a></li>
+				<li><a href="function-b_sacc_balances_show.html">b_sacc_balances_show</a></li>
+				<li><a href="function-cloneBlock.html">cloneBlock</a></li>
+				<li><a href="function-createAccount.html">createAccount</a></li>
+				<li><a href="function-createOrg.html">createOrg</a></li>
+				<li><a href="function-dispForm.html" class="invalid">dispForm</a></li>
+				<li><a href="function-displayAccForm.html">displayAccForm</a></li>
+				<li><a href="function-displayOrgForm.html">displayOrgForm</a></li>
+				<li><a href="function-editBlock.html">editBlock</a></li>
+				<li><a href="function-exportSchema.html">exportSchema</a></li>
+				<li><a href="function-formatMoney.html">formatMoney</a></li>
+				<li><a href="function-getAccount.html">getAccount</a></li>
+				<li><a href="function-getControlAccount.html">getControlAccount</a></li>
+				<li><a href="function-getErrMsg.html">getErrMsg</a></li>
+				<li><a href="function-getErrNo.html">getErrNo</a></li>
+				<li><a href="function-getOrg.html">getOrg</a></li>
+				<li><a href="function-getSACCModConfigs.html">getSACCModConfigs</a></li>
+				<li><a href="function-initializeJournal.html">initializeJournal</a></li>
+				<li><a href="function-isBlockCloned.html">isBlockCloned</a></li>
+				<li><a href="function-listBlocks.html">listBlocks</a></li>
+				<li><a href="function-loadSampleData.html" class="invalid">loadSampleData</a></li>
+				<li><a href="function-saveJournal.html">saveJournal</a></li>
+				<li><a href="function-saveSampleData.html">saveSampleData</a></li>
+				<li><a href="function-setOrder.html">setOrder</a></li>
+				<li><a href="function-submitAccForm.html">submitAccForm</a></li>
+				<li><a href="function-submitForm.html" class="invalid">submitForm</a></li>
+				<li><a href="function-submitOrgForm.html">submitOrgForm</a></li>
+				<li><a href="function-updateBlock.html">updateBlock</a></li>
+				<li class="active"><a href="function-xoops_module_admin_menu.html">xoops_module_admin_menu</a></li>
+				<li><a href="function-xoops_module_install_sacc.html">xoops_module_install_sacc</a></li>
+				<li><a href="function-xoops_module_uninstall_sacc.html">xoops_module_uninstall_sacc</a></li>
+				<li><a href="function-xoops_module_update_sacc.html">xoops_module_update_sacc</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-None.html" title="Summary of None"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Function</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="function">
+	<h1>Function xoops_module_admin_menu</h1>
+
+
+	<div class="description">
+	<p>Function: Creates a pretty menu and navigation bar above your module admin page</p>
+
+<p>I've nicked the basis of this from functions.php,v 1.2 of the new Profiles module
+developed by hyperpod for Xoops V1.2</p>
+	</div>
+
+	<div class="info">
+		
+		<b>Package:</b> SACC\Admin<br>
+				<b>Copyright:</b>
+				2005 Ashley Kitson, UK<br>
+				<b>Author:</b>
+				hyperpod (parts) A Kitson (parts)<br>
+				<b>Version:</b>
+				1<br>
+		<b>Located at</b>
+		<a href="source-function-xoops_module_admin_menu.html#70-286" title="Go to source code">
+			dmin/adminheader.php
+		</a><br>
+	</div>
+
+
+	<table class="summary" id="parameters">
+	<caption>Parameters summary</caption>
+	<tr id="$currentoption">
+		<td class="name"><code>integer</code></td>
+		<td class="value"><code><var>$currentoption</var> = <span class="php-num">0</span></code></td>
+		<td>The menu option to display as being current</td>
+	</tr>
+	<tr id="$breadcrumb">
+		<td class="name"><code>string</code></td>
+		<td class="value"><code><var>$breadcrumb</var> = <span class="php-quote">''</span></code></td>
+		<td>the trail back to where we've come from</td>
+	</tr>
+	</table>
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js?fa1cafd1613329ba11b588c73ae10fe23725bcc4"></script>
+<script src="elementlist.js?87df75317562455eda509bf1603babba0e0bcd22"></script>
+</body>
+</html>

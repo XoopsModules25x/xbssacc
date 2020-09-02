@@ -4,36 +4,16 @@ namespace XoopsModules\Xbssacc;
 
 use XoopsModules\Xbscdm;
 
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <https://xoops.org>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author:    Ashley Kitson                                                  //
-// Copyright: (c) 2004, Ashley Kitson
-// URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (https://xoops.org/)                      //
-// Module:    SACC Simple Accounts                                           //
-// ------------------------------------------------------------------------- //
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
 /**
  * Account Object Handler
  *
@@ -46,7 +26,7 @@ use XoopsModules\Xbscdm;
 /**
  * SACC functions
  */
-require_once CDM_PATH . '/include/functions.php';
+//require_once CDM_PATH . '/include/functions.php';
 
 /**
  * Object handler for Account
@@ -76,10 +56,10 @@ class AccountHandler extends Xbscdm\BaseHandler
     /**
      * Create account object -  overide ancestor because we need to know what type of account it is
      *
-     * @param string $accType                 default null. Type of account to create, SACC_ACTP_INCOME, SACC_ACTP_EXPENSE, SACC_ACTP_ASSET,
+     * @param null $accType                   default null. Type of account to create, SACC_ACTP_INCOME, SACC_ACTP_EXPENSE, SACC_ACTP_ASSET,
      *                                        SACC_ACTP_LIABILITY, SACC_ACTP_BANK, SACC_ACTP_SUPPLIER, SACC_ACTP_CUSTOMER,
      *                                        SACC_ACTP_EQUITY
-     * @param bool   $isNew                   default TRUE. This is a new account we are creating
+     * @param bool $isNew                     default TRUE. This is a new account we are creating
      * @return Account object else FALSE on failure
      */
     public function create($accType = null, $isNew = true)
@@ -117,16 +97,14 @@ class AccountHandler extends Xbscdm\BaseHandler
             $obj->setNew();
 
             $obj->unsetDirty();
+        } elseif ($obj) {         //it is not new (forced by caller, usually &getAll()) but obj was created
+            $obj->unsetNew();
+
+            $obj->unsetDirty();
         } else {
-            if ($obj) {         //it is not new (forced by caller, usually &getAll()) but obj was created
-                $obj->unsetNew();
+            $this->setError(-1, sprintf(_MD_XBSCDM_ERR_2, $classname));
 
-                $obj->unsetDirty();
-            } else {
-                $this->setError(-1, sprintf(_MD_CDM_ERR_2, $classname));
-
-                return false;      //obj was not created so return False to caller.
-            }
+            return false;      //obj was not created so return False to caller.
         }
 
         return $obj;
@@ -139,6 +117,7 @@ class AccountHandler extends Xbscdm\BaseHandler
      *
      * @param      $key
      * @param null $row_flag
+     * @param null $lang
      * @return string
      * @internal
      */
@@ -156,8 +135,9 @@ class AccountHandler extends Xbscdm\BaseHandler
     /**
      * function getall - overide ancestor because we need to know account type
      *
-     * @param int    $id       id of account to get
-     * @param string $row_flag default null.  Row status flag
+     * @param int  $id       id of account to get
+     * @param null $row_flag default null.  Row status flag
+     * @param null $lang
      * @return bool object on success else FALSE on failure
      */
     public function getAll($id, $row_flag = null, $lang = null)
@@ -172,7 +152,7 @@ class AccountHandler extends Xbscdm\BaseHandler
 
                 $actype = $ret[0];
             } else {//no result
-                $this->setError(-1, sprintf(_MD_SACC_ERR_6, (string)$id));
+                $this->setError(-1, sprintf(_MD_XBSSACC_ERR_6, (string)$id));
             }
 
             $account = $this->create($actype, false);
@@ -189,13 +169,13 @@ class AccountHandler extends Xbscdm\BaseHandler
                         return $account;
                     }
 
-                    $this->setError(-1, sprintf(_MD_SACC_ERR_7, (string)$id));
+                    $this->setError(-1, sprintf(_MD_XBSSACC_ERR_7, (string)$id));
                 } else {
                     $this->setError($this->db->errno(), $this->db->error());
                 }//end if
             }//end if - error value set in call to create()
         } else {
-            $this->setError(-1, sprintf(_MD_SACC_ERR_8, (string)$id));
+            $this->setError(-1, sprintf(_MD_XBSSACC_ERR_8, (string)$id));
         }//end if
         return false; //default return
     }
@@ -218,7 +198,7 @@ class AccountHandler extends Xbscdm\BaseHandler
      * function reload - extend ancestor to add account information
      *
      * @param Account $obj handle to account object
-     * @param int         $key Accoint id
+     * @param null    $key Accoint id
      * @return bool
      */
     public function reload($obj, $key = null)
@@ -416,7 +396,7 @@ class AccountHandler extends Xbscdm\BaseHandler
             $account->setBalance();
 
             if (0 != $account->getVar('ac_net_bal')) {
-                $this->setError(-1, sprintf(_MD_SACC_ERR_9, $account->getVar('ac_nm')));
+                $this->setError(-1, sprintf(_MD_XBSSACC_ERR_9, $account->getVar('ac_nm')));
 
                 return false;
             }

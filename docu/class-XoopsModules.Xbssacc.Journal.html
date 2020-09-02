@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class XoopsModules\Xbssacc\Journal</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li>
+					<a href="namespace-None.html">
+						None					</a>
+
+						</li>
+				<li class="active">
+					<a href="namespace-XoopsModules.html">
+						XoopsModules<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-XoopsModules.Xbssacc.html">
+						Xbssacc<span></span>
+					</a>
+
+						<ul>
+				<li>
+					<a href="namespace-XoopsModules.Xbssacc.Common.html">
+						Common					</a>
+
+						</li>
+				<li>
+					<a href="namespace-XoopsModules.Xbssacc.Form.html">
+						Form					</a>
+
+						</li>
+							</ul></li></ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-XoopsModules.Xbssacc.Account.html">Account</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.AccountHandler.html">AccountHandler</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.AcEntry.html">AcEntry</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.AssetAc.html">AssetAc</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.BankAc.html">BankAc</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.Control.html">Control</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.ControlHandler.html">ControlHandler</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.CRAccount.html">CRAccount</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.CustomerAc.html">CustomerAc</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.DRAccount.html">DRAccount</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.EntryHandler.html">EntryHandler</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.EquityAc.html">EquityAc</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.ExpenseAc.html">ExpenseAc</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.Helper.html">Helper</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.IncomeAc.html">IncomeAc</a></li>
+				<li class="active"><a href="class-XoopsModules.Xbssacc.Journal.html">Journal</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.JournalHandler.html">JournalHandler</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.LiabilityAc.html">LiabilityAc</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.Org.html">Org</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.OrgHandler.html">OrgHandler</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.SupplierAc.html">SupplierAc</a></li>
+				<li><a href="class-XoopsModules.Xbssacc.Utility.html">Utility</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-XoopsModules.Xbssacc.html" title="Summary of XoopsModules\Xbssacc"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Journal</h1>
+
+
+	<div class="description">
+	<p>Class to hold a journal entry</p>
+
+<p><b>This is probably the most important object in SACC!</b>  It is the primary
+method for making entries in the accounts system.  The following example
+illustrates its use:</p>
+
+<pre><span class="php-keyword1">require_once</span> SACC_PATH.<span class="php-quote">&quot;/include/functions.php&quot;</span>;
+<span class="php-var">$org_id</span> = <span class="php-num">1</span>; <span class="php-comment">//set to your organisation id</span>
+<span class="php-var">$purpose</span> = <span class="php-quote">&quot;Testing&quot;</span>;
+<span class="php-var">$journal</span> = initializeJournal(<span class="php-var">$org_id</span>, <span class="php-keyword1">null</span>, <span class="php-var">$purpose</span>) <span class="php-comment">//create a new journal</span>
+<span class="php-comment">// a series of calls to appendEntry sets up the account entries</span>
+<span class="php-comment">// void appendEntry( int $ac_id, string $ref, int $dr, int $cr)</span>
+<span class="php-var">$journal</span>-&gt;appendEntry(<span class="php-num">2</span>,<span class="php-quote">&quot;Ref description&quot;</span>,<span class="php-num">11750</span>,<span class="php-num">0</span>); <span class="php-comment">//DR bank account</span>
+<span class="php-var">$journal</span>-&gt;appendEntry(<span class="php-num">6</span>,<span class="php-quote">&quot;Ref description&quot;</span>,<span class="php-num">0</span>,<span class="php-num">10000</span>); <span class="php-comment">//CR Sales account</span>
+<span class="php-var">$journal</span>-&gt;appendEntry(<span class="php-num">12</span>,<span class="php-quote">&quot;Ref description&quot;</span>,<span class="php-num">0</span>,<span class="php-num">1750</span>); <span class="php-comment">//CR VAT In account</span>
+<span class="php-keyword1">if</span> (!saveJournal(<span class="php-var">$journal</span>)) { <span class="php-comment">//oops an error</span>
+  <span class="php-keyword1">print</span> (<span class="php-keyword2">strval</span>(getErrNo().<span class="php-quote">&quot; - &quot;</span>.getErrMsg());
+}</pre>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+XoopsModules\Xbscdm\BaseObject
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by">
+<b><span>XoopsModules\Xbssacc\Journal</span></b>			
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-XoopsModules.html">XoopsModules</a>\<a href="namespace-XoopsModules.Xbssacc.html">Xbssacc</a><br>
+		<b>Package:</b> SACC\Journal<br>
+
+				<b>Version:</b>
+				1<br>
+			<b>Located at</b> <a href="source-class-XoopsModules.Xbssacc.Journal.html#50-127" title="Go to source code">lass/Journal.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-XoopsModules.Xbssacc.Journal.html#76-93" title="Go to source code">__construct</a>( )</code>
+
+		<div class="description short">
+			<p>Constructor</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Constructor</p>
+
+<p>The following variables are declared for retrieval via ->getVar()
+{@source 2 6}</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="appendEntry" id="_appendEntry">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_appendEntry">#</a>
+		<code><a href="source-class-XoopsModules.Xbssacc.Journal.html#95-126" title="Go to source code">appendEntry</a>( <span>integer <var>$ac_id</var></span>, <span>string <var>$ref</var></span>, <span>integer <var>$dr</var></span>, <span>integer <var>$cr</var></span> )</code>
+
+		<div class="description short">
+			<p>Add an accounting entry to the journal</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Add an accounting entry to the journal</p>
+
+<p>There should never be a case when both the debit and credit amounts
+are non zero.  See SACC Help documentation for further details on
+the handling of monetary values.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$ac_id</var></dt>
+					<dd>Account ID</dd>
+					<dt><var>$ref</var></dt>
+					<dd>Entry reference</dd>
+					<dt><var>$dr</var></dt>
+					<dd>Debit amount</dd>
+					<dt><var>$cr</var></dt>
+					<dd>Credit amount</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

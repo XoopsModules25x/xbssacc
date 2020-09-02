@@ -11,15 +11,18 @@
  * @package       SACC
  * @subpackage    Definitions
  * @access        private
- * @author        Ashley Kitson http://xoobs.net
- * @copyright (c) 2005 Ashley Kitson, Great Britain
+ * @copyright     Ashley Kitson
+ * @copyright     XOOPS Project https://xoops.org/
+ * @license       GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author        Ashley Kitson http://akitson.bbcb.co.uk
+ * @author        XOOPS Development Team
  */
 
 /**
  * Strings used in Balances Block
  */
-define('_MB_SACC_BALANCE_ORG', 'Organisation name');
-define('_MB_SACC_BALANCE_BALNAME', 'Balance Sheet');
-define('_MB_SACC_BALANCE_PLNAME', 'P&L');
-define('_MB_SACC_BALANCE_EQNAME', 'Equity');
-define('_MB_SACC_BALANCE_ORGNAME', 'Organisation Name');
+define('_MB_XBSSACC_BALANCE_ORG', 'Organisation name');
+define('_MB_XBSSACC_BALANCE_BALNAME', 'Balance Sheet');
+define('_MB_XBSSACC_BALANCE_PLNAME', 'P&L');
+define('_MB_XBSSACC_BALANCE_EQNAME', 'Equity');
+define('_MB_XBSSACC_BALANCE_ORGNAME', 'Organisation Name');
