@@ -15,7 +15,7 @@
 /**
  * Include the Xoops mainfile defines
  */
-require dirname(dirname(__DIR__)) . '/mainfile.php';
+require dirname(__DIR__, 2) . '/mainfile.php';
 /**
  * Include the CDM system constant defines as SACC relies on CDM
  */

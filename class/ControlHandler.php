@@ -4,49 +4,32 @@ namespace XoopsModules\Xbssacc;
 
 use XoopsModules\Xbscdm;
 
-//  ------------------------------------------------------------------------ //
-//                XOOPS - PHP Content Management System                      //
-//                    Copyright (c) 2000 XOOPS.org                           //
-//                       <https://xoops.org>                             //
-//  ------------------------------------------------------------------------ //
-//  This program is free software; you can redistribute it and/or modify     //
-//  it under the terms of the GNU General Public License as published by     //
-//  the Free Software Foundation; either version 2 of the License, or        //
-//  (at your option) any later version.                                      //
-//                                                                           //
-//  You may not change or alter any portion of this comment or credits       //
-//  of supporting developers from this source code or any supporting         //
-//  source code which is considered copyrighted (c) material of the          //
-//  original comment or credit authors.                                      //
-//                                                                           //
-//  This program is distributed in the hope that it will be useful,          //
-//  but WITHOUT ANY WARRANTY; without even the implied warranty of           //
-//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the            //
-//  GNU General Public License for more details.                             //
-//                                                                           //
-//  You should have received a copy of the GNU General Public License        //
-//  along with this program; if not, write to the Free Software              //
-//  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307 USA //
-//  ------------------------------------------------------------------------ //
-// Author:    Ashley Kitson                                                  //
-// Copyright: (c) 2004, Ashley Kitson
-// URL:       http://xoobs.net                                      //
-// Project:   The XOOPS Project (https://xoops.org/)                      //
-// Module:    SACC Simple Accounts                                           //
-// ------------------------------------------------------------------------- //
+/*
+ * You may not change or alter any portion of this comment or credits
+ * of supporting developers from this source code or any supporting source code
+ * which is considered copyrighted (c) material of the original comment or credit authors.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+ */
+
 /**
  * Control account object hamdler
  *
  * @package       SACC
  * @subpackage    SACCControl
- * @author        Ashley Kitson http://xoobs.net
- * @copyright (c) 2004 Ashley Kitson, Great Britain
+ * @copyright (c) 2004, Ashley Kitson
+ * @copyright     XOOPS Project https://xoops.org/
+ * @license       GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author        Ashley Kitson http://akitson.bbcb.co.uk
+ * @author        XOOPS Development Team
  */
 
 /**
  * SACC functions
  */
-require_once CDM_PATH . '/include/functions.php';
+//require_once CDM_PATH . '/include/functions.php';
 
 /**
  * Object handler for SACCControl
@@ -107,8 +90,8 @@ class ControlHandler extends Xbscdm\BaseHandler
      *
      * @param int    $org_id   organisation id
      * @param string $ctrl_cd  control account tag name
-     * @param string $row_flag default NULL. row status flag indicator
-     * @param string $lang     default NULL. Language set
+     * @param null   $row_flag default NULL. row status flag indicator
+     * @param null   $lang     default NULL. Language set
      * @return SACCControl object if success else FALSE on failure.
      */
     public function getAll($org_id, $ctrl_cd, $row_flag = null, $lang = null)

@@ -8,12 +8,15 @@
  * English UK language definitions for module installation
  * Read the source file for definitions
  *
- * @author     Ashley Kitson http://xoobs.net
- * @copyright  2005 Ashley Kitson, UK
- * @package    SACC
- * @subpackage Definitions
- * @access     private
- * @version    1
+ * @copyright (c) 2004, Ashley Kitson
+ * @copyright     XOOPS Project https://xoops.org/
+ * @license       GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
+ * @author        Ashley Kitson http://akitson.bbcb.co.uk
+ * @author        XOOPS Development Team
+ * @package       SACC
+ * @subpackage    Definitions
+ * @access        private
+ * @version       1
  */
 
 /**
@@ -41,6 +44,8 @@ define('_MI_XBSSACC_SMNAME6', 'Help with SACC');
 /**#@+
  * Admin menu titles
  */
+define('_MI_XBSSACC_HOME', 'Home');
+define('_MI_XBSSACC_ABOUT', 'About');
 define('_MI_XBSSACC_ADMENU1', 'Organisations');
 define('_MI_XBSSACC_ADMENU2', 'Account Setup');
 define('_MI_XBSSACC_ADMENU3', 'Docu');
@@ -67,7 +72,7 @@ define('_MI_XBSSACC_BLOCK_BALANCEDESC', 'Displays summary trial balance for an o
 /**#@-*/
 
 //Help
-define('_MI_XBSSACC_DIRNAME', basename(dirname(dirname(__DIR__))));
+define('_MI_XBSSACC_DIRNAME', basename(dirname(__DIR__, 2)));
 define('_MI_XBSSACC_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_XBSSACC_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_XBSSACC_OVERVIEW', 'Overview');
